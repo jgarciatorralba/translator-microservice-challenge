@@ -11,6 +11,20 @@ services:
       - 6432:5432
     networks:
       - symfony_app
+
+  message_broker:
+    image: rabbitmq:management
+    volumes:
+      - "rabbitmq:/var/lib/rabbitmq:cached"
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASSWORD}
+    ports:
+      - 15672:15672
+      - 5672:5672
+    networks:
+      - symfony_app
+
   php:
     build:
       context: ./php
@@ -22,6 +36,7 @@ services:
       - symfony_app_vendor:/var/www/symfony/vendor
     networks:
       - symfony_app
+
   nginx:
     build:
       context: ./nginx
@@ -40,6 +55,7 @@ volumes:
   symfony_app_var:
   symfony_app_vendor:
   pgdata:
+  rabbitmq:
 
 networks:
   symfony_app:
