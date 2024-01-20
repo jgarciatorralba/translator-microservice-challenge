@@ -10,7 +10,7 @@ services:
     ports:
       - 6432:5432
     networks:
-      - symfony_app
+      - app
 
   message_broker:
     image: rabbitmq:management
@@ -23,7 +23,7 @@ services:
       - 15672:15672
       - 5672:5672
     networks:
-      - symfony_app
+      - app
 
   php:
     build:
@@ -31,32 +31,32 @@ services:
       args:
         TIMEZONE: ${TIMEZONE}
     volumes:
-      - ../:/var/www/symfony:cached
-      - symfony_app_var:/var/www/symfony/var
-      - symfony_app_vendor:/var/www/symfony/vendor
+      - ../:/var/www/translator:cached
+      - app_var:/var/www/translator/var
+      - app_vendor:/var/www/translator/vendor
     networks:
-      - symfony_app
+      - app
 
   nginx:
     build:
       context: ./nginx
     volumes:
-      - ../:/var/www/symfony:cached
-      - symfony_app_var:/var/www/symfony/var
-      - symfony_app_vendor:/var/www/symfony/vendor
+      - ../:/var/www/translator:cached
+      - app_var:/var/www/translator/var
+      - app_vendor:/var/www/translator/vendor
     environment:
       NGINX_BACKEND_DOMAIN: ${NGINX_BACKEND_DOMAIN}
       NGINX_PUBLIC_FOLDER_PATH: ${NGINX_PUBLIC_FOLDER_PATH}
     ports:
       - 8000:80
     networks:
-      - symfony_app
+      - app
 
 volumes:
-  symfony_app_var:
-  symfony_app_vendor:
+  app_var:
+  app_vendor:
   pgdata:
   rabbitmq:
 
 networks:
-  symfony_app:
+  app:
