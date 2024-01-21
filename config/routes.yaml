@@ -4,10 +4,6 @@ favicon:
   controller:
   methods: GET
 
-translationRequests:
-  resource: routes/translationRequests.yaml
-  prefix: /api/
-
-translationResults:
-  resource: routes/translationResults.yaml
+translations:
+  resource: routes/translations.yaml
   prefix: /api/

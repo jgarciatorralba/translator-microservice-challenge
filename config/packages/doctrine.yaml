@@ -23,17 +23,11 @@ doctrine:
       naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
       auto_mapping: true
       mappings:
-        TranslationRequest:
+        Translation:
           is_bundle: false
-          dir: "%kernel.project_dir%/src/TranslationRequests/Infrastructure/Persistence/Doctrine/mappings"
-          prefix: 'App\TranslationRequests\Domain'
-          alias: App\TranslationRequests\Domain
-          type: xml
-        TranslationResult:
-          is_bundle: false
-          dir: "%kernel.project_dir%/src/TranslationResults/Infrastructure/Persistence/Doctrine/mappings"
-          prefix: 'App\TranslationResults\Domain'
-          alias: App\TranslationResults\Domain
+          dir: "%kernel.project_dir%/src/Translations/Infrastructure/Persistence/Doctrine/mappings"
+          prefix: 'App\Translations\Domain'
+          alias: App\Translations\Domain
           type: xml
       filters:
         softdeleteable:
