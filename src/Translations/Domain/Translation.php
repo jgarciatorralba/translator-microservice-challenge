@@ -8,6 +8,7 @@ use App\Shared\Domain\Aggregate\AggregateRoot;
 use App\Shared\Domain\Trait\TimestampableTrait;
 use App\Shared\Domain\ValueObject\Uuid;
 use App\Shared\Utils;
+use App\Translations\Domain\ValueObject\ProcessingStatusEnum;
 use DateTimeImmutable;
 
 class Translation extends AggregateRoot
@@ -19,6 +20,7 @@ class Translation extends AggregateRoot
         private string $sourceLanguage,
         private string $originalText,
         private string $targetLanguage,
+        private ProcessingStatusEnum $status,
         private ?string $translatedText,
         DateTimeImmutable $createdAt,
         DateTimeImmutable $updatedAt
@@ -40,6 +42,7 @@ class Translation extends AggregateRoot
             sourceLanguage: $sourceLanguage,
             originalText: $originalText,
             targetLanguage: $targetLanguage,
+            status: ProcessingStatusEnum::QUEUED,
             translatedText: null,
             createdAt: $createdAt,
             updatedAt: $updatedAt
@@ -66,6 +69,16 @@ class Translation extends AggregateRoot
         return $this->targetLanguage;
     }
 
+    public function status(): ProcessingStatusEnum
+    {
+        return $this->status;
+    }
+
+    public function updateStatus(ProcessingStatusEnum $status): void
+    {
+        $this->status = $status;
+    }
+
     public function translatedText(): ?string
     {
         return $this->translatedText;
@@ -86,6 +99,7 @@ class Translation extends AggregateRoot
             'source_lang' => $this->sourceLanguage,
             'original_text' => $this->originalText,
             'target_lang' => $this->targetLanguage,
+            'status' => $this->status->value,
             'translated_text' => $this->translatedText,
             'created_at' => Utils::dateToString($this->createdAt),
             'updated_at' => Utils::dateToString($this->updatedAt)
