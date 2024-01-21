@@ -9,6 +9,7 @@ use App\Shared\Domain\Trait\TimestampableTrait;
 use App\Shared\Domain\ValueObject\Uuid;
 use App\Shared\Utils;
 use App\Translations\Domain\ValueObject\ProcessingStatusEnum;
+use App\Translations\Domain\ValueObject\SupportedLanguageEnum;
 use DateTimeImmutable;
 
 class Translation extends AggregateRoot
@@ -17,9 +18,9 @@ class Translation extends AggregateRoot
 
     public function __construct(
         private Uuid $id,
-        private string $sourceLanguage,
+        private SupportedLanguageEnum $sourceLanguage,
         private string $originalText,
-        private string $targetLanguage,
+        private SupportedLanguageEnum $targetLanguage,
         private ProcessingStatusEnum $status,
         private ?string $translatedText,
         DateTimeImmutable $createdAt,
@@ -31,9 +32,9 @@ class Translation extends AggregateRoot
 
     public static function create(
         Uuid $id,
-        string $sourceLanguage,
+        SupportedLanguageEnum $sourceLanguage,
         string $originalText,
-        string $targetLanguage,
+        SupportedLanguageEnum $targetLanguage,
         DateTimeImmutable $createdAt,
         DateTimeImmutable $updatedAt
     ): self {
@@ -54,7 +55,7 @@ class Translation extends AggregateRoot
         return $this->id;
     }
 
-    public function sourceLanguage(): string
+    public function sourceLanguage(): SupportedLanguageEnum
     {
         return $this->sourceLanguage;
     }
@@ -64,7 +65,7 @@ class Translation extends AggregateRoot
         return $this->originalText;
     }
 
-    public function targetLanguage(): string
+    public function targetLanguage(): SupportedLanguageEnum
     {
         return $this->targetLanguage;
     }
@@ -96,9 +97,9 @@ class Translation extends AggregateRoot
     {
         return [
             'id' => $this->id->value(),
-            'source_lang' => $this->sourceLanguage,
+            'source_lang' => $this->sourceLanguage->value,
             'original_text' => $this->originalText,
-            'target_lang' => $this->targetLanguage,
+            'target_lang' => $this->targetLanguage->value,
             'status' => $this->status->value,
             'translated_text' => $this->translatedText,
             'created_at' => Utils::dateToString($this->createdAt),

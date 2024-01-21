@@ -6,12 +6,13 @@ namespace App\Translations\Domain\ValueObject;
 
 use App\Shared\Domain\Trait\EnumValuesProviderTrait;
 
-enum ProcessingStatusEnum: string
+enum SupportedLanguageEnum: string
 {
     use EnumValuesProviderTrait;
 
-    case QUEUED = 'queued';
-    case PROCESSING = 'processing';
-    case COMPLETED = 'completed';
-    case ERROR = 'error';
+    case ENGLISH = 'en';
+    case SPANISH = 'es';
+    case FRENCH = 'fr';
+    case GERMAN = 'de';
+    case PORTUGUESE = 'pt';
 }
