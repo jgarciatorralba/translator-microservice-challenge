@@ -1,0 +1,18 @@
+<doctrine-mapping
+    xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+    xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+>
+    <entity
+        name="App\Translations\Domain\Translation"
+        table="translations"
+    >
+        <id name="id" type="uuid" column="id" />
+        <field name="sourceLanguage" type="string" column="source_lang" length="8" />
+        <field name="originalText" type="string" column="original_text" length="255" />
+        <field name="targetLanguage" type="string" column="target_lang" length="8" />
+        <field name="translatedText" type="string" column="translated_text" length="255" nullable="true" />
+        <field name="createdAt" type="datetime_immutable" column="created_at" />
+        <field name="updatedAt" type="datetime_immutable" column="updated_at" />
+        <field name="deletedAt" type="datetime_immutable" column="deleted_at" nullable="true" />
+    </entity>
+</doctrine-mapping>

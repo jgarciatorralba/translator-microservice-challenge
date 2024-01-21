@@ -32,5 +32,5 @@ abstract class AggregateRoot
     /**
      * @return array<mixed>
      */
-    abstract public function toArray(bool $isNestedArray = false): array;
+    abstract public function toArray(): array;
 }
