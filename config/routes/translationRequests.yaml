@@ -1,0 +1,4 @@
+translation_requests_get:
+  path: /translation-requests
+  controller: App\UI\Controller\TranslationRequests\GetTranslationRequests
+  methods: GET

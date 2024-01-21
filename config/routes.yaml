@@ -3,3 +3,11 @@ favicon:
   path: /favicon.ico
   controller:
   methods: GET
+
+translationRequests:
+  resource: routes/translationRequests.yaml
+  prefix: /api/
+
+translationResults:
+  resource: routes/translationResults.yaml
+  prefix: /api/
