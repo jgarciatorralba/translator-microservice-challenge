@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\UI\Controller\Carts;
+namespace App\UI\Controller\TranslationRequests;
 
 use App\TranslationRequests\Application\Query\GetTranslationRequests\GetTranslationRequestsQuery;
 use App\UI\Controller\BaseController;
