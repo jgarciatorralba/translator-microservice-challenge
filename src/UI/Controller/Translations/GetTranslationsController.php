@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace App\UI\Controller\TranslationRequests;
+namespace App\UI\Controller\Translations;
 
-use App\TranslationRequests\Application\Query\GetTranslationRequests\GetTranslationRequestsQuery;
+use App\Translations\Application\Query\GetTranslations\GetTranslationsQuery;
 use App\UI\Controller\BaseController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
-final class GetTranslationRequestsController extends BaseController
+final class GetTranslationsController extends BaseController
 {
     public function __invoke(): Response
     {
-        $response = $this->ask(new GetTranslationRequestsQuery());
+        $response = $this->ask(new GetTranslationsQuery());
         return new JsonResponse($response->data(), Response::HTTP_OK);
     }
 }
