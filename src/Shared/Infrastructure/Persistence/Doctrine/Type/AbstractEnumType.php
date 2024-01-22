@@ -22,7 +22,7 @@ abstract class AbstractEnumType extends Type
 
     public function getSQLDeclaration(array $column, AbstractPlatform $platform): string
     {
-        return 'text';
+        return $this->getName();
     }
 
     public function convertToPHPValue(mixed $value, AbstractPlatform $platform): mixed

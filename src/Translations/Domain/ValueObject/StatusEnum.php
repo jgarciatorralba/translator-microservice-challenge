@@ -6,7 +6,7 @@ namespace App\Translations\Domain\ValueObject;
 
 use App\Shared\Domain\Trait\EnumValuesProviderTrait;
 
-enum ProcessingStatusEnum: string
+enum StatusEnum: string
 {
     use EnumValuesProviderTrait;
 

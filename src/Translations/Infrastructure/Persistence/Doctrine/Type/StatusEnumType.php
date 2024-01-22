@@ -6,9 +6,9 @@ namespace App\Translations\Infrastructure\Persistence\Doctrine\Type;
 
 use App\Shared\Infrastructure\Persistence\Doctrine\Type\AbstractEnumType;
 
-class SupportedLanguageType extends AbstractEnumType
+class StatusEnumType extends AbstractEnumType
 {
-    protected string $name = 'supported_language';
+    protected string $name = 'status_enum';
     /** @var string[] $values */
-    protected array $values = ['en', 'es', 'fr', 'de', 'pt'];
+    protected array $values = ['queued', 'processing', 'completed', 'error'];
 }

@@ -14,8 +14,7 @@ doctrine:
         profiling_collect_backtrace: '%kernel.debug%'
     types:
       uuid: App\Shared\Infrastructure\Persistence\Doctrine\Type\UuidType
-      processing_status: App\Translations\Infrastructure\Persistence\Doctrine\Type\ProcessingStatusType
-      supported_language: App\Translations\Infrastructure\Persistence\Doctrine\Type\SupportedLanguageType
+      status_enum: App\Translations\Infrastructure\Persistence\Doctrine\Type\StatusEnumType
 
   orm:
       auto_generate_proxy_classes: true

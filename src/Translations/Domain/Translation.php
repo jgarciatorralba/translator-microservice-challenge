@@ -8,7 +8,7 @@ use App\Shared\Domain\Aggregate\AggregateRoot;
 use App\Shared\Domain\Trait\TimestampableTrait;
 use App\Shared\Domain\ValueObject\Uuid;
 use App\Shared\Utils;
-use App\Translations\Domain\ValueObject\ProcessingStatusEnum;
+use App\Translations\Domain\ValueObject\StatusEnum;
 use App\Translations\Domain\ValueObject\SupportedLanguageEnum;
 use DateTimeImmutable;
 
@@ -21,7 +21,7 @@ class Translation extends AggregateRoot
         private SupportedLanguageEnum $sourceLanguage,
         private string $originalText,
         private SupportedLanguageEnum $targetLanguage,
-        private ProcessingStatusEnum $status,
+        private StatusEnum $status,
         private ?string $translatedText,
         DateTimeImmutable $createdAt,
         DateTimeImmutable $updatedAt
@@ -43,7 +43,7 @@ class Translation extends AggregateRoot
             sourceLanguage: $sourceLanguage,
             originalText: $originalText,
             targetLanguage: $targetLanguage,
-            status: ProcessingStatusEnum::QUEUED,
+            status: StatusEnum::QUEUED,
             translatedText: null,
             createdAt: $createdAt,
             updatedAt: $updatedAt
@@ -70,12 +70,12 @@ class Translation extends AggregateRoot
         return $this->targetLanguage;
     }
 
-    public function status(): ProcessingStatusEnum
+    public function status(): StatusEnum
     {
         return $this->status;
     }
 
-    public function updateStatus(ProcessingStatusEnum $status): void
+    public function updateStatus(StatusEnum $status): void
     {
         $this->status = $status;
     }
