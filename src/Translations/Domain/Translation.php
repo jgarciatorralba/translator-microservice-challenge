@@ -18,9 +18,9 @@ class Translation extends AggregateRoot
 
     public function __construct(
         private Uuid $id,
-        private SupportedLanguageEnum $sourceLanguage,
+        private string $sourceLanguage,
         private string $originalText,
-        private SupportedLanguageEnum $targetLanguage,
+        private string $targetLanguage,
         private StatusEnum $status,
         private ?string $translatedText,
         DateTimeImmutable $createdAt,
@@ -40,9 +40,9 @@ class Translation extends AggregateRoot
     ): self {
         return new self(
             id: $id,
-            sourceLanguage: $sourceLanguage,
+            sourceLanguage: $sourceLanguage->value,
             originalText: $originalText,
-            targetLanguage: $targetLanguage,
+            targetLanguage: $targetLanguage->value,
             status: StatusEnum::QUEUED,
             translatedText: null,
             createdAt: $createdAt,
@@ -55,7 +55,7 @@ class Translation extends AggregateRoot
         return $this->id;
     }
 
-    public function sourceLanguage(): SupportedLanguageEnum
+    public function sourceLanguage(): string
     {
         return $this->sourceLanguage;
     }
@@ -65,7 +65,7 @@ class Translation extends AggregateRoot
         return $this->originalText;
     }
 
-    public function targetLanguage(): SupportedLanguageEnum
+    public function targetLanguage(): string
     {
         return $this->targetLanguage;
     }
@@ -97,9 +97,9 @@ class Translation extends AggregateRoot
     {
         return [
             'id' => $this->id->value(),
-            'source_lang' => $this->sourceLanguage->value,
+            'source_lang' => $this->sourceLanguage,
             'original_text' => $this->originalText,
-            'target_lang' => $this->targetLanguage->value,
+            'target_lang' => $this->targetLanguage,
             'status' => $this->status->value,
             'translated_text' => $this->translatedText,
             'created_at' => Utils::dateToString($this->createdAt),

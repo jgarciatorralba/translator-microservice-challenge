@@ -7,9 +7,7 @@ namespace App\UI\Subscriber;
 final class ExceptionHttpStatusCodeMapper
 {
     private const EXCEPTIONS = [
-        // Translation Requests
-
-        // Translation Results
+        // Translations
 
     ];
 

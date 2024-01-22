@@ -25,17 +25,12 @@ abstract class AbstractEnumType extends Type
         return $this->getName();
     }
 
-    public function convertToPHPValue(mixed $value, AbstractPlatform $platform): mixed
-    {
-        return $value;
-    }
-
     public function convertToDatabaseValue(mixed $value, AbstractPlatform $platform): mixed
     {
-        if (!in_array($value, $this->values)) {
+        if (!in_array($value->value, $this->values)) {
             throw new InvalidArgumentException("Invalid '" . $this->name . "' value.");
         }
-        return $value;
+        return $value->value;
     }
 
     public function requiresSQLCommentHint(AbstractPlatform $platform): bool

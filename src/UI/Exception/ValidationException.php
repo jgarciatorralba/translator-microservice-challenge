@@ -14,7 +14,7 @@ class ValidationException extends HttpException
         private readonly array $errors = []
     ) {
         parent::__construct(
-            Response::HTTP_PRECONDITION_FAILED,
+            Response::HTTP_BAD_REQUEST,
             'Invalid request data.',
         );
     }

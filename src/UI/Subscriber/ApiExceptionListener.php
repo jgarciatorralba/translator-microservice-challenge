@@ -17,8 +17,7 @@ final class ApiExceptionListener
 {
     public function __construct(
         private readonly ExceptionHttpStatusCodeMapper $exceptionHttpStatusCodeMapper
-    ) {
-    }
+    ) {}
 
     public function onKernelException(ExceptionEvent $event): void
     {
@@ -36,7 +35,7 @@ final class ApiExceptionListener
     {
         $content = [
             'code' => $this->getErrorCode($exception),
-            'error' => $exception->getMessage(),
+            'errorMessage' => $exception->getMessage(),
         ];
 
         if ($exception instanceof ValidationException) {

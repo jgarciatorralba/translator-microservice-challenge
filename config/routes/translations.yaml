@@ -2,3 +2,8 @@ translations_get:
   path: /translations
   controller: App\UI\Controller\Translations\GetTranslationsController
   methods: GET
+
+translations_create:
+  path: /translations
+  controller: App\UI\Controller\Translations\CreateTranslationController
+  methods: POST
