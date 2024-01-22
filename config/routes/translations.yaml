@@ -1,4 +1,4 @@
 translations_get:
   path: /translations
-  controller: App\UI\Controller\Translations\GetTranslations
+  controller: App\UI\Controller\Translations\GetTranslationsController
   methods: GET
