@@ -10,7 +10,9 @@ use App\Shared\Domain\Bus\Query\QueryHandler;
 
 final class GetTranslationsQueryHandler implements QueryHandler
 {
-    public function __construct(private readonly GetTranslations $getTranslations) {}
+    public function __construct(private readonly GetTranslations $getTranslations)
+    {
+    }
 
     public function __invoke(GetTranslationsQuery $query): GetTranslationsResponse
     {

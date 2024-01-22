@@ -11,7 +11,8 @@ final class GetTranslations
 {
     public function __construct(
         private readonly TranslationRepository $translationRepository
-    ) {}
+    ) {
+    }
 
     /** @return Translation[] */
     public function __invoke(): array
