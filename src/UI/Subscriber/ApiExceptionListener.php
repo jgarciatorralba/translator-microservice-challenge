@@ -17,7 +17,8 @@ final class ApiExceptionListener
 {
     public function __construct(
         private readonly ExceptionHttpStatusCodeMapper $exceptionHttpStatusCodeMapper
-    ) {}
+    ) {
+    }
 
     public function onKernelException(ExceptionEvent $event): void
     {
