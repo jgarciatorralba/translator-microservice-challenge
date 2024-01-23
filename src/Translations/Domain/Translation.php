@@ -8,6 +8,7 @@ use App\Shared\Domain\Aggregate\AggregateRoot;
 use App\Shared\Domain\Trait\TimestampableTrait;
 use App\Shared\Domain\ValueObject\Uuid;
 use App\Shared\Utils;
+use App\Translations\Domain\Event\TranslationRequestedEvent;
 use App\Translations\Domain\ValueObject\StatusEnum;
 use App\Translations\Domain\ValueObject\SupportedLanguageEnum;
 use DateTimeImmutable;
@@ -88,6 +89,13 @@ class Translation extends AggregateRoot
     public function updateTranslatedText(?string $translatedText): void
     {
         $this->translatedText = $translatedText;
+    }
+
+    public function request(Uuid $id): void
+    {
+        $this->recordEvent(new TranslationRequestedEvent(
+            aggregateId: $id->value()
+        ));
     }
 
     /**
