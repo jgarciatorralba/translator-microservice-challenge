@@ -1,5 +1,5 @@
 services:
-  db:
+  postgres:
     image: postgres:alpine
     volumes:
       - "pgdata:/var/lib/postgresql/data"
@@ -12,7 +12,7 @@ services:
     networks:
       - app
 
-  message_broker:
+  rabbitmq:
     image: rabbitmq:management
     volumes:
       - "rabbitmq:/var/lib/rabbitmq:cached"
