@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Shared\Infrastructure\Bus\Exception;
 
 use App\Shared\Domain\Bus\Command\Command;
+use App\Shared\Utils;
 use Exception;
 
 class CommandNotRegisteredException extends Exception
@@ -13,7 +14,7 @@ class CommandNotRegisteredException extends Exception
     {
         $message = sprintf(
             'Command with class %s has no handler registered',
-            $command::class
+            Utils::extractClassName($command::class)
         );
 
         parent::__construct($message);

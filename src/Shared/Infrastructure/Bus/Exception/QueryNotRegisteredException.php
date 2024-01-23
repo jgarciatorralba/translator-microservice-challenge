@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Shared\Infrastructure\Bus\Exception;
 
 use App\Shared\Domain\Bus\Query\Query;
+use App\Shared\Utils;
 use Exception;
 
 class QueryNotRegisteredException extends Exception
@@ -13,7 +14,7 @@ class QueryNotRegisteredException extends Exception
     {
         $message = sprintf(
             'Query with class %s has no handler registered',
-            $query::class
+            Utils::extractClassName($query::class)
         );
 
         parent::__construct($message);

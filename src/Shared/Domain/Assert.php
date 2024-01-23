@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Shared\Domain;
 
+use App\Shared\Utils;
 use InvalidArgumentException;
 
 final class Assert
@@ -23,8 +24,8 @@ final class Assert
         if (!$item instanceof $class) {
             throw new InvalidArgumentException(sprintf(
                 "The object '%s' is not an instance of '%s'.",
-                $class,
-                $item::class
+                Utils::extractClassName($class),
+                Utils::extractClassName($item::class)
             ));
         }
     }
