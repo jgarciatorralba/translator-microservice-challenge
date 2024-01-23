@@ -97,13 +97,13 @@ class Translation extends AggregateRoot
     {
         return [
             'id' => $this->id->value(),
-            'source_lang' => $this->sourceLanguage,
-            'original_text' => $this->originalText,
-            'target_lang' => $this->targetLanguage,
+            'sourceLang' => $this->sourceLanguage,
+            'originalText' => $this->originalText,
+            'targetLang' => $this->targetLanguage,
             'status' => $this->status->value,
-            'translated_text' => $this->translatedText,
-            'created_at' => Utils::dateToString($this->createdAt),
-            'updated_at' => Utils::dateToString($this->updatedAt)
+            'translatedText' => $this->translatedText,
+            'createdAt' => Utils::dateToString($this->createdAt),
+            'updatedAt' => Utils::dateToString($this->updatedAt)
         ];
     }
 }
