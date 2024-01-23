@@ -44,8 +44,8 @@ abstract class DomainEvent
     {
         return [
             'id' => $this->eventId,
-            'event_type' => static::eventType(),
-            'occurred_on' => $this->occurredOn,
+            'eventType' => static::eventType(),
+            'occurredOn' => $this->occurredOn,
             'attributes' => array_merge(
                 $this->toPrimitives(),
                 ['id' => $this->aggregateId]
