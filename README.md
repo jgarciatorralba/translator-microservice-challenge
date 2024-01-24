@@ -1,47 +1,40 @@
 # Code Challenge: Machine Translation Microservice
 
-## Description
-
-To facilitate all machine translation jobs at our company, we require a machine translation microservice. This service should provide machine translations of texts submitted by various systems or users, and it will use external services to translate the texts. When such an external service is not available, there should be fallback to a secondary service. In the future, there will be more fallbacks, so this should be considered.
-
-You are free to use any machine translation platform, but you should use at least two (one as a fallback). For example, **DeepL** and **LectoAI** offer free accounts and APIs, but:
-
-- Do not use a third-party API connector package for the platforms of your choice, write your own implementation.
-- The microservice should be able to receive translation requests and allow querying the results of previously made requests, through an API (JSON).
-- We also want to keep logs for each translation processed through this microservice.
-- To maximize the performance of the service, translations should occur asynchronously (use the queuing technique of your choice).
-
-Also, please make sure:
-
-- The microservice is horizontally scalable.
-- The code includes at least one unit and one functional test case.
-- Include a readme that briefly explains the choices you made and why.
-
-### Out of scope
-
-- No authentication/authorization is required for this microservice for now.
-
-### Requirements
-
-- Docker
-- PHP
-- MySQL, PostgreSQL, MongoDB, or any other data storage
-
-### Bonus (optional)
-
-- CLI command to receive translation requests and allow querying the results of requests.
-
-### Preferred technologies
-
-- Symfony/Laravel
+This repository consists on a proposed solution to a technical challenge raised during the selection process for a Senior Backend Developer position.
 
 ---
 
-## Done?
+## Content
 
-Push all the commits to a GitHub repository and share the URL.
+This is a **Symfony** project for a **REST API** application, with a development environment configured in **Docker**.
 
-- **_Important_**: Only **Docker** will run on our machines, and we should not need to install any additional software to run this microservice.
+## Installation
+
+- Clone this repo: `git clone git@github.com:jgarciatorralba/translator-microservice-challenge.git`
+- Navigate to the `/.docker` folder, then run `docker-compose up -d` to download images and set up containers.
+  - **Important**: the configuration is prepared to expose the server container's port on host's port 8000, the database container's port on host's 6432, and the message broker container's port on hosts' 5672 and 15672, so make sure they are available before running the above command.
+- Once completed, open with VisualStudio and in the command palette (*View > Command Palette*) select the option *"Dev Containers: Reopen in Container"*.
+- Inside the development container, install packages with `composer install`.
+- Even though an empty database named **app_db** should have been created with the installation, you can still run `sf doctrine:database:create` for good measure.
+- With the database created and the connection to the application successfully established, execute the existing migrations in folder `/etc/migrations` using the command `sf doctrine:migrations:migrate`.
+
+---
+
+## Tests
+
+- Run the complete test suite by executing the command: `php ./vendor/bin/phpunit`
+  - **Important**: make sure to clear Symfony's testing cache by running `sf cache:clear --env=test` before executing the tests.
+
+---
+
+## Scripts
+
+- Run _PHPUnit_ tests: `php ./vendor/bin/phpunit`
+- Run _CodeSniffer_ analysis: `php ./vendor/bin/phpcs <filename|foldername>`
+  - Correct detected coding standard violations: `php ./vendor/bin/phpcbf <filename|foldername>`
+- Run _PHPStan_ analysis: `php ./vendor/bin/phpstan analyse <foldernames>`
+- Delete existing database: `sf doctrine:database:drop --force`
+- Run worker to consume messages queued in the message broker: `sf messenger:consume async -vv`
 
 ---
 
