@@ -29,8 +29,7 @@ class DoctrineTranslationRepository extends DoctrineRepository implements Transl
 
     public function delete(Translation $translation): void
     {
-        $translation->updateDeletedAt(new DateTimeImmutable());
-        $this->updateEntity();
+        $this->remove($translation);
     }
 
     /**

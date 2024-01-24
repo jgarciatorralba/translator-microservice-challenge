@@ -10,7 +10,6 @@ trait TimestampableTrait
 {
     private DateTimeImmutable $createdAt;
     private DateTimeImmutable $updatedAt;
-    private ?DateTimeImmutable $deletedAt = null;
 
     public function createdAt(): DateTimeImmutable
     {
@@ -22,11 +21,6 @@ trait TimestampableTrait
         return $this->updatedAt;
     }
 
-    public function deletedAt(): ?DateTimeImmutable
-    {
-        return $this->deletedAt;
-    }
-
     public function updateCreatedAt(DateTimeImmutable $createdAt): void
     {
         $this->createdAt = $createdAt;
@@ -35,10 +29,5 @@ trait TimestampableTrait
     public function updateUpdatedAt(DateTimeImmutable $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
-    }
-
-    public function updateDeletedAt(?DateTimeImmutable $deletedAt): void
-    {
-        $this->deletedAt = $deletedAt;
     }
 }

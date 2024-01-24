@@ -27,13 +27,11 @@ final class Version20240122194454 extends AbstractMigration
 				translated_text VARCHAR(255) DEFAULT NULL,
 				created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
 				updated_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
-				deleted_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL,
 				PRIMARY KEY(id))'
         );
         $this->addSql('COMMENT ON COLUMN translations.status IS \'(DC2Type:status_enum)\'');
         $this->addSql('COMMENT ON COLUMN translations.created_at IS \'(DC2Type:datetime_immutable)\'');
         $this->addSql('COMMENT ON COLUMN translations.updated_at IS \'(DC2Type:datetime_immutable)\'');
-        $this->addSql('COMMENT ON COLUMN translations.deleted_at IS \'(DC2Type:datetime_immutable)\'');
     }
 
     public function down(Schema $schema): void

@@ -31,10 +31,6 @@ doctrine:
           prefix: 'App\Translations\Domain'
           alias: App\Translations\Domain
           type: xml
-      filters:
-        softdeleteable:
-          class: App\Shared\Infrastructure\Persistence\Doctrine\Filter\SoftDeleteableFilter
-          enabled: true
 
 when@test:
   doctrine:
