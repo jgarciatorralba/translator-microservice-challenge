@@ -8,7 +8,6 @@ use App\Shared\Domain\ValueObject\Uuid;
 use App\Shared\Infrastructure\Persistence\Doctrine\DoctrineRepository;
 use App\Translations\Domain\Contract\TranslationRepository;
 use App\Translations\Domain\Translation;
-use DateTimeImmutable;
 
 class DoctrineTranslationRepository extends DoctrineRepository implements TranslationRepository
 {
