@@ -12,7 +12,8 @@ abstract class SymfonyHttpClient
 {
     public function __construct(
         private readonly HttpClientInterface $client
-    ) {}
+    ) {
+    }
 
     /**
      * @param array<string, string|array<string>|array<string, string>> $httpOptions

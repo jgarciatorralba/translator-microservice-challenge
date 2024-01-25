@@ -16,7 +16,8 @@ final class CreateTranslationCommand implements Command
         private readonly string $targetLanguage,
         private readonly DateTimeImmutable $createdAt,
         private readonly DateTimeImmutable $updatedAt
-    ) {}
+    ) {
+    }
 
     public function id(): string
     {
