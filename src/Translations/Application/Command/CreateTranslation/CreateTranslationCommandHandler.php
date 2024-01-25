@@ -23,7 +23,7 @@ final class CreateTranslationCommandHandler implements CommandHandler
     {
         $translation = Translation::create(
             id: Uuid::fromString($command->id()),
-            sourceLanguage: SupportedLanguageEnum::tryFrom($command->sourceLanguage()),
+            sourceLanguage: SupportedLanguageEnum::tryFrom($command->sourceLanguage() ?? 'null'),
             originalText: $command->originalText(),
             targetLanguage: SupportedLanguageEnum::from($command->targetLanguage()),
             createdAt: $command->createdAt(),
