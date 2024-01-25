@@ -13,7 +13,7 @@ final class CreateTranslationRequest extends AbstractRequest
     protected function validationRules(): Assert\Collection
     {
         return new Assert\Collection([
-            'sourceLanguage' => new Assert\Required([
+            'sourceLanguage' => new Assert\Optional([
                 new Assert\NotBlank(),
                 new Assert\Type('string'),
                 new Assert\Length(min: 2, max: 5),

@@ -23,7 +23,7 @@ final class CreateTranslationController extends BaseController
 
         $this->dispatch(new CreateTranslationCommand(
             id: $id,
-            sourceLanguage: $data['sourceLanguage'],
+            sourceLanguage: $data['sourceLanguage'] ?? null,
             originalText: $data['originalText'],
             targetLanguage: $data['targetLanguage'],
             createdAt: new DateTimeImmutable(),

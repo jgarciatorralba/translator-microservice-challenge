@@ -11,20 +11,19 @@ final class CreateTranslationCommand implements Command
 {
     public function __construct(
         private readonly string $id,
-        private readonly string $sourceLanguage,
+        private readonly ?string $sourceLanguage,
         private readonly string $originalText,
         private readonly string $targetLanguage,
         private readonly DateTimeImmutable $createdAt,
         private readonly DateTimeImmutable $updatedAt
-    ) {
-    }
+    ) {}
 
     public function id(): string
     {
         return $this->id;
     }
 
-    public function sourceLanguage(): string
+    public function sourceLanguage(): ?string
     {
         return $this->sourceLanguage;
     }

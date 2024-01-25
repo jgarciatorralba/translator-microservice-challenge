@@ -19,7 +19,7 @@ class Translation extends AggregateRoot
 
     public function __construct(
         private Uuid $id,
-        private string $sourceLanguage,
+        private ?string $sourceLanguage,
         private string $originalText,
         private string $targetLanguage,
         private StatusEnum $status,
@@ -33,7 +33,7 @@ class Translation extends AggregateRoot
 
     public static function create(
         Uuid $id,
-        SupportedLanguageEnum $sourceLanguage,
+        ?SupportedLanguageEnum $sourceLanguage,
         string $originalText,
         SupportedLanguageEnum $targetLanguage,
         DateTimeImmutable $createdAt,
@@ -41,7 +41,7 @@ class Translation extends AggregateRoot
     ): self {
         return new self(
             id: $id,
-            sourceLanguage: $sourceLanguage->value,
+            sourceLanguage: $sourceLanguage ? $sourceLanguage->value : null,
             originalText: $originalText,
             targetLanguage: $targetLanguage->value,
             status: StatusEnum::QUEUED,
@@ -56,7 +56,7 @@ class Translation extends AggregateRoot
         return $this->id;
     }
 
-    public function sourceLanguage(): string
+    public function sourceLanguage(): ?string
     {
         return $this->sourceLanguage;
     }

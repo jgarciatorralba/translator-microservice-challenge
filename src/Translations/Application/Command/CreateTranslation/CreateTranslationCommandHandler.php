@@ -16,14 +16,13 @@ final class CreateTranslationCommandHandler implements CommandHandler
     public function __construct(
         private readonly CreateTranslation $createTranslation,
         private readonly EventBus $eventBus
-    ) {
-    }
+    ) {}
 
     public function __invoke(CreateTranslationCommand $command): void
     {
         $translation = Translation::create(
             id: Uuid::fromString($command->id()),
-            sourceLanguage: SupportedLanguageEnum::from($command->sourceLanguage()),
+            sourceLanguage: SupportedLanguageEnum::tryFrom($command->sourceLanguage()),
             originalText: $command->originalText(),
             targetLanguage: SupportedLanguageEnum::from($command->targetLanguage()),
             createdAt: $command->createdAt(),
