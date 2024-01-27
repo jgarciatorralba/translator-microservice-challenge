@@ -5,19 +5,22 @@ declare(strict_types=1);
 namespace App\Shared\Infrastructure\Http\Symfony;
 
 use Exception;
+use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpClient\HttpOptions;
+use Symfony\Component\HttpClient\RetryableHttpClient;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-abstract class SymfonyHttpClient
+class SymfonyHttpClient
 {
     public function __construct(
-        private readonly HttpClientInterface $client
+        private ?HttpClientInterface $client = null
     ) {
+        $this->client = new RetryableHttpClient(HttpClient::create());
     }
 
     /**
      * @param array<string, string|array<string, string>> $httpOptions
-     * @return array<string, string|null>
+     * @return array<string, string|array<string, mixed>|null>
      */
     public function submit(string $url, array $httpOptions): array
     {
@@ -36,7 +39,7 @@ abstract class SymfonyHttpClient
 
         try {
             $response = $this->client->request('POST', $url);
-            $result['output'] = $response->getContent();
+            $result['output'] = $response->toArray();
         } catch (Exception $e) {
             $result['error'] = $e->getMessage();
         }
