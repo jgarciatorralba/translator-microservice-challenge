@@ -16,7 +16,7 @@ abstract class SymfonyHttpClient
     }
 
     /**
-     * @param array<string, string|array<string>|array<string, string>> $httpOptions
+     * @param array<string, string|array<string, string>> $httpOptions
      * @return array<string, string|null>
      */
     public function submit(string $url, array $httpOptions): array
