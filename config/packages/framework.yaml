@@ -1,12 +1,17 @@
 framework:
-    secret: '%env(APP_SECRET)%'
-    #csrf_protection: true
+  secret: '%env(APP_SECRET)%'
+  #csrf_protection: true
 
-    # Note that the session will be started ONLY if you read or write from it.
-    session: true
+  # Note that the session will be started ONLY if you read or write from it.
+  session: true
 
-    #esi: true
-    #fragments: true
+  #esi: true
+  #fragments: true
+
+  http_client:
+    default_options:
+      retry_failed:
+        max_retries: 3
 
 when@test:
   framework:
