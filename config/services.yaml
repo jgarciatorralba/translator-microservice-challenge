@@ -32,3 +32,13 @@ services:
 
   App\Shared\Domain\Bus\Event\EventBus:
     class: App\Shared\Infrastructure\Bus\Event\RabbitMQ\RabbitMQEventBus
+
+  App\Translations\Infrastructure\Http\DeepL\DeepLTranslationProvider:
+    arguments:
+      $apiKey: "%env(resolve:DEEPL_API_KEY)%"
+      $baseUri: "%env(resolve:DEEPL_BASE_URI)"
+
+  App\Translations\Infrastructure\Http\LectoAI\LectoAITranslationProvider:
+    arguments:
+      $apiKey: "%env(resolve:LECTOAI_API_KEY)%"
+      $baseUri: "%env(resolve:LECTOAI_BASE_URI)"

@@ -61,6 +61,12 @@ class Translation extends AggregateRoot
         return $this->sourceLanguage;
     }
 
+    public function updateSourceLanguage(string $sourceLanguage): void
+    {
+        $detectedSourceLanguage = SupportedLanguageEnum::tryFrom($sourceLanguage);
+        $this->sourceLanguage = $detectedSourceLanguage ?? 'unfit';
+    }
+
     public function originalText(): string
     {
         return $this->originalText;

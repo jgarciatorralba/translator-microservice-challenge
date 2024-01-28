@@ -34,6 +34,13 @@ final class UpdateTranslation
             $translation->updateTranslatedText($updatedData['translatedText']);
             $hasChanged = true;
         }
+        if (
+            !empty($updatedData['sourceLanguage'])
+            && empty($translation->sourceLanguage())
+        ) {
+            $translation->updateSourceLanguage($updatedData['sourceLanguage']);
+            $hasChanged = true;
+        }
 
         if ($hasChanged) {
             $translation->updateUpdatedAt($updatedData['updatedAt']);
