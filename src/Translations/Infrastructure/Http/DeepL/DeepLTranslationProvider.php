@@ -20,7 +20,7 @@ class DeepLTranslationProvider implements TranslationProvider
     public function translate(TranslationRequest $translation): TranslationResponse
     {
         $request = $this->httpClient->submit(
-            'translate',
+            '/translate',
             [
                 'base_uri' => $this->baseUri,
                 'headers' => [

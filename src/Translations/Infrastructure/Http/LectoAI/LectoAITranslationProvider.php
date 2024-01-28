@@ -20,7 +20,7 @@ class LectoAITranslationProvider implements TranslationProvider
     public function translate(TranslationRequest $translation): TranslationResponse
     {
         $request = $this->httpClient->submit(
-            'translate/text',
+            '/translate/text',
             [
                 'base_uri' => $this->baseUri,
                 'headers' => [
