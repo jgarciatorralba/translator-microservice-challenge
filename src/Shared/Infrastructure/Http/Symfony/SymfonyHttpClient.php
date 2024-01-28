@@ -23,14 +23,14 @@ class SymfonyHttpClient
      */
     public function submit(string $url, array $httpOptions): ResponseInterface
     {
-        $this->client->withOptions(
+        return $this->client->request(
+            'POST',
+            $url,
             (new HttpOptions())
                 ->setBaseUri($httpOptions['base_uri'])
                 ->setHeaders($httpOptions['headers'])
                 ->setJson($httpOptions['json'])
                 ->toArray()
         );
-
-        return $this->client->request('POST', $url);
     }
 }
