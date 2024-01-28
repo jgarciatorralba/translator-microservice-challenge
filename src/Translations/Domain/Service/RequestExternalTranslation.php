@@ -13,23 +13,12 @@ final class RequestExternalTranslation
 {
     private const MIN_IMPLEMENTATIONS = 2;
 
-    /**
-     * @param TranslationProvider[] $translationProviders
-     */
-    public function __construct(
-        private array $translationProviders = []
-    ) {
-        $implementations = array_filter(
-            get_declared_classes(),
-            fn(string $className) => in_array(
-                TranslationProvider::class,
-                class_implements($className)
-            )
-        );
+    /** @var TranslationProvider[] */
+    private array $translationProviders;
 
-        foreach ($implementations as $implementation) {
-            $this->translationProviders[] = new $implementation();
-        }
+    public function __construct(iterable $translationProviders)
+    {
+        $this->translationProviders = iterator_to_array($translationProviders);
     }
 
     public function __invoke(TranslationRequest $translation): TranslationResponse

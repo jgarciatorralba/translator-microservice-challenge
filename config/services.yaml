@@ -30,8 +30,15 @@ services:
     App\Shared\Domain\Bus\Event\EventSubscriber:
       tags: [messenger.message_handler]
 
+    App\Translations\Domain\Contract\TranslationProvider:
+      tags: ['app.translation_provider']
+
   App\Shared\Domain\Bus\Event\EventBus:
     class: App\Shared\Infrastructure\Bus\Event\RabbitMQ\RabbitMQEventBus
+
+  App\Translations\Domain\Service\RequestExternalTranslation:
+    arguments:
+      $translationProviders: !tagged_iterator app.translation_provider
 
   App\Translations\Infrastructure\Http\DeepL\DeepLTranslationProvider:
     arguments:
