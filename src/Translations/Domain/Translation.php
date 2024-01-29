@@ -64,7 +64,7 @@ class Translation extends AggregateRoot
     public function updateSourceLanguage(string $sourceLanguage): void
     {
         $detectedSourceLanguage = SupportedLanguageEnum::tryFrom($sourceLanguage);
-        $this->sourceLanguage = $detectedSourceLanguage ?? 'unfit';
+        $this->sourceLanguage = $detectedSourceLanguage->value ?? 'unfit';
     }
 
     public function originalText(): string
