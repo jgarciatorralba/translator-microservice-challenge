@@ -14,8 +14,7 @@ class DeepLTranslationProvider implements TranslationProvider
         private readonly string $apiKey,
         private readonly string $baseUri,
         private readonly SymfonyHttpClient $httpClient
-    ) {
-    }
+    ) {}
 
     public function translate(TranslationRequest $translation): TranslationResponse
     {
@@ -43,7 +42,7 @@ class DeepLTranslationProvider implements TranslationProvider
                 $statusCode,
                 null,
                 $translation,
-                $content['translations'][0]['detected_source_language']
+                strtolower($content['translations'][0]['detected_source_language'])
             );
         } catch (Exception $e) {
             return new TranslationResponse(
