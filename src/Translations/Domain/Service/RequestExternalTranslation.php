@@ -15,31 +15,34 @@ final class RequestExternalTranslation
     private const MIN_IMPLEMENTATIONS = 2;
 
     /** @var TranslationProvider[] */
-    private array $fallbackTranslationProviders;
+    private array $fallbackProviders;
 
-    /** @param IteratorAggregate<int, TranslationProvider> $fallbackTranslationProviders */
+    /** @param IteratorAggregate<int, TranslationProvider> $translationProviders */
     public function __construct(
         private readonly TranslationProvider $primaryTranslationProvider,
-        iterable $fallbackTranslationProviders
+        iterable $translationProviders
     ) {
-        $this->fallbackTranslationProviders = iterator_to_array($fallbackTranslationProviders);
+        $implementations = iterator_to_array($translationProviders);
+        if (count($implementations) < self::MIN_IMPLEMENTATIONS) {
+            throw new MissingProviderException(
+                self::MIN_IMPLEMENTATIONS - count($implementations)
+            );
+        }
+
+        $this->fallbackProviders = array_filter(
+            $implementations,
+            fn(TranslationProvider $implementation) =>
+                get_class($implementation) !== get_class($this->primaryTranslationProvider)
+        );
     }
 
     public function __invoke(TranslationProviderRequest $translation): TranslationProviderResponse
     {
-        if (
-            $numImplementations = count($this->fallbackTranslationProviders) < self::MIN_IMPLEMENTATIONS
-        ) {
-            throw new MissingProviderException(
-                self::MIN_IMPLEMENTATIONS - $numImplementations
-            );
-        }
-
         $result = $this->primaryTranslationProvider->translate($translation);
-        $fallbackProvider = array_shift($this->fallbackTranslationProviders);
+        $fallbackProvider = array_shift($this->fallbackProviders);
         while (empty($result->translatedText()) && !empty($fallbackProvider)) {
             $result = $fallbackProvider->translate($translation);
-            $fallbackProvider = array_shift($this->fallbackTranslationProviders);
+            $fallbackProvider = array_shift($this->fallbackProviders);
         }
 
         return $result;

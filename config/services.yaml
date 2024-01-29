@@ -38,9 +38,8 @@ services:
 
   App\Translations\Domain\Service\RequestExternalTranslation:
     arguments:
-      $primaryTranslationProvider:
-        class: App\Translations\Infrastructure\Http\DeepL\DeepLTranslationProvider
-      $fallbackTranslationProviders: !tagged_iterator app.translation_provider
+      $primaryTranslationProvider: '@App\Translations\Infrastructure\Http\DeepL\DeepLTranslationProvider'
+      $translationProviders: !tagged_iterator app.translation_provider
 
   App\Translations\Infrastructure\Http\DeepL\DeepLTranslationProvider:
     arguments:
