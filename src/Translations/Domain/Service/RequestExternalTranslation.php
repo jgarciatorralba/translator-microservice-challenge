@@ -39,10 +39,14 @@ final class RequestExternalTranslation
     public function __invoke(TranslationProviderRequest $translation): TranslationProviderResponse
     {
         $result = $this->primaryTranslationProvider->translate($translation);
-        $fallbackProvider = array_shift($this->fallbackProviders);
-        while (empty($result->translatedText()) && !empty($fallbackProvider)) {
-            $result = $fallbackProvider->translate($translation);
-            $fallbackProvider = array_shift($this->fallbackProviders);
+
+        if (empty($result->translatedText())) {
+            foreach ($this->fallbackProviders as $fallbackProvider) {
+                $result = $fallbackProvider->translate($translation);
+                if (!empty($result->translatedText())) {
+                    break;
+                }
+            }
         }
 
         return $result;
