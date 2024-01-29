@@ -8,7 +8,7 @@ use App\Translations\Domain\Contract\TranslationProvider;
 use App\Translations\Domain\Exception\MissingProviderException;
 use App\Translations\Domain\ValueObject\TranslationProvider\TranslationProviderRequest;
 use App\Translations\Domain\ValueObject\TranslationProvider\TranslationProviderResponse;
-use Iterator;
+use IteratorAggregate;
 
 final class RequestExternalTranslation
 {
@@ -17,7 +17,7 @@ final class RequestExternalTranslation
     /** @var TranslationProvider[] */
     private array $translationProviders;
 
-    /** @param Iterator<int, TranslationProvider> $translationProviders */
+    /** @param IteratorAggregate<int, TranslationProvider> $translationProviders */
     public function __construct(iterable $translationProviders)
     {
         $this->translationProviders = iterator_to_array($translationProviders);
