@@ -11,7 +11,7 @@ use App\Translations\Domain\Service\GetTranslationById;
 use App\Translations\Domain\Service\RequestExternalTranslation;
 use App\Translations\Domain\Service\UpdateTranslation;
 use App\Translations\Domain\ValueObject\StatusEnum;
-use App\Translations\Domain\ValueObject\TranslationRequest;
+use App\Translations\Domain\ValueObject\TranslationProvider\TranslationProviderRequest;
 use DateTimeImmutable;
 
 final class RequestTranslationSubscriber implements EventSubscriber
@@ -20,8 +20,7 @@ final class RequestTranslationSubscriber implements EventSubscriber
         private readonly GetTranslationById $getTranslationById,
         private readonly UpdateTranslation $updateTranslation,
         private readonly RequestExternalTranslation $requestExternalTranslation
-    ) {
-    }
+    ) {}
 
     public function __invoke(TranslationRequestedEvent $event): void
     {
@@ -35,7 +34,7 @@ final class RequestTranslationSubscriber implements EventSubscriber
         ]);
 
         $result = $this->requestExternalTranslation->__invoke(
-            new TranslationRequest(
+            new TranslationProviderRequest(
                 $translation->originalText(),
                 $translation->targetLanguage(),
                 $translation->sourceLanguage()

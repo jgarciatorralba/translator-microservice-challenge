@@ -2,16 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\Translations\Domain\ValueObject;
+namespace App\Translations\Domain\ValueObject\TranslationProvider;
 
-final class TranslationRequest
+final class TranslationProviderRequest
 {
     public function __construct(
         private readonly string $originalText,
         private readonly string $targetLanguage,
         private readonly ?string $sourceLanguage = null
-    ) {
-    }
+    ) {}
 
     public function sourceLanguage(): ?string
     {

@@ -4,8 +4,8 @@ namespace App\Translations\Infrastructure\Http\DeepL;
 
 use App\Shared\Infrastructure\Http\Symfony\SymfonyHttpClient;
 use App\Translations\Domain\Contract\TranslationProvider;
-use App\Translations\Domain\ValueObject\TranslationRequest;
-use App\Translations\Domain\ValueObject\TranslationResponse;
+use App\Translations\Domain\ValueObject\TranslationProvider\TranslationProviderRequest;
+use App\Translations\Domain\ValueObject\TranslationProvider\TranslationProviderResponse;
 use Exception;
 
 class DeepLTranslationProvider implements TranslationProvider
@@ -14,10 +14,9 @@ class DeepLTranslationProvider implements TranslationProvider
         private readonly string $apiKey,
         private readonly string $baseUri,
         private readonly SymfonyHttpClient $httpClient
-    ) {
-    }
+    ) {}
 
-    public function translate(TranslationRequest $translation): TranslationResponse
+    public function translate(TranslationProviderRequest $translation): TranslationProviderResponse
     {
         $request = $this->httpClient->submit(
             'translate',
@@ -39,14 +38,14 @@ class DeepLTranslationProvider implements TranslationProvider
                 && is_array($content['translations'])
                     ? $content['translations'][0]['text']
                     : null;
-            return new TranslationResponse(
+            return new TranslationProviderResponse(
                 $statusCode,
                 null,
                 $translation,
                 strtolower($content['translations'][0]['detected_source_language'])
             );
         } catch (Exception $e) {
-            return new TranslationResponse(
+            return new TranslationProviderResponse(
                 $statusCode,
                 $e->getMessage()
             );
@@ -54,7 +53,7 @@ class DeepLTranslationProvider implements TranslationProvider
     }
 
     /** @return array<string, string|string[]> */
-    private function getRequestBody(TranslationRequest $translation): array
+    private function getRequestBody(TranslationProviderRequest $translation): array
     {
         $body = [
             'text' => [$translation->originalText()],

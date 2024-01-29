@@ -6,8 +6,8 @@ namespace App\Translations\Domain\Service;
 
 use App\Translations\Domain\Contract\TranslationProvider;
 use App\Translations\Domain\Exception\MissingProviderException;
-use App\Translations\Domain\ValueObject\TranslationRequest;
-use App\Translations\Domain\ValueObject\TranslationResponse;
+use App\Translations\Domain\ValueObject\TranslationProvider\TranslationProviderRequest;
+use App\Translations\Domain\ValueObject\TranslationProvider\TranslationProviderResponse;
 use Iterator;
 
 final class RequestExternalTranslation
@@ -23,7 +23,7 @@ final class RequestExternalTranslation
         $this->translationProviders = iterator_to_array($translationProviders);
     }
 
-    public function __invoke(TranslationRequest $translation): TranslationResponse
+    public function __invoke(TranslationProviderRequest $translation): TranslationProviderResponse
     {
         if (
             $numImplementations = count($this->translationProviders) < self::MIN_IMPLEMENTATIONS
@@ -33,7 +33,7 @@ final class RequestExternalTranslation
             );
         }
 
-        $result = new TranslationResponse();
+        $result = new TranslationProviderResponse();
         $provider = array_shift($this->translationProviders);
         while (empty($result->translatedText()) && !empty($provider)) {
             $result = $provider->translate($translation);
