@@ -20,7 +20,8 @@ final class RequestTranslationSubscriber implements EventSubscriber
         private readonly GetTranslationById $getTranslationById,
         private readonly UpdateTranslation $updateTranslation,
         private readonly RequestExternalTranslation $requestExternalTranslation
-    ) {}
+    ) {
+    }
 
     public function __invoke(TranslationRequestedEvent $event): void
     {

@@ -10,7 +10,8 @@ final class TranslationProviderRequest
         private readonly string $originalText,
         private readonly string $targetLanguage,
         private readonly ?string $sourceLanguage = null
-    ) {}
+    ) {
+    }
 
     public function sourceLanguage(): ?string
     {
