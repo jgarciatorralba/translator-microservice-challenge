@@ -15,29 +15,31 @@ final class RequestExternalTranslation
     private const MIN_IMPLEMENTATIONS = 2;
 
     /** @var TranslationProvider[] */
-    private array $translationProviders;
+    private array $fallbackTranslationProviders;
 
-    /** @param IteratorAggregate<int, TranslationProvider> $translationProviders */
-    public function __construct(iterable $translationProviders)
-    {
-        $this->translationProviders = iterator_to_array($translationProviders);
+    /** @param IteratorAggregate<int, TranslationProvider> $fallbackTranslationProviders */
+    public function __construct(
+        private readonly TranslationProvider $primaryTranslationProvider,
+        iterable $fallbackTranslationProviders
+    ) {
+        $this->fallbackTranslationProviders = iterator_to_array($fallbackTranslationProviders);
     }
 
     public function __invoke(TranslationProviderRequest $translation): TranslationProviderResponse
     {
         if (
-            $numImplementations = count($this->translationProviders) < self::MIN_IMPLEMENTATIONS
+            $numImplementations = count($this->fallbackTranslationProviders) < self::MIN_IMPLEMENTATIONS
         ) {
             throw new MissingProviderException(
                 self::MIN_IMPLEMENTATIONS - $numImplementations
             );
         }
 
-        $result = new TranslationProviderResponse();
-        $provider = array_shift($this->translationProviders);
-        while (empty($result->translatedText()) && !empty($provider)) {
-            $result = $provider->translate($translation);
-            $provider = array_shift($this->translationProviders);
+        $result = $this->primaryTranslationProvider->translate($translation);
+        $fallbackProvider = array_shift($this->fallbackTranslationProviders);
+        while (empty($result->translatedText()) && !empty($fallbackProvider)) {
+            $result = $fallbackProvider->translate($translation);
+            $fallbackProvider = array_shift($this->fallbackTranslationProviders);
         }
 
         return $result;
