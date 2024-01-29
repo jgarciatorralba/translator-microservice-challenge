@@ -14,7 +14,8 @@ class DeepLTranslationProvider implements TranslationProvider
         private readonly string $apiKey,
         private readonly string $baseUri,
         private readonly SymfonyHttpClient $httpClient
-    ) {}
+    ) {
+    }
 
     public function translate(TranslationRequest $translation): TranslationResponse
     {
