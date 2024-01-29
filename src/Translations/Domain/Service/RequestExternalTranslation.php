@@ -40,12 +40,10 @@ final class RequestExternalTranslation
     {
         $result = $this->primaryTranslationProvider->translate($translation);
 
-        if (empty($result->translatedText())) {
-            foreach ($this->fallbackProviders as $fallbackProvider) {
-                $result = $fallbackProvider->translate($translation);
-                if (!empty($result->translatedText())) {
-                    break;
-                }
+        while (empty($result->translatedText()) && current($this->fallbackProviders)) {
+            $result = current($this->fallbackProviders)->translate($translation);
+            if (empty($result->translatedText())) {
+                next($this->fallbackProviders);
             }
         }
 
