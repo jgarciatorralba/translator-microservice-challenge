@@ -1,22 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Translations\Infrastructure\Http\DeepL;
 
-use App\Shared\Infrastructure\Http\Symfony\SymfonyHttpClient;
 use App\Translations\Domain\Contract\TranslationProvider;
 use App\Translations\Domain\ValueObject\TranslationProvider\TranslationProviderRequest;
 use App\Translations\Domain\ValueObject\TranslationProvider\TranslationProviderResponse;
+use App\Translations\Infrastructure\Http\AbstractTranslationProvider;
 use Exception;
 
-class DeepLTranslationProvider implements TranslationProvider
+class DeepLTranslationProvider extends AbstractTranslationProvider implements TranslationProvider
 {
-    public function __construct(
-        private readonly string $apiKey,
-        private readonly string $baseUri,
-        private readonly SymfonyHttpClient $httpClient
-    ) {
-    }
-
     public function translate(TranslationProviderRequest $translation): TranslationProviderResponse
     {
         try {
@@ -26,7 +21,7 @@ class DeepLTranslationProvider implements TranslationProvider
                     'Content-Type' => 'application/json',
                     'Authorization' => "DeepL-Auth-Key $this->apiKey"
                 ],
-                'json' => $this->getRequestBody($translation)
+                'json' => $this->generateRequestBody($translation)
             ]);
 
             $statusCode = $request->getStatusCode();
@@ -51,7 +46,7 @@ class DeepLTranslationProvider implements TranslationProvider
     }
 
     /** @return array<string, string|string[]> */
-    private function getRequestBody(TranslationProviderRequest $translation): array
+    public function generateRequestBody(TranslationProviderRequest $translation): array
     {
         $body = [
             'text' => [$translation->originalText()],

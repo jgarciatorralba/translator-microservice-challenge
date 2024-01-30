@@ -13,7 +13,8 @@ final class TranslationProviderResponse
         private readonly ?string $error = null,
         private readonly ?string $translatedText = null,
         private readonly ?string $detectedLanguage = null
-    ) {}
+    ) {
+    }
 
     public function statusCode(): ?int
     {
