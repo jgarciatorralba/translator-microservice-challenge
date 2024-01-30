@@ -19,26 +19,23 @@ class DeepLTranslationProvider implements TranslationProvider
 
     public function translate(TranslationProviderRequest $translation): TranslationProviderResponse
     {
-        $request = $this->httpClient->submit(
-            'translate',
-            [
+        try {
+            $request = $this->httpClient->submit('translate', [
                 'base_uri' => $this->baseUri,
                 'headers' => [
                     'Content-Type' => 'application/json',
                     'Authorization' => "DeepL-Auth-Key $this->apiKey"
                 ],
                 'json' => $this->getRequestBody($translation)
-            ]
-        );
+            ]);
 
-        $statusCode = $request->getStatusCode();
-
-        try {
+            $statusCode = $request->getStatusCode();
             $content = $request->toArray();
             $translation = isset($content['translations'])
                 && is_array($content['translations'])
                     ? $content['translations'][0]['text']
                     : null;
+
             return new TranslationProviderResponse(
                 $statusCode,
                 null,

@@ -19,26 +19,23 @@ class LectoAITranslationProvider implements TranslationProvider
 
     public function translate(TranslationProviderRequest $translation): TranslationProviderResponse
     {
-        $request = $this->httpClient->submit(
-            'translate/text',
-            [
+        try {
+            $request = $this->httpClient->submit('translate/text', [
                 'base_uri' => $this->baseUri,
                 'headers' => [
                     'Content-Type' => 'application/json',
                     'X-API-Key' => $this->apiKey
                 ],
                 'json' => $this->getRequestBody($translation)
-            ]
-        );
+            ]);
 
-        $statusCode = $request->getStatusCode();
-
-        try {
+            $statusCode = $request->getStatusCode();
             $content = $request->toArray();
             $translation = isset($content['translations']['translated'])
                 && is_array($content['translations']['translated'])
                     ? $content['translations']['translated'][0]
                     : null;
+
             return new TranslationProviderResponse(
                 $statusCode,
                 null,

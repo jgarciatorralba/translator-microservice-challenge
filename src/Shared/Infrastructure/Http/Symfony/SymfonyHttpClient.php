@@ -9,8 +9,9 @@ use Symfony\Component\HttpClient\HttpOptions;
 use Symfony\Component\HttpClient\RetryableHttpClient;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
+use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 
-class SymfonyHttpClient
+final class SymfonyHttpClient
 {
     public function __construct(
         private ?HttpClientInterface $client = null
@@ -20,6 +21,7 @@ class SymfonyHttpClient
 
     /**
      * @param array<string, string|array<string, string>> $httpOptions
+     * @throws TransportExceptionInterface
      */
     public function submit(string $url, array $httpOptions): ResponseInterface
     {
