@@ -6,15 +6,16 @@ namespace App\Translations\Domain\ValueObject\TranslationProvider;
 
 final class TranslationProviderResponse
 {
+    private const HTTP_BAD_REQUEST = 400;
+
     public function __construct(
-        private readonly int $statusCode = 200,
+        private readonly ?int $statusCode = null,
         private readonly ?string $error = null,
         private readonly ?string $translatedText = null,
         private readonly ?string $detectedLanguage = null
-    ) {
-    }
+    ) {}
 
-    public function statusCode(): int
+    public function statusCode(): ?int
     {
         return $this->statusCode;
     }
@@ -32,5 +33,10 @@ final class TranslationProviderResponse
     public function detectedLanguage(): ?string
     {
         return $this->detectedLanguage;
+    }
+
+    public function isFromBadRequest(): bool
+    {
+        return $this->statusCode === self::HTTP_BAD_REQUEST;
     }
 }

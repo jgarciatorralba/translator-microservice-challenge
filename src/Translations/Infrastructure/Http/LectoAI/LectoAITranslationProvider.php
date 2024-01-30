@@ -44,7 +44,7 @@ class LectoAITranslationProvider implements TranslationProvider
             );
         } catch (Exception $e) {
             return new TranslationProviderResponse(
-                $statusCode,
+                $statusCode ?? null,
                 $e->getMessage()
             );
         }
