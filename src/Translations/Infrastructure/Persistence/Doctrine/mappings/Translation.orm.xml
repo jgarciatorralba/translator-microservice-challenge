@@ -15,7 +15,7 @@
                 <option name="default">queued</option>
             </options>
         </field>
-        <field name="translatedText" type="string" column="translated_text" length="255" nullable="true" />
+        <field name="translatedText" type="text" column="translated_text" nullable="true" />
         <field name="createdAt" type="datetime_immutable" column="created_at" />
         <field name="updatedAt" type="datetime_immutable" column="updated_at" />
     </entity>

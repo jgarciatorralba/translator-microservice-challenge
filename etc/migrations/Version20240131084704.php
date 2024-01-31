@@ -7,7 +7,7 @@ namespace DoctrineMigrations;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
-final class Version20240122194454 extends AbstractMigration
+final class Version20240131084704 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -24,7 +24,7 @@ final class Version20240122194454 extends AbstractMigration
 				original_text VARCHAR(255) NOT NULL,
 				target_lang VARCHAR(5) NOT NULL,
 				status status_enum DEFAULT \'queued\' NOT NULL,
-				translated_text VARCHAR(255) DEFAULT NULL,
+				translated_text TEXT DEFAULT NULL,
 				created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
 				updated_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
 				PRIMARY KEY(id)
