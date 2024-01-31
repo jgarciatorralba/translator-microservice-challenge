@@ -55,9 +55,7 @@ final class DeepLTranslationProvider extends AbstractTranslationProvider impleme
                 $this->mapLanguageCode(SupportedLanguageEnum::from($translation->targetLanguage()))
         ];
         if (!empty($translation->sourceLanguage())) {
-            $body['source_lang'] = $this->mapLanguageCode(
-                SupportedLanguageEnum::from($translation->sourceLanguage())
-            );
+            $body['source_lang'] = strtoupper($translation->sourceLanguage());
         }
 
         return $body;
