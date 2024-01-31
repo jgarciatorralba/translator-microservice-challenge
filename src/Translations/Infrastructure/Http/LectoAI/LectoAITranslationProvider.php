@@ -10,7 +10,7 @@ use App\Translations\Domain\ValueObject\TranslationProviderResponse;
 use App\Translations\Infrastructure\Http\AbstractTranslationProvider;
 use Exception;
 
-class LectoAITranslationProvider extends AbstractTranslationProvider implements TranslationProvider
+final class LectoAITranslationProvider extends AbstractTranslationProvider implements TranslationProvider
 {
     public function translate(Translation $translation): TranslationProviderResponse
     {
