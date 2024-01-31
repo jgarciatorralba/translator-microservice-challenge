@@ -3,6 +3,13 @@ translations_get:
   controller: App\UI\Controller\Translations\GetTranslationsController
   methods: GET
 
+translations_get_by_id:
+  path: /translations/{id}
+  controller: App\UI\Controller\Translations\GetTranslationByIdController
+  methods: GET
+  requirements:
+    id: '%routing.uuid%'
+
 translations_create:
   path: /translations
   controller: App\UI\Controller\Translations\CreateTranslationController
