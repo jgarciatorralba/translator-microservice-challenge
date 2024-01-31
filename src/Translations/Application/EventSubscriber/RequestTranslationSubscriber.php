@@ -11,7 +11,6 @@ use App\Translations\Domain\Service\GetTranslationById;
 use App\Translations\Domain\Service\RequestExternalTranslation;
 use App\Translations\Domain\Service\UpdateTranslation;
 use App\Translations\Domain\ValueObject\StatusEnum;
-use App\Translations\Domain\ValueObject\TranslationProvider\TranslationProviderRequest;
 use DateTimeImmutable;
 
 final class RequestTranslationSubscriber implements EventSubscriber
@@ -34,13 +33,7 @@ final class RequestTranslationSubscriber implements EventSubscriber
             'updatedAt' => new DateTimeImmutable()
         ]);
 
-        $result = $this->requestExternalTranslation->__invoke(
-            new TranslationProviderRequest(
-                $translation->originalText(),
-                $translation->targetLanguage(),
-                $translation->sourceLanguage()
-            )
-        );
+        $result = $this->requestExternalTranslation->__invoke($translation);
 
         $this->updateTranslation->__invoke($translation, [
             'status' => !empty($result->error())

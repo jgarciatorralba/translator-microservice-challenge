@@ -6,8 +6,8 @@ namespace App\Translations\Domain\Service;
 
 use App\Translations\Domain\Contract\TranslationProvider;
 use App\Translations\Domain\Exception\MissingProviderException;
-use App\Translations\Domain\ValueObject\TranslationProvider\TranslationProviderRequest;
-use App\Translations\Domain\ValueObject\TranslationProvider\TranslationProviderResponse;
+use App\Translations\Domain\Translation;
+use App\Translations\Domain\ValueObject\TranslationProviderResponse;
 use IteratorAggregate;
 
 final class RequestExternalTranslation
@@ -36,7 +36,7 @@ final class RequestExternalTranslation
         );
     }
 
-    public function __invoke(TranslationProviderRequest $translation): TranslationProviderResponse
+    public function __invoke(Translation $translation): TranslationProviderResponse
     {
         $response = $this->primaryTranslationProvider->translate($translation);
 

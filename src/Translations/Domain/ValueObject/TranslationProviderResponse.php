@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Translations\Domain\ValueObject\TranslationProvider;
+namespace App\Translations\Domain\ValueObject;
 
 final class TranslationProviderResponse
 {

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Translations\Infrastructure\Http;
 
 use App\Shared\Infrastructure\Http\Symfony\SymfonyHttpClient;
-use App\Translations\Domain\ValueObject\TranslationProvider\TranslationProviderRequest;
+use App\Translations\Domain\Translation;
 
 abstract class AbstractTranslationProvider
 {
@@ -17,5 +17,5 @@ abstract class AbstractTranslationProvider
     }
 
     /** @return array<string, mixed> */
-    abstract public function generateRequestBody(TranslationProviderRequest $translation): array;
+    abstract public function generateRequestBody(Translation $translation): array;
 }

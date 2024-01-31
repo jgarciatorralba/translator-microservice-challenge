@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace App\Translations\Infrastructure\Http\LectoAI;
 
 use App\Translations\Domain\Contract\TranslationProvider;
-use App\Translations\Domain\ValueObject\TranslationProvider\TranslationProviderRequest;
-use App\Translations\Domain\ValueObject\TranslationProvider\TranslationProviderResponse;
+use App\Translations\Domain\Translation;
+use App\Translations\Domain\ValueObject\TranslationProviderResponse;
 use App\Translations\Infrastructure\Http\AbstractTranslationProvider;
 use Exception;
 
 class LectoAITranslationProvider extends AbstractTranslationProvider implements TranslationProvider
 {
-    public function translate(TranslationProviderRequest $translation): TranslationProviderResponse
+    public function translate(Translation $translation): TranslationProviderResponse
     {
         try {
             $request = $this->httpClient->submit('translate/text', [
@@ -46,7 +46,7 @@ class LectoAITranslationProvider extends AbstractTranslationProvider implements 
     }
 
     /** @return array<string, string|string[]> */
-    public function generateRequestBody(TranslationProviderRequest $translation): array
+    public function generateRequestBody(Translation $translation): array
     {
         $body = [
             'texts' => [$translation->originalText()],
