@@ -6,6 +6,7 @@ namespace App\Translations\Infrastructure\Http\DeepL;
 
 use App\Translations\Domain\Contract\TranslationProvider;
 use App\Translations\Domain\Translation;
+use App\Translations\Domain\ValueObject\SupportedLanguageEnum;
 use App\Translations\Domain\ValueObject\TranslationProviderResponse;
 use App\Translations\Infrastructure\Http\AbstractTranslationProvider;
 use Exception;
@@ -50,12 +51,26 @@ final class DeepLTranslationProvider extends AbstractTranslationProvider impleme
     {
         $body = [
             'text' => [$translation->originalText()],
-            'target_lang' => strtoupper($translation->targetLanguage())
+            'target_lang' =>
+                $this->mapLanguageCode(SupportedLanguageEnum::from($translation->targetLanguage()))
         ];
         if (!empty($translation->sourceLanguage())) {
-            $body['source_lang'] = strtoupper($translation->sourceLanguage());
+            $body['source_lang'] = $this->mapLanguageCode(
+                SupportedLanguageEnum::from($translation->sourceLanguage())
+            );
         }
 
         return $body;
+    }
+
+    public function mapLanguageCode(SupportedLanguageEnum $languageCode): string
+    {
+        if ($languageCode === SupportedLanguageEnum::ENGLISH) {
+            return 'EN-GB';
+        } elseif ($languageCode === SupportedLanguageEnum::PORTUGUESE_PORTUGAL) {
+            return 'PT-PT';
+        }
+
+        return strtoupper($languageCode->value);
     }
 }

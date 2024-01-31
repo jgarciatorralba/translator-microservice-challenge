@@ -6,6 +6,7 @@ namespace App\Translations\Infrastructure\Http\LectoAI;
 
 use App\Translations\Domain\Contract\TranslationProvider;
 use App\Translations\Domain\Translation;
+use App\Translations\Domain\ValueObject\SupportedLanguageEnum;
 use App\Translations\Domain\ValueObject\TranslationProviderResponse;
 use App\Translations\Infrastructure\Http\AbstractTranslationProvider;
 use Exception;
@@ -50,12 +51,25 @@ final class LectoAITranslationProvider extends AbstractTranslationProvider imple
     {
         $body = [
             'texts' => [$translation->originalText()],
-            'to' => [$translation->targetLanguage()]
+            'to' => [
+                $this->mapLanguageCode(SupportedLanguageEnum::from($translation->targetLanguage()))
+            ]
         ];
         if (!empty($translation->sourceLanguage())) {
-            $body['from'] = $translation->sourceLanguage();
+            $body['from'] = $this->mapLanguageCode(
+                SupportedLanguageEnum::from($translation->sourceLanguage())
+            );
         }
 
         return $body;
+    }
+
+    public function mapLanguageCode(SupportedLanguageEnum $languageCode): string
+    {
+        if ($languageCode === SupportedLanguageEnum::PORTUGUESE_PORTUGAL) {
+            return 'pt-PT';
+        }
+
+        return $languageCode->value;
     }
 }
