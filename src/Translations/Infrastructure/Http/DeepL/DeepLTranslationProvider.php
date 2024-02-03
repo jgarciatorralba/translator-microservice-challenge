@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Translations\Infrastructure\Http\DeepL;
 
+use App\Shared\Utils;
 use App\Translations\Domain\Contract\TranslationProvider;
 use App\Translations\Domain\Translation;
 use App\Translations\Domain\ValueObject\SupportedLanguageEnum;
@@ -14,6 +15,12 @@ final class DeepLTranslationProvider extends AbstractTranslationProvider impleme
 {
     public function translate(Translation $translation): TranslationProviderResponse
     {
+        $message = "Requesting translation from class '"
+            . Utils::extractClassName(self::class) . "'";
+        $this->logger->info($message, [
+            'translation' => $translation->toArray()
+        ]);
+
         $response = $this->httpClient->submit('translate', [
             'base_uri' => $this->baseUri,
             'headers' => [
@@ -24,6 +31,12 @@ final class DeepLTranslationProvider extends AbstractTranslationProvider impleme
         ]);
 
         if (!empty($response->error())) {
+            $this->logger->error("Error requesting translation.", [
+                'translation' => $translation->id()->value(),
+                'statusCode' => $response->statusCode(),
+                'error' => $response->error()
+            ]);
+
             return new TranslationProviderResponse(
                 $response->statusCode(),
                 $response->error()
@@ -31,7 +44,7 @@ final class DeepLTranslationProvider extends AbstractTranslationProvider impleme
         }
 
         $decodedContent = json_decode($response->content(), true);
-        $translation = isset($decodedContent['translations'])
+        $translatedText = isset($decodedContent['translations'])
             && is_array($decodedContent['translations'])
                 ? $decodedContent['translations'][0]['text']
                 : null;
@@ -39,11 +52,17 @@ final class DeepLTranslationProvider extends AbstractTranslationProvider impleme
             ? strtolower($decodedContent['translations'][0]['detected_source_language'])
             : null;
 
+        $this->logger->info('Translation request completed.', [
+            'translation' => $translation->id()->value(),
+            'statusCode' => $response->statusCode(),
+            'content' => $decodedContent
+        ]);
+
         return new TranslationProviderResponse(
             $response->statusCode(),
             null,
             $response->content(),
-            $translation,
+            $translatedText,
             $sourceLang
         );
     }

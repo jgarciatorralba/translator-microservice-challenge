@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Translations\Infrastructure\Http;
 
 use App\Shared\Infrastructure\Http\Symfony\SymfonyHttpClient;
+use App\Shared\Infrastructure\Log\Monolog\TranslationLogger;
 use App\Translations\Domain\Translation;
 
 abstract class AbstractTranslationProvider
@@ -12,7 +13,8 @@ abstract class AbstractTranslationProvider
     public function __construct(
         protected readonly string $apiKey,
         protected readonly string $baseUri,
-        protected readonly SymfonyHttpClient $httpClient
+        protected readonly SymfonyHttpClient $httpClient,
+        protected readonly TranslationLogger $logger
     ) {
     }
 
