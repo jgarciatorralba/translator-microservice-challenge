@@ -9,41 +9,41 @@ use App\Translations\Domain\Translation;
 use App\Translations\Domain\ValueObject\SupportedLanguageEnum;
 use App\Translations\Domain\ValueObject\TranslationProviderResponse;
 use App\Translations\Infrastructure\Http\AbstractTranslationProvider;
-use Exception;
 
 final class LectoAITranslationProvider extends AbstractTranslationProvider implements TranslationProvider
 {
     public function translate(Translation $translation): TranslationProviderResponse
     {
-        try {
-            $request = $this->httpClient->submit('translate/text', [
-                'base_uri' => $this->baseUri,
-                'headers' => [
-                    'Content-Type' => 'application/json',
-                    'X-API-Key' => $this->apiKey
-                ],
-                'json' => $this->generateRequestBody($translation)
-            ]);
+        $response = $this->httpClient->submit('translate/text', [
+            'base_uri' => $this->baseUri,
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'X-API-Key' => $this->apiKey
+            ],
+            'json' => $this->generateRequestBody($translation)
+        ]);
 
-            $statusCode = $request->getStatusCode();
-            $content = $request->toArray();
-            $translation = isset($content['translations']['translated'])
-                && is_array($content['translations']['translated'])
-                    ? $content['translations']['translated'][0]
-                    : null;
-
+        if (!empty($response->error())) {
             return new TranslationProviderResponse(
-                $statusCode,
-                null,
-                $translation,
-                $content['from']
-            );
-        } catch (Exception $e) {
-            return new TranslationProviderResponse(
-                $statusCode ?? null,
-                $e->getMessage()
+                $response->statusCode(),
+                $response->error()
             );
         }
+
+        $decodedContent = json_decode($response->content(), true);
+        $translation = isset($decodedContent['translations']['translated'])
+            && is_array($decodedContent['translations']['translated'])
+                ? $decodedContent['translations']['translated'][0]
+                : null;
+        $sourceLang = $decodedContent['from'] ?? null;
+
+        return new TranslationProviderResponse(
+            $response->statusCode(),
+            null,
+            $response->content(),
+            $translation,
+            $sourceLang
+        );
     }
 
     /** @return array<string, string|string[]> */

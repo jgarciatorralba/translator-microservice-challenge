@@ -4,14 +4,17 @@ declare(strict_types=1);
 
 namespace App\Shared\Infrastructure\Http\Symfony;
 
+use App\Shared\Domain\Contract\HttpClient as HttpClientContract;
+use App\Shared\Domain\ValueObject\HttpResponse;
 use Symfony\Component\HttpClient\HttpClient;
+use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\HttpExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Component\HttpClient\HttpOptions;
 use Symfony\Component\HttpClient\RetryableHttpClient;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
-use Symfony\Contracts\HttpClient\ResponseInterface;
-use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 
-final class SymfonyHttpClient
+final class SymfonyHttpClient implements HttpClientContract
 {
     public function __construct(
         private ?HttpClientInterface $client = null
@@ -21,18 +24,29 @@ final class SymfonyHttpClient
 
     /**
      * @param array<string, string|array<string, string>> $httpOptions
-     * @throws TransportExceptionInterface
      */
-    public function submit(string $url, array $httpOptions): ResponseInterface
+    public function submit(string $url, array $httpOptions): HttpResponse
     {
-        return $this->client->request(
-            'POST',
-            $url,
-            (new HttpOptions())
-                ->setBaseUri($httpOptions['base_uri'])
-                ->setHeaders($httpOptions['headers'])
-                ->setJson($httpOptions['json'])
-                ->toArray()
-        );
+        try {
+            $response = $this->client->request(
+                'POST',
+                $url,
+                (new HttpOptions())
+                    ->setBaseUri($httpOptions['base_uri'])
+                    ->setHeaders($httpOptions['headers'])
+                    ->setJson($httpOptions['json'])
+                    ->toArray()
+            );
+            $statusCode = $response->getStatusCode();
+            $content = $response->getContent();
+
+            return new HttpResponse($statusCode, null, $content);
+        } catch (TransportExceptionInterface | DecodingExceptionInterface | HttpExceptionInterface $e) {
+            return new HttpResponse(
+                $statusCode ?? null,
+                $e->getMessage(),
+                null
+            );
+        }
     }
 }
