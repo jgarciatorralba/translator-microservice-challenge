@@ -9,7 +9,6 @@ services:
   App\:
     resource: '../src/'
     exclude:
-      - '../src/DependencyInjection/'
       - '../src/Kernel.php'
 
   App\UI\Controller\:
