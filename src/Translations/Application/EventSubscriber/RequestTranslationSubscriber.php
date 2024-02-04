@@ -28,11 +28,6 @@ final class RequestTranslationSubscriber implements EventSubscriber
             Uuid::fromString($event->aggregateId())
         );
 
-        $this->updateTranslation->__invoke($translation, [
-            'status' => StatusEnum::PROCESSING,
-            'updatedAt' => new DateTimeImmutable()
-        ]);
-
         $result = $this->requestExternalTranslation->__invoke($translation);
 
         $this->updateTranslation->__invoke($translation, [

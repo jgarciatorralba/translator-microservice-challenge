@@ -11,8 +11,9 @@ use Doctrine\DBAL\Platforms\AbstractPlatform;
 class StatusEnumType extends AbstractEnumType
 {
     protected string $name = 'status_enum';
+
     /** @var string[] $values */
-    protected array $values = ['queued', 'processing', 'completed', 'error'];
+    protected array $values = ['queued', 'completed', 'error'];
 
     public function convertToPHPValue(mixed $value, AbstractPlatform $platform): mixed
     {

@@ -11,7 +11,6 @@ enum StatusEnum: string
     use EnumValuesProviderTrait;
 
     case QUEUED = 'queued';
-    case PROCESSING = 'processing';
     case COMPLETED = 'completed';
     case ERROR = 'error';
 }

@@ -16,7 +16,7 @@ final class Version20240131084704 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        $this->addSql('CREATE TYPE status_enum AS ENUM (\'queued\', \'processing\', \'completed\', \'error\')');
+        $this->addSql('CREATE TYPE status_enum AS ENUM (\'queued\', \'completed\', \'error\')');
         $this->addSql(
             'CREATE TABLE translations (
 				id UUID NOT NULL,
