@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Shared\Infrastructure\Bus\Query;
+namespace App\Shared\Infrastructure\Bus\Query\InMemory;
 
 use App\Shared\Domain\Bus\Query\Query;
 use App\Shared\Domain\Bus\Query\QueryBus;
@@ -13,7 +13,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Exception\HandlerFailedException;
 use Symfony\Component\Messenger\Exception\NoHandlerForMessageException;
 
-class InMemorySymfonyQueryBus implements QueryBus
+final class InMemorySymfonyQueryBus implements QueryBus
 {
     public function __construct(
         private readonly MessageBusInterface $queryBus
