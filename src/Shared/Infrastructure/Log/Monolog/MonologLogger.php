@@ -7,7 +7,7 @@ namespace App\Shared\Infrastructure\Log\Monolog;
 use App\Shared\Domain\Contract\Logger;
 use Psr\Log\LoggerInterface;
 
-abstract class AbstractLogger implements Logger
+abstract class MonologLogger implements Logger
 {
     public function __construct(
         private readonly LoggerInterface $logger
