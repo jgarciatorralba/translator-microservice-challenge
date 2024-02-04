@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Shared\Infrastructure\Log\Monolog;
+namespace App\Translations\Infrastructure\Log;
 
+use App\Shared\Infrastructure\Log\Monolog\AbstractLogger;
 use Psr\Log\LoggerInterface;
 
 final class TranslationLogger extends AbstractLogger

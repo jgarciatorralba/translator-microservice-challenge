@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Shared\Infrastructure\Log\Monolog;
 
-use App\Shared\Domain\Contract\Logger as LoggerContract;
+use App\Shared\Domain\Contract\Logger;
 use Psr\Log\LoggerInterface;
 
-abstract class AbstractLogger implements LoggerContract
+abstract class AbstractLogger implements Logger
 {
     public function __construct(
         private readonly LoggerInterface $logger

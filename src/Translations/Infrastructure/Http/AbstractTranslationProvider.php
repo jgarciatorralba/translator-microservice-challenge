@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Translations\Infrastructure\Http;
 
 use App\Shared\Infrastructure\Http\Symfony\SymfonyHttpClient;
-use App\Shared\Infrastructure\Log\Monolog\TranslationLogger;
 use App\Translations\Domain\Translation;
+use App\Translations\Infrastructure\Log\TranslationLogger;
 
 abstract class AbstractTranslationProvider
 {
