@@ -27,10 +27,10 @@ abstract class AbstractEnumType extends Type
 
     public function convertToDatabaseValue(mixed $value, AbstractPlatform $platform): mixed
     {
-        if (!in_array($value->value, $this->values)) {
+        if (isset($value->value) && !in_array($value->value, $this->values)) {
             throw new InvalidArgumentException("Invalid '" . $this->name . "' value.");
         }
-        return $value->value;
+        return $value->value ?? null;
     }
 
     public function requiresSQLCommentHint(AbstractPlatform $platform): bool

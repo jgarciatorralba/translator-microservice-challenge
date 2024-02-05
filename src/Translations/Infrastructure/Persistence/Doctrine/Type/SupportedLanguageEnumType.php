@@ -17,6 +17,6 @@ class SupportedLanguageEnumType extends AbstractEnumType
 
     public function convertToPHPValue(mixed $value, AbstractPlatform $platform): mixed
     {
-        return SupportedLanguageEnum::from($value);
+        return $value ? SupportedLanguageEnum::from($value) : null;
     }
 }
