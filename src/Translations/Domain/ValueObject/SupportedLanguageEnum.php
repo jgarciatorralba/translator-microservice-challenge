@@ -16,14 +16,14 @@ enum SupportedLanguageEnum: string
     case GERMAN_STANDARD = 'de';
     case PORTUGUESE_PORTUGAL = 'pt';
     case ITALIAN = 'it';
-    case NOT_SUPPORTED = 'unfit';
+    case NOT_RECOGNIZED = 'not_recognized';
 
     /** @return string[] */
     public static function supportedValues(): array
     {
         return array_filter(
             array_column(self::cases(), 'value'),
-            fn(string $case) => $case !== self::NOT_SUPPORTED->value
+            fn(string $case) => $case !== self::NOT_RECOGNIZED->value
         );
     }
 }

@@ -16,6 +16,7 @@ doctrine:
     types:
       uuid: App\Shared\Infrastructure\Persistence\Doctrine\Type\UuidType
       status_enum: App\Translations\Infrastructure\Persistence\Doctrine\Type\StatusEnumType
+      supported_language_enum: App\Translations\Infrastructure\Persistence\Doctrine\Type\SupportedLanguageEnumType
 
   orm:
       auto_generate_proxy_classes: true
