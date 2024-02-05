@@ -22,17 +22,17 @@ This is a **Symfony** project for a **REST API** application, with a development
 
 ## Tests
 
-- Run the complete test suite by executing the command: `php vendor/bin/phpunit`
+- Run the complete test suite by executing the command: `php ./vendor/bin/phpunit`
   - **Important**: make sure to clear Symfony's testing cache by running `sf cache:clear --env=test` before executing the tests.
 
 ---
 
 ## Scripts
 
-- Run _PHPUnit_ tests: `php vendor/bin/phpunit`
-- Run _CodeSniffer_ analysis: `php vendor/bin/phpcs <filename|foldername>`
-  - Correct detected coding standard violations: `php vendor/bin/phpcbf <filename|foldername>`
-- Run _PHPStan_ analysis: `php vendor/bin/phpstan analyse <foldernames>`
+- Run _PHPUnit_ tests: `php ./vendor/bin/phpunit`
+- Run _CodeSniffer_ analysis: `php ./vendor/bin/phpcs <filename|foldername>`
+  - Correct detected coding standard violations: `php ./vendor/bin/phpcbf <filename|foldername>`
+- Run _PHPStan_ analysis: `php ./vendor/bin/phpstan analyse <foldernames>`
 - Delete existing database: `sf doctrine:database:drop --force`
 - Run worker to consume messages queued in the message broker: `sf messenger:consume async -vv`
 
