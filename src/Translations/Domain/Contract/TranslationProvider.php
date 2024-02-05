@@ -12,5 +12,7 @@ interface TranslationProvider
 {
     public function translate(Translation $translation): TranslationProviderResponse;
 
-    public function mapLanguageCode(SupportedLanguageEnum $languageCode): string;
+    public function convertLanguageCode(SupportedLanguageEnum $languageCode): string;
+
+    public function revertLanguageCode(string $languageCode): SupportedLanguageEnum;
 }

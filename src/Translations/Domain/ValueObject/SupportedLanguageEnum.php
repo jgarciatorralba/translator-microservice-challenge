@@ -10,11 +10,11 @@ enum SupportedLanguageEnum: string
 {
     use EnumValuesProviderTrait;
 
-    case ENGLISH_GREAT_BRITAIN = 'en';
-    case SPANISH_SPAIN = 'es';
-    case FRENCH_STANDARD = 'fr';
-    case GERMAN_STANDARD = 'de';
-    case PORTUGUESE_PORTUGAL = 'pt';
+    case ENGLISH = 'en';
+    case SPANISH = 'es';
+    case FRENCH = 'fr';
+    case GERMAN = 'de';
+    case PORTUGUESE = 'pt';
     case ITALIAN = 'it';
     case NOT_RECOGNIZED = 'not_recognized';
 

@@ -16,8 +16,8 @@ final class CreateTranslationRequest extends AbstractRequest
             'sourceLanguage' => new Assert\Optional([
                 new Assert\NotBlank(),
                 new Assert\Type('string'),
-                new Assert\Length(min: 2, max: 5),
-                new Assert\Choice(SupportedLanguageEnum::values())
+                new Assert\Length(min: 2),
+                new Assert\Choice(SupportedLanguageEnum::supportedValues())
             ]),
             'originalText' => new Assert\Required([
                 new Assert\NotBlank(),
@@ -27,8 +27,8 @@ final class CreateTranslationRequest extends AbstractRequest
             'targetLanguage' => new Assert\Required([
                 new Assert\NotBlank(),
                 new Assert\Type('string'),
-                new Assert\Length(min: 2, max: 5),
-                new Assert\Choice(SupportedLanguageEnum::values())
+                new Assert\Length(min: 2),
+                new Assert\Choice(SupportedLanguageEnum::supportedValues())
             ]),
         ]);
     }

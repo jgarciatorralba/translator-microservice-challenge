@@ -49,7 +49,7 @@ final class DeepLTranslationProvider extends AbstractTranslationProvider impleme
                 ? $decodedContent['translations'][0]['text']
                 : null;
         $sourceLang = isset($decodedContent['translations'][0]['detected_source_language'])
-            ? strtolower($decodedContent['translations'][0]['detected_source_language'])
+            ? $this->revertLanguageCode($decodedContent['translations'][0]['detected_source_language'])
             : null;
 
         $this->logger->info('Translation request completed.', [
@@ -73,23 +73,28 @@ final class DeepLTranslationProvider extends AbstractTranslationProvider impleme
         $body = [
             'text' => [$translation->originalText()],
             'target_lang' =>
-                $this->mapLanguageCode(SupportedLanguageEnum::from($translation->targetLanguage()))
+                $this->convertLanguageCode($translation->targetLanguage())
         ];
         if (!empty($translation->sourceLanguage())) {
-            $body['source_lang'] = strtoupper($translation->sourceLanguage());
+            $body['source_lang'] = strtoupper($translation->sourceLanguage()->value);
         }
 
         return $body;
     }
 
-    public function mapLanguageCode(SupportedLanguageEnum $languageCode): string
+    public function convertLanguageCode(SupportedLanguageEnum $languageCode): string
     {
-        if ($languageCode === SupportedLanguageEnum::ENGLISH_GREAT_BRITAIN) {
+        if ($languageCode === SupportedLanguageEnum::ENGLISH) {
             return 'EN-GB';
-        } elseif ($languageCode === SupportedLanguageEnum::PORTUGUESE_PORTUGAL) {
+        } elseif ($languageCode === SupportedLanguageEnum::PORTUGUESE) {
             return 'PT-PT';
         }
 
         return strtoupper($languageCode->value);
+    }
+
+    public function revertLanguageCode(string $languageCode): SupportedLanguageEnum
+    {
+        return SupportedLanguageEnum::tryFrom(strtolower($languageCode)) ?? SupportedLanguageEnum::NOT_RECOGNIZED;
     }
 }

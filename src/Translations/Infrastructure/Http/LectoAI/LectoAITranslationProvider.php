@@ -48,7 +48,9 @@ final class LectoAITranslationProvider extends AbstractTranslationProvider imple
             && is_array($decodedContent['translations']['translated'])
                 ? $decodedContent['translations']['translated'][0]
                 : null;
-        $sourceLang = $decodedContent['from'] ?? null;
+        $sourceLang = isset($decodedContent['from'])
+            ? $this->revertLanguageCode($decodedContent['from'])
+            : null;
 
         $this->logger->info('Translation request completed.', [
             'translation' => $translation->id()->value(),
@@ -71,24 +73,31 @@ final class LectoAITranslationProvider extends AbstractTranslationProvider imple
         $body = [
             'texts' => [$translation->originalText()],
             'to' => [
-                $this->mapLanguageCode(SupportedLanguageEnum::from($translation->targetLanguage()))
+                $this->convertLanguageCode($translation->targetLanguage())
             ]
         ];
         if (!empty($translation->sourceLanguage())) {
-            $body['from'] = $this->mapLanguageCode(
-                SupportedLanguageEnum::from($translation->sourceLanguage())
-            );
+            $body['from'] = $this->convertLanguageCode($translation->sourceLanguage());
         }
 
         return $body;
     }
 
-    public function mapLanguageCode(SupportedLanguageEnum $languageCode): string
+    public function convertLanguageCode(SupportedLanguageEnum $languageCode): string
     {
-        if ($languageCode === SupportedLanguageEnum::PORTUGUESE_PORTUGAL) {
+        if ($languageCode === SupportedLanguageEnum::PORTUGUESE) {
             return 'pt-PT';
         }
 
         return $languageCode->value;
+    }
+
+    public function revertLanguageCode(string $languageCode): SupportedLanguageEnum
+    {
+        if ($languageCode === 'pt-PT' || $languageCode === 'pt-BR') {
+            return SupportedLanguageEnum::PORTUGUESE;
+        }
+
+        return SupportedLanguageEnum::tryFrom($languageCode) ?? SupportedLanguageEnum::NOT_RECOGNIZED;
     }
 }

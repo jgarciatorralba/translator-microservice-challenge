@@ -7,6 +7,7 @@ namespace App\Translations\Domain\Service;
 use App\Translations\Domain\Contract\TranslationRepository;
 use App\Translations\Domain\Translation;
 use App\Translations\Domain\ValueObject\StatusEnum;
+use App\Translations\Domain\ValueObject\SupportedLanguageEnum;
 use DateTimeImmutable;
 
 final class UpdateTranslation
@@ -17,7 +18,7 @@ final class UpdateTranslation
     }
 
     /**
-     * @param array <string, string|StatusEnum|DateTimeImmutable> $updatedData
+     * @param array <string, string|StatusEnum|SupportedLanguageEnum|DateTimeImmutable> $updatedData
      */
     public function __invoke(Translation $translation, array $updatedData): void
     {

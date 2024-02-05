@@ -19,9 +19,9 @@ class Translation extends AggregateRoot
 
     public function __construct(
         private Uuid $id,
-        private ?string $sourceLanguage,
+        private ?SupportedLanguageEnum $sourceLanguage,
         private string $originalText,
-        private string $targetLanguage,
+        private SupportedLanguageEnum $targetLanguage,
         private StatusEnum $status,
         private ?string $translatedText,
         DateTimeImmutable $createdAt,
@@ -41,9 +41,9 @@ class Translation extends AggregateRoot
     ): self {
         return new self(
             id: $id,
-            sourceLanguage: $sourceLanguage ? $sourceLanguage->value : null,
+            sourceLanguage: $sourceLanguage ?? null,
             originalText: $originalText,
-            targetLanguage: $targetLanguage->value,
+            targetLanguage: $targetLanguage,
             status: StatusEnum::QUEUED,
             translatedText: null,
             createdAt: $createdAt,
@@ -56,15 +56,14 @@ class Translation extends AggregateRoot
         return $this->id;
     }
 
-    public function sourceLanguage(): ?string
+    public function sourceLanguage(): ?SupportedLanguageEnum
     {
         return $this->sourceLanguage;
     }
 
-    public function updateSourceLanguage(string $sourceLanguage): void
+    public function updateSourceLanguage(SupportedLanguageEnum $sourceLanguage): void
     {
-        $detectedSourceLanguage = SupportedLanguageEnum::tryFrom($sourceLanguage);
-        $this->sourceLanguage = $detectedSourceLanguage->value ?? 'unfit';
+        $this->sourceLanguage = $sourceLanguage;
     }
 
     public function originalText(): string
@@ -72,7 +71,7 @@ class Translation extends AggregateRoot
         return $this->originalText;
     }
 
-    public function targetLanguage(): string
+    public function targetLanguage(): SupportedLanguageEnum
     {
         return $this->targetLanguage;
     }
@@ -111,9 +110,9 @@ class Translation extends AggregateRoot
     {
         return [
             'id' => $this->id->value(),
-            'sourceLang' => $this->sourceLanguage,
+            'sourceLang' => $this->sourceLanguage->value ?? null,
             'originalText' => $this->originalText,
-            'targetLang' => $this->targetLanguage,
+            'targetLang' => $this->targetLanguage->value,
             'status' => $this->status->value,
             'translatedText' => $this->translatedText,
             'createdAt' => Utils::dateToString($this->createdAt),

@@ -13,7 +13,7 @@ final class TranslationProviderResponse extends HttpResponse
         ?string $error = null,
         ?string $content = null,
         private readonly ?string $translatedText = null,
-        private readonly ?string $detectedLanguage = null
+        private readonly ?SupportedLanguageEnum $detectedLanguage = null
     ) {
         parent::__construct($statusCode, $error, $content);
     }
@@ -23,7 +23,7 @@ final class TranslationProviderResponse extends HttpResponse
         return $this->translatedText;
     }
 
-    public function detectedLanguage(): ?string
+    public function detectedLanguage(): ?SupportedLanguageEnum
     {
         return $this->detectedLanguage;
     }
