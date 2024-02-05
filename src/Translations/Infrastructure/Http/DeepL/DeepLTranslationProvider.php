@@ -84,7 +84,7 @@ final class DeepLTranslationProvider extends AbstractTranslationProvider impleme
 
     public function mapLanguageCode(SupportedLanguageEnum $languageCode): string
     {
-        if ($languageCode === SupportedLanguageEnum::ENGLISH) {
+        if ($languageCode === SupportedLanguageEnum::ENGLISH_GREAT_BRITAIN) {
             return 'EN-GB';
         } elseif ($languageCode === SupportedLanguageEnum::PORTUGUESE_PORTUGAL) {
             return 'PT-PT';
