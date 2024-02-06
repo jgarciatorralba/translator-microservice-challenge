@@ -38,6 +38,15 @@ This is a **Symfony** project for a **REST API** application, with a development
 
 ---
 
+## Design Decisions
+
+- In order to facilitate the development, only a handful of languages is supported: English, Spanish, French, German, Italian and Portuguese.
+- Maximum of 255 characters to translate in each request, so the free tier limit is not reached too soon.
+- Use of universally unique identifiers (UUIDs) for improved API security.
+- Use of enumerations in translation status and in supported languages instead of plain text for better control of database input.
+
+---
+
 ## Author
 
 - **Jorge García Torralba** &#8594; [jorge-garcia](https://github.com/jgarciatorralba)
