@@ -44,9 +44,9 @@ final class LectoAITranslationProvider extends AbstractTranslationProvider imple
         }
 
         $decodedContent = json_decode($response->content(), true);
-        $translatedText = isset($decodedContent['translations']['translated'])
-            && is_array($decodedContent['translations']['translated'])
-                ? $decodedContent['translations']['translated'][0]
+        $translatedText = isset($decodedContent['translations'][0]['translated'])
+            && is_array($decodedContent['translations'][0]['translated'])
+                ? $decodedContent['translations'][0]['translated'][0]
                 : null;
         $sourceLang = isset($decodedContent['from'])
             ? $this->revertLanguageCode($decodedContent['from'])
