@@ -10,6 +10,8 @@ use Doctrine\ORM\EntityRepository;
 
 abstract class DoctrineRepository
 {
+    protected const MAX_RESULTS_PER_PAGE = 50;
+
     /**
      * @var EntityRepository<object> $repository
      */

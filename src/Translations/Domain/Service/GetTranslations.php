@@ -14,9 +14,22 @@ final class GetTranslations
     ) {
     }
 
-    /** @return Translation[] */
-    public function __invoke(): array
-    {
-        return $this->translationRepository->findAll();
+    /**
+     * @param array <string, mixed> $criteria
+     * @param array <string, string>|null $orderBy
+     * @return Translation[]
+     * */
+    public function __invoke(
+        array $criteria,
+        ?array $orderBy,
+        ?int $limit,
+        ?int $offset
+    ): array {
+        return $this->translationRepository->findByCriteria(
+            $criteria,
+            $orderBy,
+            $limit,
+            $offset
+        );
     }
 }
