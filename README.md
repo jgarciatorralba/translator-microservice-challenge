@@ -29,10 +29,10 @@ This is a **Symfony** project for a **REST API** application, with a development
 
 ## Scripts
 
-- Run _PHPUnit_ tests: `php ./vendor/bin/phpunit`
-- Run _CodeSniffer_ analysis: `php ./vendor/bin/phpcs <filename|foldername>`
+- Run *PHPUnit* tests: `php ./vendor/bin/phpunit`
+- Run *CodeSniffer* analysis: `php ./vendor/bin/phpcs <filename|foldername>`
   - Correct detected coding standard violations: `php ./vendor/bin/phpcbf <filename|foldername>`
-- Run _PHPStan_ analysis: `php ./vendor/bin/phpstan analyse <foldernames>`
+- Run *PHPStan* analysis: `php ./vendor/bin/phpstan analyse <foldernames>`
 - Delete existing database: `sf doctrine:database:drop --force`
 - Run worker to consume messages queued in the message broker: `sf messenger:consume async -vv`
 
