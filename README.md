@@ -22,8 +22,8 @@ This is a **Symfony** project for a **REST API** application, with a development
 
 ## Tests
 
-- Run the complete test suite by executing the command: `php ./vendor/bin/phpunit`
-  - **Important**: make sure to clear Symfony's testing cache by running `sf cache:clear --env=test` before executing the tests.
+- Run the test suite by executing the command: `php ./vendor/bin/phpunit`
+  - **Important**: make sure to clear Symfony's testing cache by running `sf cache:clear --env=test` before executing them.
 
 ---
 
