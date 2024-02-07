@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Translations\Application\Query\GetTranslations;
 
-use App\Translations\Domain\Service\GetTranslations;
 use App\Shared\Domain\Aggregate\AggregateRoot;
 use App\Shared\Domain\Bus\Query\QueryHandler;
+use App\Translations\Domain\Service\GetTranslations;
 
 final class GetTranslationsQueryHandler implements QueryHandler
 {
