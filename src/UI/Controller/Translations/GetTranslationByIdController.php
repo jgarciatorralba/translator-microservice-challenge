@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\UI\Controller\Translations;
 
-use App\UI\Controller\BaseController;
 use App\Translations\Application\Query\GetTranslationById\GetTranslationByIdQuery;
+use App\UI\Controller\BaseController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
