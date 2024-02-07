@@ -16,12 +16,8 @@ final class GetTranslationsQueryHandler implements QueryHandler
 
     public function __invoke(GetTranslationsQuery $query): GetTranslationsResponse
     {
-        $limit = ($query->size() !== null && $query->size() > 0)
-            ? $query->size()
-            : null;
-        $offset = ($limit !== null && $query->page() !== null && $query->page() > 0)
-            ? ($query->page() - 1) * $limit
-            : 0;
+        $limit = $query->size() > 0 ? $query->size() : null;
+        $offset = $query->page() > 0 ? ($query->page() - 1) * ($limit ?? 0) : 0;
 
         $translations = $this->getTranslations->__invoke(
             criteria: [],
@@ -29,10 +25,13 @@ final class GetTranslationsQueryHandler implements QueryHandler
             limit: $limit,
             offset: $offset
         );
-        $translations = array_map(fn(AggregateRoot $translation) => $translation->toArray(), $translations);
+        $translations = array_map(
+            fn(AggregateRoot $translation) => $translation->toArray(),
+            $translations
+        );
 
         return new GetTranslationsResponse([
-            'items' => $translations,
+            'translations' => $translations,
             'count' => count($translations)
         ]);
     }
