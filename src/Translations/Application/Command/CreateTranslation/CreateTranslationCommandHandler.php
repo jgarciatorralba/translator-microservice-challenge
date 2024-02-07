@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Translations\Application\Command\CreateTranslation;
 
-use App\Translations\Domain\Translation;
-use App\Translations\Domain\Service\CreateTranslation;
 use App\Shared\Domain\Bus\Command\CommandHandler;
 use App\Shared\Domain\Bus\Event\EventBus;
 use App\Shared\Domain\ValueObject\Uuid;
+use App\Translations\Domain\Service\CreateTranslation;
+use App\Translations\Domain\Translation;
 use App\Translations\Domain\ValueObject\SupportedLanguageEnum;
 
 final class CreateTranslationCommandHandler implements CommandHandler
