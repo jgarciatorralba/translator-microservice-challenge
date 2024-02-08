@@ -6,10 +6,12 @@ namespace App\Tests\Feature\UI\Controller\Translations;
 
 use App\Shared\Domain\ValueObject\Uuid;
 use App\Tests\Feature\FeatureTestCase;
+use App\Tests\Unit\Shared\Domain\FakeValueGenerator;
 use App\Translations\Domain\Translation;
 use App\Translations\Domain\ValueObject\StatusEnum;
 use App\Translations\Domain\ValueObject\SupportedLanguageEnum;
 use InvalidArgumentException;
+use Symfony\Component\HttpClient\Exception\ClientException;
 use Symfony\Component\HttpFoundation\Response;
 
 final class CreateTranslationControllerTest extends FeatureTestCase
@@ -45,8 +47,61 @@ final class CreateTranslationControllerTest extends FeatureTestCase
         }
     }
 
-    public function testThrowValidationError(): void
+    /**
+     * @dataProvider dataThrowValidationException
+     */
+    public function testThrowValidationException(
+        ?string $sourceLanguageValue,
+        ?string $originalText,
+        ?string $targetLanguageValue
+    ): void {
+        $client = $this->getApiClient();
+
+        $response = $client->request('POST', '/api/translations', [
+            'body' => json_encode([
+                'sourceLanguage' => $sourceLanguageValue,
+                'originalText' => $originalText,
+                'targetLanguage' => $targetLanguageValue
+            ])
+        ]);
+
+        $this->assertEquals($response->getStatusCode(), Response::HTTP_BAD_REQUEST);
+
+        $this->expectException(ClientException::class);
+        $response->getContent();
+    }
+
+    /**
+     * @return array<string, array<string|null>>
+     */
+    public static function dataThrowValidationException(): array
     {
-        $this->assertTrue(true);
+        $tooLongText = '';
+        for ($i = 0; $i < 5; $i++) {
+            $tooLongText .= FakeValueGenerator::text();
+        }
+
+        return [
+            'blank source language' => [
+                '',
+                FakeValueGenerator::string(),
+                SupportedLanguageEnum::SPANISH->value
+            ],
+            'missing original text' => [
+                SupportedLanguageEnum::ENGLISH->value,
+                null,
+                SupportedLanguageEnum::PORTUGUESE->value
+            ],
+            'text too long' => [
+                SupportedLanguageEnum::FRENCH->value,
+                $tooLongText,
+                SupportedLanguageEnum::ITALIAN->value
+            ],
+            'invalid target language' => [
+                null,
+                FakeValueGenerator::text(),
+                FakeValueGenerator::string()
+            ]
+        ];
     }
 }
