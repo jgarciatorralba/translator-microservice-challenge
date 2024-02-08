@@ -6,7 +6,7 @@ This repository consists on a proposed solution to a technical challenge raised 
 
 ## Content
 
-This is a **Symfony** project for a **REST API** application, with a development environment configured in **Docker**.
+This is a **Symfony** project for an **API** service, with a development environment configured in **Docker**.
 
 ## Installation
 
