@@ -48,7 +48,7 @@ final class CreateTranslationControllerTest extends FeatureTestCase
     /**
      * @dataProvider dataValidation
      */
-    public function testThrowsValidationException(
+    public function testThrowValidationException(
         ?string $sourceLanguageValue,
         ?string $originalText,
         ?string $targetLanguageValue
@@ -66,7 +66,7 @@ final class CreateTranslationControllerTest extends FeatureTestCase
     /**
      * @dataProvider dataValidation
      */
-    public function testReturnsValidationError(
+    public function testReturnValidationError(
         ?string $sourceLanguageValue,
         ?string $originalText,
         ?string $targetLanguageValue
