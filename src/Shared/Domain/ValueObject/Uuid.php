@@ -32,6 +32,9 @@ final class Uuid implements Stringable
         return $this->value();
     }
 
+    /**
+     * @throws InvalidArgumentException
+     */
     private function ensureIsValidUuid(string $id): void
     {
         if (!SymfonyUuid::isValid($id)) {

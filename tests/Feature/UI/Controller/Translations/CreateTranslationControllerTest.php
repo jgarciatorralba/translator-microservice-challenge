@@ -6,18 +6,17 @@ namespace App\Tests\Feature\UI\Controller\Translations;
 
 use App\Shared\Domain\ValueObject\Uuid;
 use App\Tests\Feature\FeatureTestCase;
+use App\Translations\Domain\Translation;
 use App\Translations\Domain\ValueObject\StatusEnum;
 use App\Translations\Domain\ValueObject\SupportedLanguageEnum;
-use ReflectionClass;
+use InvalidArgumentException;
 use Symfony\Component\HttpFoundation\Response;
 
 final class CreateTranslationControllerTest extends FeatureTestCase
 {
-    protected function tearDown(): void
-    {
-        $this->clearDatabase();
-    }
-
+    /**
+     * @throws InvalidArgumentException
+     */
     public function testCreateProduct(): void
     {
         $client = $this->getApiClient();
@@ -38,9 +37,12 @@ final class CreateTranslationControllerTest extends FeatureTestCase
         $this->assertEquals($decodedResponse['status'], StatusEnum::QUEUED->value);
         $this->assertArrayHasKey('id', $decodedResponse);
 
-        $reflectionUuid = new ReflectionClass(Uuid::class);
-        $ensureIsValidUuid = $reflectionUuid->getMethod('ensureIsValidUuid');
-        $ensureIsValidUuid->invokeArgs(new Uuid($decodedResponse['id']), [$decodedResponse['id']]);
+        new Uuid($decodedResponse['id']);
+
+        $translation = $this->find(Translation::class, $decodedResponse['id']);
+        if ($translation) {
+            $this->remove($translation);
+        }
     }
 
     public function testThrowValidationError(): void
