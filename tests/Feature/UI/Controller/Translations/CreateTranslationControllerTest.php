@@ -23,7 +23,7 @@ final class CreateTranslationControllerTest extends FeatureTestCase
         $response = $client->request('POST', '/api/translations', [
             'body' => json_encode([
                 'sourceLanguage' => SupportedLanguageEnum::ENGLISH->value,
-                'originalText' => 'Barrow Neurological Institute is the world\'s largest neurological disease treatment and research institution, and is consistently ranked as one of the best neurosurgical training centers in the United States. Its main campus is in Phoenix, Arizona.',
+                'originalText' => "The target of an HTTP request is called a 'resource', which nature isn't defined further; it can be a document, a photo, or anything else. Each resource is identified by a Uniform Resource Identifier (URI) used throughout HTTP for identifying resources.",
                 'targetLanguage' => SupportedLanguageEnum::SPANISH->value
             ])
         ]);
