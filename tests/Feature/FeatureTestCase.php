@@ -6,26 +6,16 @@ namespace App\Tests\Feature;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
-use RuntimeException;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\HttpClient\HttpClient;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Symfony\Component\HttpKernel\HttpKernelBrowser;
 
 abstract class FeatureTestCase extends WebTestCase
 {
-    protected function getApiClient(): HttpClientInterface
-    {
-        $baseUrl = getenv('API_BASE_URL');
-        if (!$baseUrl) {
-            throw new RuntimeException('Missing "API_BASE_URL" environment variable.');
-        }
+    protected ?HttpKernelBrowser $client = null;
 
-        return HttpClient::create([
-            'base_uri' => $baseUrl,
-            'headers' => [
-                'Content-Type' => 'application/json'
-            ]
-        ]);
+    protected function setUp(): void
+    {
+        $this->client = static::createClient();
     }
 
     /**
