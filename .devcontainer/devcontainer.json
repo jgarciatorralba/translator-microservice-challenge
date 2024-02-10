@@ -9,7 +9,7 @@
       "settings": {
         "terminal.integrated.shell.linux": "/bin/bash",
         "intelephense.files.exclude": [
-          "**/tests/Unit/**/**Test.php"
+          "**/tests/Unit/**/*Test.php"
         ]
       },
       "extensions": [
