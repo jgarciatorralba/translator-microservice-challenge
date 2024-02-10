@@ -101,7 +101,7 @@ final class CreateTranslationControllerTest extends FeatureTestCase
         return [
             'blank source language' => [
                 '',
-                FakeValueGenerator::string(),
+                FakeValueGenerator::text(),
                 SupportedLanguageEnum::SPANISH->value
             ],
             'missing original text' => [
