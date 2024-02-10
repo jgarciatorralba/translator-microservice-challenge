@@ -109,7 +109,7 @@ final class CreateTranslationControllerTest extends FeatureTestCase
                 null,
                 SupportedLanguageEnum::PORTUGUESE->value
             ],
-            'text too long' => [
+            'original text too long' => [
                 SupportedLanguageEnum::FRENCH->value,
                 $tooLongText,
                 SupportedLanguageEnum::ITALIAN->value
