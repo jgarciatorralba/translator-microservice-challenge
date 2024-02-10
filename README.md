@@ -1,6 +1,6 @@
 # Code Challenge: Machine Translation Microservice
 
-This repository consists on a proposed solution to a technical challenge raised during the selection process for a Senior Backend Developer position.
+The repository consists on a proposed solution to a technical challenge raised during the selection process for a Senior Backend Developer position.
 
 ---
 
@@ -22,14 +22,14 @@ This is a **Symfony** project for an **API** service, with a development environ
 
 ## Tests
 
-- Run the test suite by executing the command: `php ./vendor/bin/phpunit`
+- Run the test suite by executing the command: `php bin/phpunit`
   - **Important**: make sure to clear Symfony's testing cache by running `sf cache:clear --env=test` before executing them.
 
 ---
 
 ## Scripts
 
-- Run *PHPUnit* tests: `php ./vendor/bin/phpunit`
+- Run *PHPUnit* tests: `php bin/phpunit`
 - Run *CodeSniffer* analysis: `php ./vendor/bin/phpcs <filename|foldername>`
   - Correct detected coding standard violations: `php ./vendor/bin/phpcbf <filename|foldername>`
 - Run *PHPStan* analysis: `php ./vendor/bin/phpstan analyse <foldernames>`
