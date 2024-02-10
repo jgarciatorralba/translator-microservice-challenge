@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Translations\TestCase;
 
+use App\Tests\Unit\Shared\Infrastructure\Testing\AbstractMock;
 use App\Translations\Domain\Translation;
 use App\Translations\Domain\Service\CreateTranslation;
-use App\Tests\Unit\Shared\Infrastructure\Testing\AbstractMock;
 
 final class CreateTranslationMock extends AbstractMock
 {

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Translations\Application\Command\CreateTranslation;
 
-use App\Translations\Application\Command\CreateTranslation\CreateTranslationCommandHandler;
 use App\Tests\Unit\Shared\TestCase\EventBusMock;
 use App\Tests\Unit\Translations\Application\Command\CreateTranslation\CreateTranslationCommandFactory;
 use App\Tests\Unit\Translations\Domain\TranslationFactory;
 use App\Tests\Unit\Translations\TestCase\CreateTranslationMock;
+use App\Translations\Application\Command\CreateTranslation\CreateTranslationCommandHandler;
 use PHPUnit\Framework\TestCase;
 
 final class CreateTranslationCommandHandlerTest extends TestCase

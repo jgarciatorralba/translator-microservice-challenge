@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Translations\Application\Command\CreateTranslation;
 
+use App\Tests\Unit\Shared\Domain\FakeValueGenerator;
 use App\Translations\Application\Command\CreateTranslation\CreateTranslationCommand;
 use App\Translations\Domain\Translation;
-use App\Tests\Unit\Shared\Domain\FakeValueGenerator;
 use App\Translations\Domain\ValueObject\SupportedLanguageEnum;
 use DateTimeImmutable;
 
