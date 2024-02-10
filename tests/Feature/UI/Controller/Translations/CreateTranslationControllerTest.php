@@ -20,7 +20,7 @@ final class CreateTranslationControllerTest extends FeatureTestCase
     /**
      * @throws InvalidArgumentException
      */
-    public function testCreateProduct(): void
+    public function testCreateTranslation(): void
     {
         $this->client->request('POST', 'api/translations', content: json_encode([
             'sourceLanguage' => SupportedLanguageEnum::ENGLISH->value,
