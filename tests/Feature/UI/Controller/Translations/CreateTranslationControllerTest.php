@@ -12,6 +12,7 @@ use App\Translations\Domain\ValueObject\StatusEnum;
 use App\Translations\Domain\ValueObject\SupportedLanguageEnum;
 use App\UI\Exception\ValidationException;
 use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Component\HttpFoundation\Response;
 
 final class CreateTranslationControllerTest extends FeatureTestCase
@@ -45,9 +46,7 @@ final class CreateTranslationControllerTest extends FeatureTestCase
         }
     }
 
-    /**
-     * @dataProvider dataValidation
-     */
+    #[DataProvider('dataValidation')]
     public function testThrowValidationException(
         ?string $sourceLanguageValue,
         ?string $originalText,
@@ -63,9 +62,7 @@ final class CreateTranslationControllerTest extends FeatureTestCase
         ]));
     }
 
-    /**
-     * @dataProvider dataValidation
-     */
+    #[DataProvider('dataValidation')]
     public function testReturnValidationError(
         ?string $sourceLanguageValue,
         ?string $originalText,

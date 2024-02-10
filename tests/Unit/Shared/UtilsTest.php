@@ -8,6 +8,7 @@ use App\Shared\Utils;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Exception;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class UtilsTest extends TestCase
@@ -24,9 +25,7 @@ final class UtilsTest extends TestCase
         );
     }
 
-    /**
-     * @dataProvider dataStringToDate
-     */
+    #[DataProvider('dataStringToDate')]
     public function testStringToDate(
         string $stringToConvert,
         ?DateTimeInterface $expectedResult,
@@ -47,9 +46,7 @@ final class UtilsTest extends TestCase
         $this->assertEquals('Utils', $className);
     }
 
-    /**
-     * @dataProvider dataToSnakeCase
-     */
+    #[DataProvider('dataToSnakeCase')]
     public function testToSnakeCase(
         string $stringToConvert,
         string $expectedResult
