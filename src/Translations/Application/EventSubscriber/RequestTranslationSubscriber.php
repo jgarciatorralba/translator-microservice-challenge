@@ -6,7 +6,6 @@ namespace App\Translations\Application\EventSubscriber;
 
 use App\Shared\Domain\Bus\Event\EventSubscriber;
 use App\Shared\Domain\ValueObject\Uuid;
-use App\Shared\Utils;
 use App\Translations\Domain\Event\TranslationRequestedEvent;
 use App\Translations\Domain\Service\GetTranslationById;
 use App\Translations\Domain\Service\RequestExternalTranslation;
@@ -36,7 +35,7 @@ final class RequestTranslationSubscriber implements EventSubscriber
                 : StatusEnum::COMPLETED,
             'translatedText' => $result->translatedText(),
             'sourceLanguage' => $result->detectedLanguage(),
-            'updatedAt' => Utils::stringToDate($event->occurredOn())
+            'updatedAt' => $result->translatedAt()
         ]);
     }
 }

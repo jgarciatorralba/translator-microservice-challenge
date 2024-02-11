@@ -41,18 +41,13 @@ final class RequestTranslationSubscriberTest extends TestCase
 
         $result = $this->requestExternalTranslation->shouldProvideTranslationResponse($translation);
 
-        $event = TranslationRequestedEventFactory::create(
-            $translation->id()->value(),
-            new DateTimeImmutable()
-        );
-
         $this->updateTranslation->shouldUpdateTranslation($translation, [
             'status' => !empty($result->error())
                 ? StatusEnum::ERROR
                 : StatusEnum::COMPLETED,
             'translatedText' => $result->translatedText(),
             'sourceLanguage' => $result->detectedLanguage(),
-            'updatedAt' => $event->occurredOn()
+            'updatedAt' => $result->translatedAt()
         ]);
 
         $subscriber = new RequestTranslationSubscriber(
@@ -61,6 +56,7 @@ final class RequestTranslationSubscriberTest extends TestCase
             updateTranslation: $this->updateTranslation->getMock()
         );
 
+        $event = TranslationRequestedEventFactory::createFromTranslation($translation);
         $subscriber->__invoke($event);
     }
 }
