@@ -6,12 +6,12 @@ namespace App\Translations\Application\EventSubscriber;
 
 use App\Shared\Domain\Bus\Event\EventSubscriber;
 use App\Shared\Domain\ValueObject\Uuid;
+use App\Shared\Utils;
 use App\Translations\Domain\Event\TranslationRequestedEvent;
 use App\Translations\Domain\Service\GetTranslationById;
 use App\Translations\Domain\Service\RequestExternalTranslation;
 use App\Translations\Domain\Service\UpdateTranslation;
 use App\Translations\Domain\ValueObject\StatusEnum;
-use DateTimeImmutable;
 
 final class RequestTranslationSubscriber implements EventSubscriber
 {
@@ -36,7 +36,7 @@ final class RequestTranslationSubscriber implements EventSubscriber
                 : StatusEnum::COMPLETED,
             'translatedText' => $result->translatedText(),
             'sourceLanguage' => $result->detectedLanguage(),
-            'updatedAt' => $event->occurredOn()
+            'updatedAt' => Utils::stringToDate($event->occurredOn())
         ]);
     }
 }

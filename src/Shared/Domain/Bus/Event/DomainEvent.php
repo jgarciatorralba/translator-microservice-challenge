@@ -5,20 +5,21 @@ declare(strict_types=1);
 namespace App\Shared\Domain\Bus\Event;
 
 use App\Shared\Domain\ValueObject\Uuid;
+use App\Shared\Utils;
 use DateTimeImmutable;
 
 abstract class DomainEvent
 {
     private readonly string $eventId;
-    private readonly DateTimeImmutable $occurredOn;
+    private readonly string $occurredOn;
 
     public function __construct(
         private readonly string $aggregateId,
         string $eventId = null,
-        DateTimeImmutable $occurredOn = null
+        string $occurredOn = null
     ) {
         $this->eventId = $eventId ?: Uuid::random()->value();
-        $this->occurredOn = $occurredOn ?: new DateTimeImmutable();
+        $this->occurredOn = $occurredOn ?: Utils::dateToString(new DateTimeImmutable());
     }
 
     public function aggregateId(): string
@@ -31,13 +32,13 @@ abstract class DomainEvent
         return $this->eventId;
     }
 
-    public function occurredOn(): DateTimeImmutable
+    public function occurredOn(): string
     {
         return $this->occurredOn;
     }
 
     /**
-     * @return array<string, string|DateTimeImmutable|array<string, string>>
+     * @return array<string, string|array<string, string>>
      */
     public function toArray(): array
     {
