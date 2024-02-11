@@ -33,7 +33,7 @@ final class RequestTranslationSubscriberTest extends TestCase
         $this->requestExternalTranslation = null;
     }
 
-    public function testTranslationRequested(): void
+    public function testRequestTranslation(): void
     {
         $translation = TranslationFactory::create();
 
