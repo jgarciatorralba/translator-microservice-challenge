@@ -36,7 +36,7 @@ final class RequestTranslationSubscriber implements EventSubscriber
                 : StatusEnum::COMPLETED,
             'translatedText' => $result->translatedText(),
             'sourceLanguage' => $result->detectedLanguage(),
-            'updatedAt' => new DateTimeImmutable()
+            'updatedAt' => $event->occurredOn()
         ]);
     }
 }
