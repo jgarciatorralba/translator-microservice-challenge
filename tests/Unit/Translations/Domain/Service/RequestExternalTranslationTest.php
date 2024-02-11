@@ -75,5 +75,28 @@ final class RequestExternalTranslationTest extends TestCase
         );
         $this->assertIsString($result->content());
         $this->assertIsString($result->translatedText());
+        $this->assertEmpty($result->error());
+    }
+
+    public function testReturnErrorResponse(): void
+    {
+        $translation = TranslationFactory::create();
+
+        $this->primaryProviderMock->shouldReturnErrorResponse($translation);
+
+        $service = new RequestExternalTranslation(
+            primaryTranslationProvider: $this->primaryProviderMock->getMock(),
+            translationProviders: [
+                $this->primaryProviderMock->getMock(),
+                $this->fallbackProviderMock->getMock()
+            ]
+        );
+
+        $result = $service->__invoke($translation);
+
+        $this->assertEquals(Response::HTTP_BAD_REQUEST, $result->statusCode());
+        $this->assertEmpty($result->content());
+        $this->assertEmpty($result->translatedText());
+        $this->assertIsString($result->error());
     }
 }
