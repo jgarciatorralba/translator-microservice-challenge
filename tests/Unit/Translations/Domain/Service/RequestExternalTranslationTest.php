@@ -42,6 +42,7 @@ final class RequestExternalTranslationTest extends TestCase
         $translation = TranslationFactory::create();
 
         $this->primaryProviderMock->shouldNotHaveBeenCalled($translation);
+        $this->fallbackProviderMock->shouldNotHaveBeenCalled($translation);
 
         $this->expectException(MissingProviderException::class);
         $service = new RequestExternalTranslation(
@@ -57,6 +58,7 @@ final class RequestExternalTranslationTest extends TestCase
         $translation = TranslationFactory::create();
 
         $this->primaryProviderMock->shouldReturnSuccessfullResponse($translation);
+        $this->fallbackProviderMock->shouldNotHaveBeenCalled($translation);
 
         $service = new RequestExternalTranslation(
             primaryTranslationProvider: $this->primaryProviderMock->getMock(),
@@ -83,6 +85,7 @@ final class RequestExternalTranslationTest extends TestCase
         $translation = TranslationFactory::create();
 
         $this->primaryProviderMock->shouldReturnErrorResponse($translation);
+        $this->fallbackProviderMock->shouldNotHaveBeenCalled($translation);
 
         $service = new RequestExternalTranslation(
             primaryTranslationProvider: $this->primaryProviderMock->getMock(),
