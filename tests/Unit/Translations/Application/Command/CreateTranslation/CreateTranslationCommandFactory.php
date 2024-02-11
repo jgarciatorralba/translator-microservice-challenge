@@ -22,12 +22,7 @@ final class CreateTranslationCommandFactory
     ): CreateTranslationCommand {
         return new CreateTranslationCommand(
             id: $id ?? FakeValueGenerator::uuid()->value(),
-            sourceLanguage: $sourceLanguage
-                ? $sourceLanguage->value
-                : FakeValueGenerator::randomElement([
-                    null,
-                    ...SupportedLanguageEnum::supportedValues()
-                ]),
+            sourceLanguage: $sourceLanguage->value,
             originalText: $originalText ?? FakeValueGenerator::text(),
             targetLanguage: $targetLanguage
                 ? $targetLanguage->value
