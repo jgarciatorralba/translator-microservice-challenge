@@ -19,9 +19,6 @@ final class RequestExternalTranslationTest extends TestCase
     private ?TranslationProviderMock $primaryProviderMock;
     private ?TranslationProviderMock $fallbackProviderMock;
 
-    /** @var TranslationProviderMock[] $fallbackProviderMocks */
-    private ?array $fallbackProviderMocks;
-
     protected function setUp(): void
     {
         $this->primaryProviderMock = new TranslationProviderMock(
