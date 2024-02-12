@@ -16,7 +16,7 @@ This is a **Symfony** project for an **API** service, with a development environ
 - Once completed, open with VisualStudio and in the command palette (*"View > Command Palette"*) select the option *"Dev Containers: Reopen in Container"*.
 - Inside the development container, install packages with `composer install`.
 - Even though an empty database named **app_db** should have been created with the installation, you can still run `sf doctrine:database:create` for good measure.
-- With the database created and the connection to the application successfully established, execute the existing migrations in folder `/etc/migrations` using the command `sf doctrine:migrations:migrate`.
+- With the database created and the connection to the app successfully established, execute the existing migrations in folder `/etc/migrations` using the command `sf doctrine:migrations:migrate`.
 
 ---
 
@@ -24,7 +24,7 @@ This is a **Symfony** project for an **API** service, with a development environ
 
 - Run the test suite by executing the command: `php bin/phpunit`
   - **Important**: make sure to clear Symfony's testing cache by running `sf cache:clear --env=test` before executing them.
-  - Make sure the **test** database is created and ready by running the commands `sf doctrine:database:create --env=test` and `sf doctrine:migrations:migrate --env=test`.
+  - Create the **test** database by running the command `sf doctrine:database:create --env=test` and execute the corresponding migration with `sf doctrine:migrations:migrate --env=test`.
 
 ---
 
@@ -50,4 +50,5 @@ This is a **Symfony** project for an **API** service, with a development environ
 
 ## Author
 
-- **Jorge García Torralba** &#8594; [jorge-garcia](https://github.com/jgarciatorralba)
+- **Jorge García Torralba** &#8594; [jorge-garcia](https://github.com/jgarciatorralba).
+  - Feel free to contribute by opening a pull request!
