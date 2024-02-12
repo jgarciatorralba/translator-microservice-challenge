@@ -13,26 +13,26 @@ use PHPUnit\Framework\TestCase;
 
 final class GetTranslationByIdTest extends TestCase
 {
-    private ?TranslationRepositoryMock $translationRepositoryMock;
+    private ?TranslationRepositoryMock $translationRepository;
 
     protected function setUp(): void
     {
-        $this->translationRepositoryMock = new TranslationRepositoryMock($this);
+        $this->translationRepository = new TranslationRepositoryMock($this);
     }
 
     protected function tearDown(): void
     {
-        $this->translationRepositoryMock = null;
+        $this->translationRepository = null;
     }
 
     public function testReturnTranslation(): void
     {
         $translation = TranslationFactory::create();
 
-        $this->translationRepositoryMock->shouldFindTranslationById($translation->id(), $translation);
+        $this->translationRepository->shouldFindTranslationById($translation->id(), $translation);
 
         $service = new GetTranslationById(
-            translationRepository: $this->translationRepositoryMock->getMock()
+            translationRepository: $this->translationRepository->getMock()
         );
         $result = $service->__invoke($translation->id());
 
@@ -43,10 +43,10 @@ final class GetTranslationByIdTest extends TestCase
     {
         $id = Uuid::random();
 
-        $this->translationRepositoryMock->shouldNotFindTranslationById($id);
+        $this->translationRepository->shouldNotFindTranslationById($id);
 
         $service = new GetTranslationById(
-            translationRepository: $this->translationRepositoryMock->getMock()
+            translationRepository: $this->translationRepository->getMock()
         );
 
         $this->expectException(TranslationNotFoundException::class);

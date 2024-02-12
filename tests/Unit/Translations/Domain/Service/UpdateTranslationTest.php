@@ -14,26 +14,26 @@ use PHPUnit\Framework\TestCase;
 
 final class UpdateTranslationTest extends TestCase
 {
-    private ?TranslationRepositoryMock $translationRepositoryMock;
+    private ?TranslationRepositoryMock $translationRepository;
 
     protected function setUp(): void
     {
-        $this->translationRepositoryMock = new TranslationRepositoryMock($this);
+        $this->translationRepository = new TranslationRepositoryMock($this);
     }
 
     protected function tearDown(): void
     {
-        $this->translationRepositoryMock = null;
+        $this->translationRepository = null;
     }
 
     public function testUpdateTranslation(): void
     {
         $translation = TranslationFactory::create();
 
-        $this->translationRepositoryMock->shouldUpdateTranslation($translation);
+        $this->translationRepository->shouldUpdateTranslation($translation);
 
         $service = new UpdateTranslation(
-            translationRepository: $this->translationRepositoryMock->getMock()
+            translationRepository: $this->translationRepository->getMock()
         );
         $result = $service->__invoke($translation, [
             'translatedText' => FakeValueGenerator::text(),

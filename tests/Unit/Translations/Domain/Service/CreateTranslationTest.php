@@ -11,26 +11,26 @@ use PHPUnit\Framework\TestCase;
 
 final class CreateTranslationTest extends TestCase
 {
-    private ?TranslationRepositoryMock $translationRepositoryMock;
+    private ?TranslationRepositoryMock $translationRepository;
 
     protected function setUp(): void
     {
-        $this->translationRepositoryMock = new TranslationRepositoryMock($this);
+        $this->translationRepository = new TranslationRepositoryMock($this);
     }
 
     protected function tearDown(): void
     {
-        $this->translationRepositoryMock = null;
+        $this->translationRepository = null;
     }
 
     public function testCreateTranslation(): void
     {
         $translation = TranslationFactory::create();
 
-        $this->translationRepositoryMock->shouldCreateTranslation($translation);
+        $this->translationRepository->shouldCreateTranslation($translation);
 
         $service = new CreateTranslation(
-            translationRepository: $this->translationRepositoryMock->getMock()
+            translationRepository: $this->translationRepository->getMock()
         );
         $result = $service->__invoke($translation);
 

@@ -16,16 +16,16 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class RequestExternalTranslationTest extends TestCase
 {
-    private ?TranslationProviderMock $primaryProviderMock;
-    private ?TranslationProviderMock $fallbackProviderMock;
+    private ?TranslationProviderMock $primaryProvider;
+    private ?TranslationProviderMock $fallbackProvider;
 
     protected function setUp(): void
     {
-        $this->primaryProviderMock = new TranslationProviderMock(
+        $this->primaryProvider = new TranslationProviderMock(
             testCase: $this,
             className: DeepLTranslationProvider::class
         );
-        $this->fallbackProviderMock = new TranslationProviderMock(
+        $this->fallbackProvider = new TranslationProviderMock(
             testCase: $this,
             className: LectoAITranslationProvider::class
         );
@@ -33,21 +33,21 @@ final class RequestExternalTranslationTest extends TestCase
 
     protected function tearDown(): void
     {
-        $this->primaryProviderMock = null;
-        $this->fallbackProviderMock = null;
+        $this->primaryProvider = null;
+        $this->fallbackProvider = null;
     }
 
     public function testThrowMissingProviderException(): void
     {
         $translation = TranslationFactory::create();
 
-        $this->primaryProviderMock->shouldNotHaveBeenCalled($translation);
-        $this->fallbackProviderMock->shouldNotHaveBeenCalled($translation);
+        $this->primaryProvider->shouldNotHaveBeenCalled($translation);
+        $this->fallbackProvider->shouldNotHaveBeenCalled($translation);
 
         $this->expectException(MissingProviderException::class);
         $service = new RequestExternalTranslation(
-            primaryTranslationProvider: $this->primaryProviderMock->getMock(),
-            translationProviders: [$this->primaryProviderMock->getMock()]
+            primaryTranslationProvider: $this->primaryProvider->getMock(),
+            translationProviders: [$this->primaryProvider->getMock()]
         );
 
         $service->__invoke($translation);
@@ -57,14 +57,14 @@ final class RequestExternalTranslationTest extends TestCase
     {
         $translation = TranslationFactory::create();
 
-        $this->primaryProviderMock->shouldReturnSuccessfullResponse($translation);
-        $this->fallbackProviderMock->shouldNotHaveBeenCalled($translation);
+        $this->primaryProvider->shouldReturnSuccessfullResponse($translation);
+        $this->fallbackProvider->shouldNotHaveBeenCalled($translation);
 
         $service = new RequestExternalTranslation(
-            primaryTranslationProvider: $this->primaryProviderMock->getMock(),
+            primaryTranslationProvider: $this->primaryProvider->getMock(),
             translationProviders: [
-                $this->primaryProviderMock->getMock(),
-                $this->fallbackProviderMock->getMock()
+                $this->primaryProvider->getMock(),
+                $this->fallbackProvider->getMock()
             ]
         );
 
@@ -84,14 +84,14 @@ final class RequestExternalTranslationTest extends TestCase
     {
         $translation = TranslationFactory::create();
 
-        $this->primaryProviderMock->shouldReturnErrorResponse($translation);
-        $this->fallbackProviderMock->shouldNotHaveBeenCalled($translation);
+        $this->primaryProvider->shouldReturnErrorResponse($translation);
+        $this->fallbackProvider->shouldNotHaveBeenCalled($translation);
 
         $service = new RequestExternalTranslation(
-            primaryTranslationProvider: $this->primaryProviderMock->getMock(),
+            primaryTranslationProvider: $this->primaryProvider->getMock(),
             translationProviders: [
-                $this->primaryProviderMock->getMock(),
-                $this->fallbackProviderMock->getMock()
+                $this->primaryProvider->getMock(),
+                $this->fallbackProvider->getMock()
             ]
         );
 
