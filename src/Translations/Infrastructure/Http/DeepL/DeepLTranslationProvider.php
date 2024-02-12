@@ -7,7 +7,7 @@ namespace App\Translations\Infrastructure\Http\DeepL;
 use App\Shared\Utils;
 use App\Translations\Domain\Contract\TranslationProvider;
 use App\Translations\Domain\Translation;
-use App\Translations\Domain\ValueObject\SupportedLanguageEnum;
+use App\Translations\Domain\ValueObject\LanguageEnum;
 use App\Translations\Domain\ValueObject\TranslationProviderResponse;
 use App\Translations\Infrastructure\Http\AbstractTranslationProvider;
 
@@ -82,19 +82,19 @@ final class DeepLTranslationProvider extends AbstractTranslationProvider impleme
         return $body;
     }
 
-    public function convertLanguageCode(SupportedLanguageEnum $languageCode): string
+    public function convertLanguageCode(LanguageEnum $languageCode): string
     {
-        if ($languageCode === SupportedLanguageEnum::ENGLISH) {
+        if ($languageCode === LanguageEnum::ENGLISH) {
             return 'EN-GB';
-        } elseif ($languageCode === SupportedLanguageEnum::PORTUGUESE) {
+        } elseif ($languageCode === LanguageEnum::PORTUGUESE) {
             return 'PT-PT';
         }
 
         return strtoupper($languageCode->value);
     }
 
-    public function revertLanguageCode(string $languageCode): SupportedLanguageEnum
+    public function revertLanguageCode(string $languageCode): LanguageEnum
     {
-        return SupportedLanguageEnum::tryFrom(strtolower($languageCode)) ?? SupportedLanguageEnum::NOT_RECOGNIZED;
+        return LanguageEnum::tryFrom(strtolower($languageCode)) ?? LanguageEnum::NOT_RECOGNIZED;
     }
 }

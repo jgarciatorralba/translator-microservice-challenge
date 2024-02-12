@@ -8,7 +8,7 @@ use App\Tests\Unit\Translations\Domain\TranslationFactory;
 use App\Tests\Unit\Translations\TestCase\TranslationProviderMock;
 use App\Translations\Domain\Exception\MissingProviderException;
 use App\Translations\Domain\Service\RequestExternalTranslation;
-use App\Translations\Domain\ValueObject\SupportedLanguageEnum;
+use App\Translations\Domain\ValueObject\LanguageEnum;
 use App\Translations\Infrastructure\Http\DeepL\DeepLTranslationProvider;
 use App\Translations\Infrastructure\Http\LectoAI\LectoAITranslationProvider;
 use PHPUnit\Framework\TestCase;
@@ -73,7 +73,7 @@ final class RequestExternalTranslationTest extends TestCase
         $this->assertEquals(Response::HTTP_OK, $result->statusCode());
         $this->assertContains(
             $result->detectedLanguage()->value,
-            SupportedLanguageEnum::supportedValues()
+            LanguageEnum::supportedValues()
         );
         $this->assertIsString($result->content());
         $this->assertIsString($result->translatedText());

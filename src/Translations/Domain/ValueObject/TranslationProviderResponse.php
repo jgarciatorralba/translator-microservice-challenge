@@ -14,7 +14,7 @@ final class TranslationProviderResponse extends HttpResponse
         ?string $error = null,
         ?string $content = null,
         private readonly ?string $translatedText = null,
-        private readonly ?SupportedLanguageEnum $detectedLanguage = null,
+        private readonly ?LanguageEnum $detectedLanguage = null,
         private readonly ?DateTimeImmutable $translatedAt = new DateTimeImmutable()
     ) {
         parent::__construct($statusCode, $error, $content);
@@ -25,7 +25,7 @@ final class TranslationProviderResponse extends HttpResponse
         return $this->translatedText;
     }
 
-    public function detectedLanguage(): ?SupportedLanguageEnum
+    public function detectedLanguage(): ?LanguageEnum
     {
         return $this->detectedLanguage;
     }

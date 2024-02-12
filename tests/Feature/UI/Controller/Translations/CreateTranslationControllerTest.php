@@ -9,7 +9,7 @@ use App\Tests\Feature\FeatureTestCase;
 use App\Tests\Unit\Shared\Domain\FakeValueGenerator;
 use App\Translations\Domain\Translation;
 use App\Translations\Domain\ValueObject\StatusEnum;
-use App\Translations\Domain\ValueObject\SupportedLanguageEnum;
+use App\Translations\Domain\ValueObject\LanguageEnum;
 use App\UI\Exception\ValidationException;
 use InvalidArgumentException;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -23,9 +23,9 @@ final class CreateTranslationControllerTest extends FeatureTestCase
     public function testCreateTranslation(): void
     {
         $this->client->request('POST', 'api/translations', content: json_encode([
-            'sourceLanguage' => SupportedLanguageEnum::ENGLISH->value,
+            'sourceLanguage' => LanguageEnum::ENGLISH->value,
             'originalText' => "The target of an HTTP request is called a 'resource', which nature isn't defined further; it can be a document, a photo, or anything else. Each resource is identified by a Uniform Resource Identifier (URI) used throughout HTTP for identifying resources.",
-            'targetLanguage' => SupportedLanguageEnum::SPANISH->value
+            'targetLanguage' => LanguageEnum::SPANISH->value
         ]));
 
         $response = $this->client->getResponse();
@@ -99,17 +99,17 @@ final class CreateTranslationControllerTest extends FeatureTestCase
             'blank source language' => [
                 '',
                 FakeValueGenerator::text(),
-                SupportedLanguageEnum::SPANISH->value
+                LanguageEnum::SPANISH->value
             ],
             'missing original text' => [
-                SupportedLanguageEnum::ENGLISH->value,
+                LanguageEnum::ENGLISH->value,
                 null,
-                SupportedLanguageEnum::PORTUGUESE->value
+                LanguageEnum::PORTUGUESE->value
             ],
             'original text too long' => [
-                SupportedLanguageEnum::FRENCH->value,
+                LanguageEnum::FRENCH->value,
                 $tooLongText,
-                SupportedLanguageEnum::ITALIAN->value
+                LanguageEnum::ITALIAN->value
             ],
             'invalid target language' => [
                 null,

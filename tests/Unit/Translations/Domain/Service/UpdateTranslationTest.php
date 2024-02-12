@@ -9,7 +9,7 @@ use App\Tests\Unit\Translations\Domain\TranslationFactory;
 use App\Tests\Unit\Translations\TestCase\TranslationRepositoryMock;
 use App\Translations\Domain\Service\UpdateTranslation;
 use App\Translations\Domain\Translation;
-use App\Translations\Domain\ValueObject\SupportedLanguageEnum;
+use App\Translations\Domain\ValueObject\LanguageEnum;
 use PHPUnit\Framework\TestCase;
 
 final class UpdateTranslationTest extends TestCase
@@ -37,9 +37,9 @@ final class UpdateTranslationTest extends TestCase
         );
         $result = $service->__invoke($translation, [
             'translatedText' => FakeValueGenerator::text(),
-            'sourceLanguage' => SupportedLanguageEnum::from(
+            'sourceLanguage' => LanguageEnum::from(
                 FakeValueGenerator::randomElement(
-                    SupportedLanguageEnum::supportedValues()
+                    LanguageEnum::supportedValues()
                 )
             ),
             'updatedAt' => FakeValueGenerator::dateTime()

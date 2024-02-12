@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Translations\Domain\ValueObject;
 
 use App\Tests\Unit\Shared\Domain\FakeValueGenerator;
-use App\Translations\Domain\ValueObject\SupportedLanguageEnum;
+use App\Translations\Domain\ValueObject\LanguageEnum;
 use App\Translations\Domain\ValueObject\TranslationProviderResponse;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -14,16 +14,16 @@ final class TranslationProviderResponseFactory
     public static function createSuccessfull(
         ?string $content = null,
         ?string $translatedText = null,
-        ?SupportedLanguageEnum $detectedLanguage = null
+        ?LanguageEnum $detectedLanguage = null
     ): TranslationProviderResponse {
         return new TranslationProviderResponse(
             statusCode: Response::HTTP_OK,
             error: null,
             content: $content ?? FakeValueGenerator::text(),
             translatedText: $translatedText ?? FakeValueGenerator::text(),
-            detectedLanguage: $detectedLanguage ?? SupportedLanguageEnum::from(
+            detectedLanguage: $detectedLanguage ?? LanguageEnum::from(
                 FakeValueGenerator::randomElement(
-                    SupportedLanguageEnum::supportedValues()
+                    LanguageEnum::supportedValues()
                 )
             )
         );

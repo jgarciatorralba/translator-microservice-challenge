@@ -7,16 +7,16 @@ namespace App\Tests\Unit\Translations\Application\Command\CreateTranslation;
 use App\Tests\Unit\Shared\Domain\FakeValueGenerator;
 use App\Translations\Application\Command\CreateTranslation\CreateTranslationCommand;
 use App\Translations\Domain\Translation;
-use App\Translations\Domain\ValueObject\SupportedLanguageEnum;
+use App\Translations\Domain\ValueObject\LanguageEnum;
 use DateTimeImmutable;
 
 final class CreateTranslationCommandFactory
 {
     public static function create(
         ?string $id = null,
-        ?SupportedLanguageEnum $sourceLanguage = null,
+        ?LanguageEnum $sourceLanguage = null,
         ?string $originalText = null,
-        ?SupportedLanguageEnum $targetLanguage = null,
+        ?LanguageEnum $targetLanguage = null,
         ?DateTimeImmutable $createdAt = null,
         ?DateTimeImmutable $updatedAt = null
     ): CreateTranslationCommand {
@@ -27,7 +27,7 @@ final class CreateTranslationCommandFactory
             targetLanguage: $targetLanguage
                 ? $targetLanguage->value
                 : FakeValueGenerator::randomElement(
-                    SupportedLanguageEnum::supportedValues()
+                    LanguageEnum::supportedValues()
                 ),
             createdAt: $createdAt ?? FakeValueGenerator::dateTime(),
             updatedAt: $updatedAt ?? FakeValueGenerator::dateTime()

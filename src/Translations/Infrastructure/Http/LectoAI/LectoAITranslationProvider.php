@@ -7,7 +7,7 @@ namespace App\Translations\Infrastructure\Http\LectoAI;
 use App\Shared\Utils;
 use App\Translations\Domain\Contract\TranslationProvider;
 use App\Translations\Domain\Translation;
-use App\Translations\Domain\ValueObject\SupportedLanguageEnum;
+use App\Translations\Domain\ValueObject\LanguageEnum;
 use App\Translations\Domain\ValueObject\TranslationProviderResponse;
 use App\Translations\Infrastructure\Http\AbstractTranslationProvider;
 
@@ -83,21 +83,21 @@ final class LectoAITranslationProvider extends AbstractTranslationProvider imple
         return $body;
     }
 
-    public function convertLanguageCode(SupportedLanguageEnum $languageCode): string
+    public function convertLanguageCode(LanguageEnum $languageCode): string
     {
-        if ($languageCode === SupportedLanguageEnum::PORTUGUESE) {
+        if ($languageCode === LanguageEnum::PORTUGUESE) {
             return 'pt-PT';
         }
 
         return $languageCode->value;
     }
 
-    public function revertLanguageCode(string $languageCode): SupportedLanguageEnum
+    public function revertLanguageCode(string $languageCode): LanguageEnum
     {
         if ($languageCode === 'pt-PT' || $languageCode === 'pt-BR') {
-            return SupportedLanguageEnum::PORTUGUESE;
+            return LanguageEnum::PORTUGUESE;
         }
 
-        return SupportedLanguageEnum::tryFrom($languageCode) ?? SupportedLanguageEnum::NOT_RECOGNIZED;
+        return LanguageEnum::tryFrom($languageCode) ?? LanguageEnum::NOT_RECOGNIZED;
     }
 }

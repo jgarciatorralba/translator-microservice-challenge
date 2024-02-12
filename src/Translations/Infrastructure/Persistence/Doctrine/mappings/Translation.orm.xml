@@ -7,9 +7,9 @@
         table="translations"
     >
         <id name="id" type="uuid" column="id" />
-        <field name="sourceLanguage" type="supported_language_enum" column="source_lang" nullable="true" />
+        <field name="sourceLanguage" type="language_enum" column="source_lang" nullable="true" />
         <field name="originalText" type="string" column="original_text" length="255" />
-        <field name="targetLanguage" type="supported_language_enum" column="target_lang" />
+        <field name="targetLanguage" type="language_enum" column="target_lang" />
         <field name="status" type="status_enum" column="status">
             <options>
                 <option name="default">queued</option>

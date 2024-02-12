@@ -8,7 +8,7 @@ use App\Tests\Unit\Shared\Infrastructure\Testing\AbstractMock;
 use App\Translations\Domain\Translation;
 use App\Translations\Domain\Service\UpdateTranslation;
 use App\Translations\Domain\ValueObject\StatusEnum;
-use App\Translations\Domain\ValueObject\SupportedLanguageEnum;
+use App\Translations\Domain\ValueObject\LanguageEnum;
 use DateTimeImmutable;
 
 final class UpdateTranslationMock extends AbstractMock
@@ -19,7 +19,7 @@ final class UpdateTranslationMock extends AbstractMock
     }
 
     /**
-     * @param array <string, string|StatusEnum|SupportedLanguageEnum|DateTimeImmutable> $updatedData
+     * @param array <string, string|StatusEnum|LanguageEnum|DateTimeImmutable> $updatedData
      */
     public function shouldUpdateTranslation(Translation $translation, array $updatedData): void
     {

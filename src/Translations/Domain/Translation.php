@@ -10,7 +10,7 @@ use App\Shared\Domain\ValueObject\Uuid;
 use App\Shared\Utils;
 use App\Translations\Domain\Event\TranslationRequestedEvent;
 use App\Translations\Domain\ValueObject\StatusEnum;
-use App\Translations\Domain\ValueObject\SupportedLanguageEnum;
+use App\Translations\Domain\ValueObject\LanguageEnum;
 use DateTimeImmutable;
 
 class Translation extends AggregateRoot
@@ -19,9 +19,9 @@ class Translation extends AggregateRoot
 
     public function __construct(
         private Uuid $id,
-        private ?SupportedLanguageEnum $sourceLanguage,
+        private ?LanguageEnum $sourceLanguage,
         private string $originalText,
-        private SupportedLanguageEnum $targetLanguage,
+        private LanguageEnum $targetLanguage,
         private StatusEnum $status,
         private ?string $translatedText,
         DateTimeImmutable $createdAt,
@@ -33,9 +33,9 @@ class Translation extends AggregateRoot
 
     public static function create(
         Uuid $id,
-        ?SupportedLanguageEnum $sourceLanguage,
+        ?LanguageEnum $sourceLanguage,
         string $originalText,
-        SupportedLanguageEnum $targetLanguage,
+        LanguageEnum $targetLanguage,
         DateTimeImmutable $createdAt,
         DateTimeImmutable $updatedAt
     ): self {
@@ -56,12 +56,12 @@ class Translation extends AggregateRoot
         return $this->id;
     }
 
-    public function sourceLanguage(): ?SupportedLanguageEnum
+    public function sourceLanguage(): ?LanguageEnum
     {
         return $this->sourceLanguage;
     }
 
-    public function updateSourceLanguage(SupportedLanguageEnum $sourceLanguage): void
+    public function updateSourceLanguage(LanguageEnum $sourceLanguage): void
     {
         $this->sourceLanguage = $sourceLanguage;
     }
@@ -71,7 +71,7 @@ class Translation extends AggregateRoot
         return $this->originalText;
     }
 
-    public function targetLanguage(): SupportedLanguageEnum
+    public function targetLanguage(): LanguageEnum
     {
         return $this->targetLanguage;
     }

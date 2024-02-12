@@ -9,23 +9,22 @@ use App\Shared\Domain\Bus\Event\EventBus;
 use App\Shared\Domain\ValueObject\Uuid;
 use App\Translations\Domain\Service\CreateTranslation;
 use App\Translations\Domain\Translation;
-use App\Translations\Domain\ValueObject\SupportedLanguageEnum;
+use App\Translations\Domain\ValueObject\LanguageEnum;
 
 final class CreateTranslationCommandHandler implements CommandHandler
 {
     public function __construct(
         private readonly CreateTranslation $createTranslation,
         private readonly EventBus $eventBus
-    ) {
-    }
+    ) {}
 
     public function __invoke(CreateTranslationCommand $command): void
     {
         $translation = Translation::create(
             id: Uuid::fromString($command->id()),
-            sourceLanguage: SupportedLanguageEnum::tryFrom($command->sourceLanguage() ?? 'null'),
+            sourceLanguage: LanguageEnum::tryFrom($command->sourceLanguage() ?? 'null'),
             originalText: $command->originalText(),
-            targetLanguage: SupportedLanguageEnum::from($command->targetLanguage()),
+            targetLanguage: LanguageEnum::from($command->targetLanguage()),
             createdAt: $command->createdAt(),
             updatedAt: $command->updatedAt()
         );

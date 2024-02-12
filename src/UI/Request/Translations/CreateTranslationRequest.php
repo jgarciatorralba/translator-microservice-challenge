@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\UI\Request\Translations;
 
-use App\Translations\Domain\ValueObject\SupportedLanguageEnum;
+use App\Translations\Domain\ValueObject\LanguageEnum;
 use App\UI\Request\AbstractRequest;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -17,7 +17,7 @@ final class CreateTranslationRequest extends AbstractRequest
                 new Assert\NotBlank(),
                 new Assert\Type('string'),
                 new Assert\Length(min: 2),
-                new Assert\Choice(SupportedLanguageEnum::supportedValues())
+                new Assert\Choice(LanguageEnum::supportedValues())
             ]),
             'originalText' => new Assert\Required([
                 new Assert\NotBlank(),
@@ -28,7 +28,7 @@ final class CreateTranslationRequest extends AbstractRequest
                 new Assert\NotBlank(),
                 new Assert\Type('string'),
                 new Assert\Length(min: 2),
-                new Assert\Choice(SupportedLanguageEnum::supportedValues())
+                new Assert\Choice(LanguageEnum::supportedValues())
             ]),
         ]);
     }
