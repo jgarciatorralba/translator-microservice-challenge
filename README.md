@@ -1,6 +1,6 @@
 # Code Challenge: Machine Translation Microservice
 
-The repository consists on a proposed solution to a technical challenge raised during the selection process for a Senior Backend Developer position.
+The repository consists on a proposed solution to a technical challenge raised during the selection process for a Backend Developer position.
 
 ---
 
@@ -24,6 +24,7 @@ This is a **Symfony** project for an **API** service, with a development environ
 
 - Run the test suite by executing the command: `php bin/phpunit`
   - **Important**: make sure to clear Symfony's testing cache by running `sf cache:clear --env=test` before executing them.
+  - Make sure the **test** database is created and ready by running the commands `sf doctrine:database:create --env=test` and `sf doctrine:migrations:migrate --env=test`.
 
 ---
 
