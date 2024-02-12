@@ -14,7 +14,8 @@ final class UpdateTranslation
 {
     public function __construct(
         private readonly TranslationRepository $translationRepository
-    ) {}
+    ) {
+    }
 
     /**
      * @param array <string, string|StatusEnum|LanguageEnum|DateTimeImmutable> $updatedData

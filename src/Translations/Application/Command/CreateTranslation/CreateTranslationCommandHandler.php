@@ -16,7 +16,8 @@ final class CreateTranslationCommandHandler implements CommandHandler
     public function __construct(
         private readonly CreateTranslation $createTranslation,
         private readonly EventBus $eventBus
-    ) {}
+    ) {
+    }
 
     public function __invoke(CreateTranslationCommand $command): void
     {
