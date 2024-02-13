@@ -41,10 +41,10 @@ This is a **Symfony** project for an **API** service, with a development environ
 
 ## Design Decisions
 
-- In order to facilitate the development, only a handful of languages is supported: English, Spanish, French, German, Italian and Portuguese.
-- Maximum of 255 characters to translate in each request, so the free tier limit is not reached too soon.
-- Use of universally unique identifiers (UUIDs) for improved API security.
-- Use of enumerations in translation status and in supported languages instead of plain text for better control of database input.
+- To facilitate development, support is limited to only a handful of languages: English, Spanish, French, German, Italian and Portuguese.
+- A maximum of 255 characters is allowed for each translation request to prevent reaching the free tier limit too quickly.
+- Universally Unique Identifiers (UUIDs) are used to enhance API security.
+- Enumerations are employed for translation status and supported languages instead of plain text to better control database input.
 
 ---
 
