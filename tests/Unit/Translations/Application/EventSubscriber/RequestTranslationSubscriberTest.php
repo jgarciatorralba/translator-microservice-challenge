@@ -47,7 +47,7 @@ final class RequestTranslationSubscriberTest extends TestCase
                 : StatusEnum::COMPLETED,
             'translatedText' => $result->translatedText(),
             'sourceLanguage' => $result->detectedLanguage(),
-            'updatedAt' => $result->translatedAt()
+            'updatedAt' => $result->timestamp()
         ]);
 
         $subscriber = new RequestTranslationSubscriber(
