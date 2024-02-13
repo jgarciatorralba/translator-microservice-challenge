@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Shared\Domain\ValueObject;
 
+use DateTimeImmutable;
 use Symfony\Component\HttpFoundation\Response;
 
 class HttpResponse
@@ -12,6 +13,7 @@ class HttpResponse
         private readonly ?int $statusCode = null,
         private readonly ?string $error = null,
         private readonly ?string $content = null,
+        private readonly ?DateTimeImmutable $timestamp = new DateTimeImmutable(),
     ) {
     }
 
@@ -28,6 +30,11 @@ class HttpResponse
     public function content(): ?string
     {
         return $this->content;
+    }
+
+    public function timestamp(): DateTimeImmutable
+    {
+        return $this->timestamp;
     }
 
     public function isFromBadRequest(): bool
