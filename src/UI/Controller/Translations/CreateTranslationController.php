@@ -21,14 +21,16 @@ final class CreateTranslationController extends BaseController
 
         $id = Uuid::random()->value();
 
-        $this->dispatch(new CreateTranslationCommand(
-            id: $id,
-            sourceLanguage: $data['sourceLanguage'] ?? null,
-            originalText: $data['originalText'],
-            targetLanguage: $data['targetLanguage'],
-            createdAt: new DateTimeImmutable(),
-            updatedAt: new DateTimeImmutable()
-        ));
+        $this->dispatch(
+            new CreateTranslationCommand(
+                id: $id,
+                sourceLanguage: $data['sourceLanguage'] ?? null,
+                originalText: $data['originalText'],
+                targetLanguage: $data['targetLanguage'],
+                createdAt: new DateTimeImmutable(),
+                updatedAt: new DateTimeImmutable()
+            )
+        );
 
         return new JsonResponse([
             'id' => $id,

@@ -17,10 +17,12 @@ final class GetTranslationsController extends BaseController
         $page = $request->get('page');
         $size = $request->get('size');
 
-        $response = $this->ask(new GetTranslationsQuery(
-            page: is_numeric($page) ? intval($page) : null,
-            size: is_numeric($size) ? intval($size) : null
-        ));
+        $response = $this->ask(
+            new GetTranslationsQuery(
+                page: is_numeric($page) ? intval($page) : null,
+                size: is_numeric($size) ? intval($size) : null
+            )
+        );
         return new JsonResponse($response->data(), Response::HTTP_OK);
     }
 }
