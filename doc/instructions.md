@@ -2,7 +2,7 @@
 
 ## Description
 
-To facilitate all machine translation jobs at our company, we require a machine translation microservice. This service should provide machine translations of texts submitted by various systems or users, and it will use external services to translate the texts. When such an external service is not available, there should be fallback to a secondary service. In the future, there will be more fallbacks, so this should be considered.
+To facilitate all machine translation jobs at our company, we require a machine translation microservice. This service should provide machine translations of texts submitted by various systems or users, and it will use external services to translate the texts. When such an external service is not available, there should be a fallback to a secondary service. In the future, there will be more fallbacks, so this should be considered.
 
 You are free to use any machine translation platform, but you should use at least two (one as a fallback). For example, **DeepL** and **LectoAI** offer free accounts and APIs, but:
 
