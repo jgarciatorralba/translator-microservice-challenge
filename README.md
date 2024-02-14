@@ -50,5 +50,5 @@ This is a **Symfony** project for an **API** service, with a development environ
 
 ## Author
 
-- **Jorge García Torralba** &#8594; [jorge-garcia](https://github.com/jgarciatorralba).
-  - Feel free to contribute by opening a pull request!
+- **Jorge García Torralba** &#8594; [jorge-garcia](https://github.com/jgarciatorralba)
+  - Feel free to open a pull request with suggestions or improvements!
