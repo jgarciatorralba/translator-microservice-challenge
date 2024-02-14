@@ -98,9 +98,11 @@ class Translation extends AggregateRoot
 
     public function request(Uuid $id): void
     {
-        $this->recordEvent(new TranslationRequestedEvent(
-            aggregateId: $id->value()
-        ));
+        $this->recordEvent(
+            new TranslationRequestedEvent(
+                aggregateId: $id->value()
+            )
+        );
     }
 
     /**

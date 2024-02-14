@@ -31,7 +31,7 @@ final class RequestExternalTranslation
 
         $this->fallbackProviders = array_filter(
             $implementations,
-            fn(TranslationProvider $implementation) =>
+            fn(TranslationProvider $implementation): bool =>
                 get_class($implementation) !== get_class($this->primaryTranslationProvider)
         );
     }

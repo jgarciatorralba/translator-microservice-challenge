@@ -24,7 +24,10 @@ final class UpdateTranslation
     {
         $hasChanged = false;
 
-        if (!empty($updatedData['status']) && $updatedData['status'] !== $translation->status()) {
+        if (
+            !empty($updatedData['status'])
+            && $updatedData['status'] !== $translation->status()
+        ) {
             $translation->updateStatus($updatedData['status']);
             $hasChanged = true;
         }

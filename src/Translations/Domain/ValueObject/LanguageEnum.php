@@ -23,7 +23,7 @@ enum LanguageEnum: string
     {
         return array_filter(
             array_column(self::cases(), 'value'),
-            fn(string $case) => $case !== self::NOT_RECOGNIZED->value
+            fn(string $case): bool => $case !== self::NOT_RECOGNIZED->value
         );
     }
 }
