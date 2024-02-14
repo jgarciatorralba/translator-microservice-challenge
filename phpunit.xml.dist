@@ -32,5 +32,6 @@
     </source>
 
     <extensions>
+        <bootstrap class="DG\BypassFinals\PHPUnitExtension"/>
     </extensions>
 </phpunit>
