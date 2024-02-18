@@ -6,9 +6,7 @@ namespace App\Shared\Domain\Trait;
 
 trait EnumValuesProviderTrait
 {
-    /**
-     * @return array<string>
-     */
+    /** @return string[] */
     public static function values(): array
     {
         return array_column(self::cases(), 'value');
