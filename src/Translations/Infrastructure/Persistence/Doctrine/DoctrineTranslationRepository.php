@@ -55,8 +55,8 @@ class DoctrineTranslationRepository extends DoctrineRepository implements Transl
         ?int $limit = null,
         ?int $offset = null
     ): array {
-        if ($limit === null || $limit > self::MAX_RESULTS_PER_PAGE) {
-            $limit = self::MAX_RESULTS_PER_PAGE;
+        if ($limit === null || $limit > self::MAX_PAGE_SIZE) {
+            $limit = self::MAX_PAGE_SIZE;
         }
 
         return $this->repository()->findBy($criteria, $orderBy, $limit, $offset);
