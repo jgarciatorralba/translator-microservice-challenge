@@ -117,8 +117,7 @@ class Translation extends AggregateRoot
             'targetLang' => $this->targetLanguage->value,
             'status' => $this->status->value,
             'translatedText' => $this->translatedText,
-            'createdAt' => Utils::dateToString($this->createdAt),
-            'updatedAt' => Utils::dateToString($this->updatedAt)
+            'createdAt' => Utils::dateToString($this->createdAt)
         ];
     }
 }
