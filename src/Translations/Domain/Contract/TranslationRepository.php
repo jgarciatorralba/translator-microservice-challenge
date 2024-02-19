@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Translations\Domain\Contract;
 
+use App\Shared\Domain\ValueObject\SearchCriteria\Criteria;
 use App\Translations\Domain\Translation;
 use App\Shared\Domain\ValueObject\Uuid;
 
@@ -20,15 +21,6 @@ interface TranslationRepository
 
     public function findOneById(Uuid $id): Translation|null;
 
-    /**
-     * @param array <string, mixed> $criteria
-     * @param array <string, string>|null $orderBy
-     * @return Translation[]
-     */
-    public function findByCriteria(
-        array $criteria,
-        ?array $orderBy = null,
-        ?int $limit = null,
-        ?int $offset = null
-    ): array;
+    /** @return Translation[] */
+    public function matching(Criteria $criteria): array;
 }

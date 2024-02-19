@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Translations\Infrastructure\Persistence\Doctrine;
 
+use App\Shared\Domain\ValueObject\SearchCriteria\Criteria;
 use App\Shared\Domain\ValueObject\Uuid;
 use App\Shared\Infrastructure\Persistence\Doctrine\DoctrineRepository;
 use App\Translations\Domain\Contract\TranslationRepository;
@@ -44,21 +45,11 @@ class DoctrineTranslationRepository extends DoctrineRepository implements Transl
         return $this->repository()->findOneBy(['id' => $id->value()]);
     }
 
-    /**
-     * @param array<string, mixed> $criteria
-     * @param array<string, string>|null $orderBy
-     * @return Translation[]
-     */
-    public function findByCriteria(
-        array $criteria = [],
-        ?array $orderBy = null,
-        ?int $limit = null,
-        ?int $offset = null
-    ): array {
-        if ($limit === null || $limit > self::MAX_PAGE_SIZE) {
-            $limit = self::MAX_PAGE_SIZE;
-        }
-
-        return $this->repository()->findBy($criteria, $orderBy, $limit, $offset);
+    /** @return Translation[] */
+    public function matching(Criteria $criteria): array
+    {
+        return $this->repository()
+            ->matching($this->convertToDoctrineCriteria($criteria))
+            ->toArray();
     }
 }

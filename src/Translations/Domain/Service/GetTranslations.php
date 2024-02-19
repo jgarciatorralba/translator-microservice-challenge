@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Translations\Domain\Service;
 
+use App\Shared\Domain\ValueObject\SearchCriteria\Criteria;
 use App\Translations\Domain\Contract\TranslationRepository;
 use App\Translations\Domain\Translation;
 
@@ -15,21 +16,11 @@ final class GetTranslations
     }
 
     /**
-     * @param array <string, mixed> $criteria
-     * @param array <string, string>|null $orderBy
+     * @param Criteria $criteria
      * @return Translation[]
      * */
-    public function __invoke(
-        array $criteria,
-        ?array $orderBy,
-        ?int $limit,
-        ?int $offset
-    ): array {
-        return $this->translationRepository->findByCriteria(
-            $criteria,
-            $orderBy,
-            $limit,
-            $offset
-        );
+    public function __invoke(Criteria $criteria): array
+    {
+        return $this->translationRepository->matching($criteria);
     }
 }

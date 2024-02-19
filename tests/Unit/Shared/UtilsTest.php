@@ -28,15 +28,15 @@ final class UtilsTest extends TestCase
     #[DataProvider('dataStringToDate')]
     public function testStringToDate(
         string $stringToConvert,
-        ?DateTimeInterface $expectedResult,
-        bool $expectException = false
+        ?DateTimeInterface $expectedResult
     ): void {
-        if ($expectException) {
-            $this->expectException(Exception::class);
+        $date = Utils::stringToDate($stringToConvert);
+        if ($date) {
+            $this->assertInstanceOf(DateTimeInterface::class, $date);
+        } else {
+            $this->assertNull($date);
         }
 
-        $date = Utils::stringToDate($stringToConvert);
-        $this->assertInstanceOf(DateTimeInterface::class, $date);
         $this->assertEquals($expectedResult, $date);
     }
 
@@ -62,7 +62,7 @@ final class UtilsTest extends TestCase
     {
         return [
             'valid datetime string' => ['2010-10-10', new DateTimeImmutable('2010-10-10')],
-            'invalid datetime string' => ['invalid-date-string', null, true]
+            'invalid datetime string' => ['invalid-date-string', null]
         ];
     }
 

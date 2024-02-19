@@ -5,22 +5,23 @@ declare(strict_types=1);
 namespace App\Translations\Application\Query\GetTranslations;
 
 use App\Shared\Domain\Bus\Query\Query;
+use DateTimeImmutable;
 
 final class GetTranslationsQuery implements Query
 {
     public function __construct(
-        private readonly ?int $page,
-        private readonly ?int $size
+        private readonly ?int $pageSize,
+        private readonly DateTimeImmutable $createdAt
     ) {
     }
 
-    public function page(): ?int
+    public function pageSize(): ?int
     {
-        return $this->page;
+        return $this->pageSize;
     }
 
-    public function size(): ?int
+    public function createdAt(): DateTimeImmutable
     {
-        return $this->size;
+        return $this->createdAt;
     }
 }
