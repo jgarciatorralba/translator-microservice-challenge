@@ -7,7 +7,6 @@ namespace App\Translations\Infrastructure\Http\DeepL;
 use App\Shared\Utils;
 use App\Translations\Domain\Contract\TranslationProvider;
 use App\Translations\Domain\Translation;
-use App\Translations\Domain\ValueObject\LanguageEnum;
 use App\Translations\Domain\ValueObject\TranslationProviderResponse;
 use App\Translations\Infrastructure\Http\AbstractTranslationProvider;
 
@@ -49,7 +48,7 @@ final class DeepLTranslationProvider extends AbstractTranslationProvider impleme
                 ? $decodedContent['translations'][0]['text']
                 : null;
         $sourceLang = isset($decodedContent['translations'][0]['detected_source_language'])
-            ? $this->revertLanguageCode($decodedContent['translations'][0]['detected_source_language'])
+            ? DeepLLanguageCodeConverter::revert($decodedContent['translations'][0]['detected_source_language'])
             : null;
 
         $this->logger->info('Translation request completed.', [
@@ -73,28 +72,12 @@ final class DeepLTranslationProvider extends AbstractTranslationProvider impleme
         $body = [
             'text' => [$translation->originalText()],
             'target_lang' =>
-                $this->convertLanguageCode($translation->targetLanguage())
+                DeepLLanguageCodeConverter::convert($translation->targetLanguage())
         ];
         if (!empty($translation->sourceLanguage())) {
             $body['source_lang'] = strtoupper($translation->sourceLanguage()->value);
         }
 
         return $body;
-    }
-
-    public function convertLanguageCode(LanguageEnum $languageCode): string
-    {
-        if ($languageCode === LanguageEnum::ENGLISH) {
-            return 'EN-GB';
-        } elseif ($languageCode === LanguageEnum::PORTUGUESE) {
-            return 'PT-PT';
-        }
-
-        return strtoupper($languageCode->value);
-    }
-
-    public function revertLanguageCode(string $languageCode): LanguageEnum
-    {
-        return LanguageEnum::tryFrom(strtolower($languageCode)) ?? LanguageEnum::NOT_RECOGNIZED;
     }
 }

@@ -7,7 +7,6 @@ namespace App\Translations\Infrastructure\Http\LectoAI;
 use App\Shared\Utils;
 use App\Translations\Domain\Contract\TranslationProvider;
 use App\Translations\Domain\Translation;
-use App\Translations\Domain\ValueObject\LanguageEnum;
 use App\Translations\Domain\ValueObject\TranslationProviderResponse;
 use App\Translations\Infrastructure\Http\AbstractTranslationProvider;
 
@@ -49,7 +48,7 @@ final class LectoAITranslationProvider extends AbstractTranslationProvider imple
                 ? $decodedContent['translations'][0]['translated'][0]
                 : null;
         $sourceLang = isset($decodedContent['from'])
-            ? $this->revertLanguageCode($decodedContent['from'])
+            ? LectoAILanguageCodeConverter::revert($decodedContent['from'])
             : null;
 
         $this->logger->info('Translation request completed.', [
@@ -73,31 +72,13 @@ final class LectoAITranslationProvider extends AbstractTranslationProvider imple
         $body = [
             'texts' => [$translation->originalText()],
             'to' => [
-                $this->convertLanguageCode($translation->targetLanguage())
+                LectoAILanguageCodeConverter::convert($translation->targetLanguage())
             ]
         ];
         if (!empty($translation->sourceLanguage())) {
-            $body['from'] = $this->convertLanguageCode($translation->sourceLanguage());
+            $body['from'] = LectoAILanguageCodeConverter::convert($translation->sourceLanguage());
         }
 
         return $body;
-    }
-
-    public function convertLanguageCode(LanguageEnum $languageCode): string
-    {
-        if ($languageCode === LanguageEnum::PORTUGUESE) {
-            return 'pt-PT';
-        }
-
-        return $languageCode->value;
-    }
-
-    public function revertLanguageCode(string $languageCode): LanguageEnum
-    {
-        if ($languageCode === 'pt-PT' || $languageCode === 'pt-BR') {
-            return LanguageEnum::PORTUGUESE;
-        }
-
-        return LanguageEnum::tryFrom($languageCode) ?? LanguageEnum::NOT_RECOGNIZED;
     }
 }
