@@ -68,7 +68,7 @@ final class LectoAITranslationProvider extends AbstractTranslationProvider imple
     }
 
     /** @return array<string, string|string[]> */
-    public function generateRequestBody(Translation $translation): array
+    protected function generateRequestBody(Translation $translation): array
     {
         $body = [
             'texts' => [$translation->originalText()],
