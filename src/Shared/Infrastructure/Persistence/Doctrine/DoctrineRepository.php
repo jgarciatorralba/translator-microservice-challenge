@@ -64,18 +64,18 @@ abstract class DoctrineRepository
         $doctrineCriteria = new DoctrineCriteria();
 
         foreach ($criteria->filters() as $filter) {
-            $condition = null;
-            if ($filter->condition() === FilterConditionEnum::EQUAL) {
-                $condition = DoctrineCriteria::expr()->eq($filter->columnName(), $filter->value());
-            } elseif ($filter->condition() === FilterConditionEnum::LOWER_THAN) {
-                $condition = DoctrineCriteria::expr()->lt($filter->columnName(), $filter->value());
+            $operator = null;
+            if ($filter->operator() === FilterOperatorEnum::EQUAL) {
+                $operator = DoctrineCriteria::expr()->eq($filter->columnName(), $filter->value());
+            } elseif ($filter->operator() === FilterOperatorEnum::LOWER_THAN) {
+                $operator = DoctrineCriteria::expr()->lt($filter->columnName(), $filter->value());
             }
 
-            if ($condition) {
-                if ($filter->operator() === FilterOperatorEnum::AND) {
-                    $doctrineCriteria->andWhere($condition);
-                } elseif ($filter->operator() === FilterOperatorEnum::OR) {
-                    $doctrineCriteria->orWhere($condition);
+            if ($operator) {
+                if ($filter->condition() === FilterConditionEnum::AND) {
+                    $doctrineCriteria->andWhere($operator);
+                } elseif ($filter->condition() === FilterConditionEnum::OR) {
+                    $doctrineCriteria->orWhere($operator);
                 }
             }
         }

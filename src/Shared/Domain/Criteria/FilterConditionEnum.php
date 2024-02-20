@@ -10,9 +10,6 @@ enum FilterConditionEnum: string
 {
     use EnumValuesProviderTrait;
 
-    case EQUAL = '=';
-    case LOWER_THAN = '<';
-    case LOWER_THAN_OR_EQUAL = '<=';
-    case GREATER_THAN = '>';
-    case GREATER_THAN_OR_EQUAL = '>=';
+    case AND = 'and';
+    case OR = 'or';
 }

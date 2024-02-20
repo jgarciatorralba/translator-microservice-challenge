@@ -9,8 +9,8 @@ final class Filter
     public function __construct(
         private string $columnName,
         private mixed $value,
-        private readonly FilterOperatorEnum $operator = FilterOperatorEnum::AND,
-        private readonly FilterConditionEnum $condition = FilterConditionEnum::EQUAL
+        private readonly FilterConditionEnum $condition = FilterConditionEnum::AND,
+        private readonly FilterOperatorEnum $operator = FilterOperatorEnum::EQUAL
     ) {
     }
 
