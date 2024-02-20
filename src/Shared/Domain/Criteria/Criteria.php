@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Shared\Domain\ValueObject\SearchCriteria;
+namespace App\Shared\Domain\Criteria;
 
 final class Criteria
 {

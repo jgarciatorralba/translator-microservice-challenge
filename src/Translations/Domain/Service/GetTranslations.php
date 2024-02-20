@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Translations\Domain\Service;
 
-use App\Shared\Domain\ValueObject\SearchCriteria\Criteria;
+use App\Shared\Domain\Criteria\Criteria;
 use App\Translations\Domain\Contract\TranslationRepository;
 use App\Translations\Domain\Translation;
 

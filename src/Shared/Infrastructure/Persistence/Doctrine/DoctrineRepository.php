@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Shared\Infrastructure\Persistence\Doctrine;
 
 use App\Shared\Domain\Aggregate\AggregateRoot;
-use App\Shared\Domain\ValueObject\SearchCriteria\Criteria;
-use App\Shared\Domain\ValueObject\SearchCriteria\FilterConditionEnum;
-use App\Shared\Domain\ValueObject\SearchCriteria\FilterOperatorEnum;
+use App\Shared\Domain\Criteria\Criteria;
+use App\Shared\Domain\Criteria\FilterConditionEnum;
+use App\Shared\Domain\Criteria\FilterOperatorEnum;
 use Doctrine\Common\Collections\Criteria as DoctrineCriteria;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;

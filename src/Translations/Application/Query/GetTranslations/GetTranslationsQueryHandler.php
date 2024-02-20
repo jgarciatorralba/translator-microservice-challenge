@@ -6,10 +6,10 @@ namespace App\Translations\Application\Query\GetTranslations;
 
 use App\Shared\Domain\Aggregate\AggregateRoot;
 use App\Shared\Domain\Bus\Query\QueryHandler;
-use App\Shared\Domain\ValueObject\SearchCriteria\Criteria;
-use App\Shared\Domain\ValueObject\SearchCriteria\Filter;
-use App\Shared\Domain\ValueObject\SearchCriteria\FilterConditionEnum;
-use App\Shared\Domain\ValueObject\SearchCriteria\OrderEnum;
+use App\Shared\Domain\Criteria\Criteria;
+use App\Shared\Domain\Criteria\Filter;
+use App\Shared\Domain\Criteria\FilterConditionEnum;
+use App\Shared\Domain\Criteria\OrderEnum;
 use App\Translations\Domain\Service\GetTranslations;
 
 final class GetTranslationsQueryHandler implements QueryHandler

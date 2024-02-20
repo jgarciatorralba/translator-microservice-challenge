@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Translations\Domain\Contract;
 
-use App\Shared\Domain\ValueObject\SearchCriteria\Criteria;
+use App\Shared\Domain\Criteria\Criteria;
 use App\Translations\Domain\Translation;
 use App\Shared\Domain\ValueObject\Uuid;
 

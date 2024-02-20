@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Translations\Infrastructure\Persistence\Doctrine;
 
-use App\Shared\Domain\ValueObject\SearchCriteria\Criteria;
+use App\Shared\Domain\Criteria\Criteria;
 use App\Shared\Domain\ValueObject\Uuid;
 use App\Shared\Infrastructure\Persistence\Doctrine\DoctrineRepository;
 use App\Translations\Domain\Contract\TranslationRepository;
