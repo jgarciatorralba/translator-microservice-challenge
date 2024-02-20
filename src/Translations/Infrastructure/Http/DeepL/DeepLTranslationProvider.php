@@ -68,7 +68,7 @@ final class DeepLTranslationProvider extends AbstractTranslationProvider impleme
     }
 
     /** @return array<string, string|string[]> */
-    public function generateRequestBody(Translation $translation): array
+    protected function generateRequestBody(Translation $translation): array
     {
         $body = [
             'text' => [$translation->originalText()],

@@ -19,5 +19,5 @@ abstract class AbstractTranslationProvider
     }
 
     /** @return array<string, mixed> */
-    abstract public function generateRequestBody(Translation $translation): array;
+    abstract protected function generateRequestBody(Translation $translation): array;
 }
