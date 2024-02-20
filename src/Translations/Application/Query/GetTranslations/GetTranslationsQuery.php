@@ -11,7 +11,7 @@ final class GetTranslationsQuery implements Query
 {
     public function __construct(
         private readonly ?int $pageSize,
-        private readonly DateTimeImmutable $createdAt
+        private readonly DateTimeImmutable $maxCreatedAt
     ) {
     }
 
@@ -20,8 +20,8 @@ final class GetTranslationsQuery implements Query
         return $this->pageSize;
     }
 
-    public function createdAt(): DateTimeImmutable
+    public function maxCreatedAt(): DateTimeImmutable
     {
-        return $this->createdAt;
+        return $this->maxCreatedAt;
     }
 }

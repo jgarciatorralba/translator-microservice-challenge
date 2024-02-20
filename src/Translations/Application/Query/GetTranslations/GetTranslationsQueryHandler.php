@@ -21,7 +21,7 @@ final class GetTranslationsQueryHandler implements QueryHandler
     public function __invoke(GetTranslationsQuery $query): GetTranslationsResponse
     {
         $limit = $query->pageSize() > 0 ? $query->pageSize() : null;
-        $createdAt = $query->createdAt();
+        $maxCreatedAt = $query->maxCreatedAt();
 
         $translations = $this->getTranslations->__invoke(
             new Criteria(
@@ -29,7 +29,7 @@ final class GetTranslationsQueryHandler implements QueryHandler
                     new Filter(
                         columnName: 'createdAt',
                         condition: FilterConditionEnum::LOWER_THAN,
-                        value: $createdAt
+                        value: $maxCreatedAt
                     )
                 ],
                 orderBy: [
