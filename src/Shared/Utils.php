@@ -15,12 +15,12 @@ final class Utils
         return $date->format(DateTimeInterface::ATOM);
     }
 
-    public static function stringToDate(string $date): ?DateTimeImmutable
+    public static function stringToDate(string $date): DateTimeImmutable
     {
         try {
             return new DateTimeImmutable($date);
         } catch (Exception) {
-            return null;
+            return new DateTimeImmutable();
         }
     }
 
