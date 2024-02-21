@@ -82,8 +82,8 @@ abstract class DoctrineRepository
 
         if (!empty($criteria->orderBy())) {
             $orderBy = [];
-            foreach ($criteria->orderBy() as $columnName => $order) {
-                $orderBy[$columnName] = $order->value;
+            foreach ($criteria->orderBy() as $order) {
+                $orderBy[$order->orderBy()] = $order->orderType()->value;
             }
 
             $doctrineCriteria->orderBy($orderBy);
