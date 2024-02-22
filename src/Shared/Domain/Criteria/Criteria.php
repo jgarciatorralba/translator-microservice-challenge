@@ -22,6 +22,8 @@ final class Criteria
     ) {
         if ($limit === null || $limit > self::MAX_PAGE_SIZE) {
             $this->limit = self::MAX_PAGE_SIZE;
+        } else {
+            $this->limit = $limit;
         }
     }
 
