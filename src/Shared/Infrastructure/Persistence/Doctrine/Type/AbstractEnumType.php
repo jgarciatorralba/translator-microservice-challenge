@@ -30,7 +30,12 @@ abstract class AbstractEnumType extends Type
         if (isset($value->value) && !in_array($value->value, $this->values)) {
             throw new InvalidArgumentException("Invalid '" . $this->name . "' value.");
         }
-        return $value->value ?? null;
+
+        if (is_null($value) || is_scalar($value)) {
+            return $value;
+        }
+
+        return $value->value;
     }
 
     public function requiresSQLCommentHint(AbstractPlatform $platform): bool
