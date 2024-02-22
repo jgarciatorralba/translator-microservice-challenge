@@ -8,8 +8,8 @@ final class FilterGroup
 {
     /** @param Filter[] $filters */
     public function __construct(
-        private readonly array $filters,
-        private readonly FilterConditionEnum $condition
+        private readonly array $filters = [],
+        private readonly FilterConditionEnum $condition = FilterConditionEnum::AND
     ) {
     }
 

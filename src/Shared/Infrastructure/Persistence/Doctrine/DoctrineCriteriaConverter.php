@@ -6,10 +6,10 @@ namespace App\Shared\Infrastructure\Persistence\Doctrine;
 
 use App\Shared\Domain\Criteria\Criteria;
 use App\Shared\Domain\Criteria\Filter;
-use App\Shared\Domain\Criteria\FilterConditionEnum;
 use App\Shared\Domain\Criteria\FilterGroup;
 use App\Shared\Domain\Criteria\Order;
 use Doctrine\Common\Collections\Criteria as DoctrineCriteria;
+use Doctrine\Common\Collections\Expr\Comparison;
 use Doctrine\Common\Collections\Expr\CompositeExpression;
 
 final class DoctrineCriteriaConverter
@@ -43,7 +43,7 @@ final class DoctrineCriteriaConverter
 
             /** @var FilterGroup $filterGroup */
             foreach ($criteria->filterGroups() as $filterGroup) {
-                $expression = $this->addFilterToExpression($filterGroup, $expression);
+                $expression = $this->addGroupExpressions($filterGroup, $expression);
             }
 
             return $expression;
@@ -52,7 +52,7 @@ final class DoctrineCriteriaConverter
         return null;
     }
 
-    private function addFilterToExpression(
+    private function addGroupExpressions(
         FilterGroup $filterGroup,
         ?CompositeExpression $expression
     ): CompositeExpression {
@@ -63,8 +63,25 @@ final class DoctrineCriteriaConverter
 
         return new CompositeExpression(
             $filterGroup->condition()->value,
-            $expressions
+            array_merge(
+                $expressions,
+                array_map(
+                    $this->buildComparison(),
+                    $filterGroup->filters()
+                )
+            )
         );
+    }
+
+    private function buildComparison(): callable
+    {
+        return function (Filter $filter): Comparison {
+            return new Comparison(
+                $filter->field(),
+                $filter->operator()->value,
+                $filter->value()
+            );
+        };
     }
 
     /** @return array <string, string> */

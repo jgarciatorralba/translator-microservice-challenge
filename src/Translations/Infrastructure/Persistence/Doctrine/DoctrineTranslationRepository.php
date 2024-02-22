@@ -6,6 +6,7 @@ namespace App\Translations\Infrastructure\Persistence\Doctrine;
 
 use App\Shared\Domain\Criteria\Criteria;
 use App\Shared\Domain\ValueObject\Uuid;
+use App\Shared\Infrastructure\Persistence\Doctrine\DoctrineCriteriaConverter;
 use App\Shared\Infrastructure\Persistence\Doctrine\DoctrineRepository;
 use App\Translations\Domain\Contract\TranslationRepository;
 use App\Translations\Domain\Translation;
@@ -48,8 +49,10 @@ class DoctrineTranslationRepository extends DoctrineRepository implements Transl
     /** @return Translation[] */
     public function matching(Criteria $criteria): array
     {
+        $doctrineCriteria = DoctrineCriteriaConverter::convert($criteria);
+
         return $this->repository()
-            ->matching($this->convertToDoctrineCriteria($criteria))
+            ->matching($doctrineCriteria)
             ->toArray();
     }
 }

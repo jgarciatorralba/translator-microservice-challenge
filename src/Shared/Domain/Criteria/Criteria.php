@@ -6,6 +6,10 @@ namespace App\Shared\Domain\Criteria;
 
 final class Criteria
 {
+    private const MAX_PAGE_SIZE = 50;
+
+    private int $limit;
+
     /**
      * @param FilterGroup[] $filterGroups
      * @param Order[] $orderBy
@@ -13,9 +17,12 @@ final class Criteria
     public function __construct(
         private readonly array $filterGroups,
         private readonly ?array $orderBy,
-        private readonly ?int $limit,
+        ?int $limit,
         private readonly ?int $offset
     ) {
+        if ($limit === null || $limit > self::MAX_PAGE_SIZE) {
+            $this->limit = self::MAX_PAGE_SIZE;
+        }
     }
 
     /** @return FilterGroup[] */

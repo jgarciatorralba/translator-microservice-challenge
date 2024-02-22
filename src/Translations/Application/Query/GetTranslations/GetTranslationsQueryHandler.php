@@ -8,6 +8,7 @@ use App\Shared\Domain\Aggregate\AggregateRoot;
 use App\Shared\Domain\Bus\Query\QueryHandler;
 use App\Shared\Domain\Criteria\Criteria;
 use App\Shared\Domain\Criteria\Filter;
+use App\Shared\Domain\Criteria\FilterGroup;
 use App\Shared\Domain\Criteria\FilterOperatorEnum;
 use App\Shared\Domain\Criteria\OrderEnum;
 use App\Translations\Domain\Service\GetTranslations;
@@ -23,15 +24,16 @@ final class GetTranslationsQueryHandler implements QueryHandler
         $limit = $query->pageSize() > 0 ? $query->pageSize() : null;
         $maxCreatedAt = $query->maxCreatedAt();
 
+        $filter = new Filter(
+            field: 'createdAt',
+            operator: FilterOperatorEnum::LOWER_THAN,
+            value: $maxCreatedAt
+        );
+        $filterGroup = new FilterGroup([$filter]);
+
         $translations = $this->getTranslations->__invoke(
             new Criteria(
-                filters: [
-                    new Filter(
-                        columnName: 'createdAt',
-                        operator: FilterOperatorEnum::LOWER_THAN,
-                        value: $maxCreatedAt
-                    )
-                ],
+                filterGroups: [$filterGroup],
                 orderBy: [
                     'createdAt' => OrderEnum::DESCENDING
                 ],
@@ -39,8 +41,9 @@ final class GetTranslationsQueryHandler implements QueryHandler
                 offset: null
             )
         );
+
         $translations = array_map(
-            fn(AggregateRoot $translation) => $translation->toArray(),
+            fn (AggregateRoot $translation) => $translation->toArray(),
             $translations
         );
 

@@ -7,24 +7,24 @@ namespace App\Shared\Domain\Criteria;
 final class Filter
 {
     public function __construct(
-        private readonly string $columnName,
+        private readonly string $field,
         private readonly mixed $value,
         private readonly FilterOperatorEnum $operator = FilterOperatorEnum::EQUAL
     ) {
     }
 
-    public function operator(): FilterOperatorEnum
+    public function field(): string
     {
-        return $this->operator;
-    }
-
-    public function columnName(): string
-    {
-        return $this->columnName;
+        return $this->field;
     }
 
     public function value(): mixed
     {
         return $this->value;
+    }
+
+    public function operator(): FilterOperatorEnum
+    {
+        return $this->operator;
     }
 }
