@@ -28,7 +28,7 @@ final class Criteria
     }
 
     /** @return FilterGroup[] */
-    public function filterGroups(): array
+    public function filterGroups(): ?array
     {
         return $this->filterGroups;
     }
