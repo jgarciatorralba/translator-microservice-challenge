@@ -15,10 +15,10 @@ final class Criteria
      * @param Order[] $orderBy
      */
     public function __construct(
-        private readonly array $filterGroups,
-        private readonly ?array $orderBy,
-        ?int $limit,
-        private readonly ?int $offset
+        private readonly ?array $filterGroups = null,
+        private readonly ?array $orderBy = null,
+        ?int $limit = null,
+        private readonly ?int $offset = null
     ) {
         if ($limit === null || $limit > self::MAX_PAGE_SIZE) {
             $this->limit = self::MAX_PAGE_SIZE;

@@ -10,6 +10,7 @@ use App\Shared\Domain\Criteria\Criteria;
 use App\Shared\Domain\Criteria\Filter;
 use App\Shared\Domain\Criteria\FilterGroup;
 use App\Shared\Domain\Criteria\FilterOperatorEnum;
+use App\Shared\Domain\Criteria\Order;
 use App\Shared\Domain\Criteria\OrderEnum;
 use App\Translations\Domain\Service\GetTranslations;
 
@@ -30,15 +31,13 @@ final class GetTranslationsQueryHandler implements QueryHandler
             value: $maxCreatedAt
         );
         $filterGroup = new FilterGroup([$filter]);
+        $order = new Order('createdAt', OrderEnum::DESCENDING);
 
         $translations = $this->getTranslations->__invoke(
             new Criteria(
                 filterGroups: [$filterGroup],
-                orderBy: [
-                    'createdAt' => OrderEnum::DESCENDING
-                ],
-                limit: $limit,
-                offset: null
+                orderBy: [$order],
+                limit: $limit
             )
         );
 
