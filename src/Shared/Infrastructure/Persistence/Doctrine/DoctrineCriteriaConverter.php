@@ -7,6 +7,7 @@ namespace App\Shared\Infrastructure\Persistence\Doctrine;
 use App\Shared\Domain\Criteria\Criteria;
 use App\Shared\Domain\Criteria\Filter;
 use App\Shared\Domain\Criteria\FilterConditionEnum;
+use App\Shared\Domain\Criteria\FilterGroup;
 use App\Shared\Domain\Criteria\Order;
 use Doctrine\Common\Collections\Criteria as DoctrineCriteria;
 use Doctrine\Common\Collections\Expr\CompositeExpression;
@@ -15,7 +16,8 @@ final class DoctrineCriteriaConverter
 {
     public function __construct(
         private readonly Criteria $criteria
-    ) {}
+    ) {
+    }
 
     public static function convert(Criteria $criteria): DoctrineCriteria
     {
@@ -36,12 +38,12 @@ final class DoctrineCriteriaConverter
 
     private function buildExpression(Criteria $criteria): ?CompositeExpression
     {
-        if ($criteria->hasFilters()) {
+        if ($criteria->hasFilterGroups()) {
             $expression = null;
 
-            /** @var Filter $filter */
-            foreach ($criteria->filters() as $filter) {
-                $expression = $this->addFilterToExpression($filter, $expression);
+            /** @var FilterGroup $filterGroup */
+            foreach ($criteria->filterGroups() as $filterGroup) {
+                $expression = $this->addFilterToExpression($filterGroup, $expression);
             }
 
             return $expression;
@@ -51,7 +53,7 @@ final class DoctrineCriteriaConverter
     }
 
     private function addFilterToExpression(
-        Filter $filter,
+        FilterGroup $filterGroup,
         ?CompositeExpression $expression
     ): CompositeExpression {
         $expressions = [];
@@ -60,18 +62,9 @@ final class DoctrineCriteriaConverter
         }
 
         return new CompositeExpression(
-            $this->mapConditionTypeConstant($filter->condition()),
+            $filterGroup->condition()->value,
             $expressions
         );
-    }
-
-    private function mapConditionTypeConstant(FilterConditionEnum $conditionType): string
-    {
-        if ($conditionType === FilterConditionEnum::AND) {
-            return CompositeExpression::TYPE_AND;
-        } else {
-            return CompositeExpression::TYPE_OR;
-        }
     }
 
     /** @return array <string, string> */

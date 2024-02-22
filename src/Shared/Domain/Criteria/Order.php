@@ -9,7 +9,8 @@ final class Order
     public function __construct(
         private readonly string $orderBy,
         private readonly OrderEnum $orderType
-    ) {}
+    ) {
+    }
 
     public static function fromValues(?string $orderBy, ?string $order): ?self
     {

@@ -10,6 +10,6 @@ enum FilterConditionEnum: string
 {
     use EnumValuesProviderTrait;
 
-    case AND = 'and';
-    case OR = 'or';
+    case AND = 'AND';
+    case OR = 'OR';
 }
