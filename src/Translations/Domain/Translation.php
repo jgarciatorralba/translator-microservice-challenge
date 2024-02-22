@@ -112,9 +112,9 @@ class Translation extends AggregateRoot
     {
         return [
             'id' => $this->id->value(),
-            'sourceLang' => $this->sourceLanguage->value ?? null,
+            'sourceLanguage' => $this->sourceLanguage->value ?? null,
             'originalText' => $this->originalText,
-            'targetLang' => $this->targetLanguage->value,
+            'targetLanguage' => $this->targetLanguage->value,
             'status' => $this->status->value,
             'translatedText' => $this->translatedText,
             'createdAt' => Utils::dateToString($this->createdAt)
