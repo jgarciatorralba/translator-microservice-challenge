@@ -48,7 +48,7 @@ final class DeepLTranslationProvider extends AbstractTranslationProvider impleme
                 ? $decodedContent['translations'][0]['text']
                 : null;
         $sourceLang = isset($decodedContent['translations'][0]['detected_source_language'])
-            ? DeepLLanguageCodeConverter::revert($decodedContent['translations'][0]['detected_source_language'])
+            ? DeepLLanguageCodeAdapter::revert($decodedContent['translations'][0]['detected_source_language'])
             : null;
 
         $this->logger->info('Translation request completed.', [
@@ -72,7 +72,7 @@ final class DeepLTranslationProvider extends AbstractTranslationProvider impleme
         $body = [
             'text' => [$translation->originalText()],
             'target_lang' =>
-                DeepLLanguageCodeConverter::convert($translation->targetLanguage())
+                DeepLLanguageCodeAdapter::convert($translation->targetLanguage())
         ];
         if (!empty($translation->sourceLanguage())) {
             $body['source_lang'] = strtoupper($translation->sourceLanguage()->value);

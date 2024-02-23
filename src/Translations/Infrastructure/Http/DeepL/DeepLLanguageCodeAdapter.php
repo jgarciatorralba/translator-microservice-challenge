@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Translations\Infrastructure\Http\DeepL;
 
-use App\Translations\Domain\Contract\LanguageCodeConverter;
+use App\Translations\Domain\Contract\LanguageCodeAdapter;
 use App\Translations\Domain\ValueObject\LanguageEnum;
 
-final class DeepLLanguageCodeConverter implements LanguageCodeConverter
+final class DeepLLanguageCodeAdapter implements LanguageCodeAdapter
 {
     public static function convert(LanguageEnum $languageCode): string
     {

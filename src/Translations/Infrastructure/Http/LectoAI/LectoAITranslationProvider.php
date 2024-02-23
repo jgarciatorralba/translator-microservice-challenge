@@ -48,7 +48,7 @@ final class LectoAITranslationProvider extends AbstractTranslationProvider imple
                 ? $decodedContent['translations'][0]['translated'][0]
                 : null;
         $sourceLang = isset($decodedContent['from'])
-            ? LectoAILanguageCodeConverter::revert($decodedContent['from'])
+            ? LectoAILanguageCodeAdapter::revert($decodedContent['from'])
             : null;
 
         $this->logger->info('Translation request completed.', [
@@ -72,11 +72,11 @@ final class LectoAITranslationProvider extends AbstractTranslationProvider imple
         $body = [
             'texts' => [$translation->originalText()],
             'to' => [
-                LectoAILanguageCodeConverter::convert($translation->targetLanguage())
+                LectoAILanguageCodeAdapter::convert($translation->targetLanguage())
             ]
         ];
         if (!empty($translation->sourceLanguage())) {
-            $body['from'] = LectoAILanguageCodeConverter::convert($translation->sourceLanguage());
+            $body['from'] = LectoAILanguageCodeAdapter::convert($translation->sourceLanguage());
         }
 
         return $body;

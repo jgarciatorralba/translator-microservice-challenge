@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Translations\Infrastructure\Http\LectoAI;
 
-use App\Translations\Domain\Contract\LanguageCodeConverter;
+use App\Translations\Domain\Contract\LanguageCodeAdapter;
 use App\Translations\Domain\ValueObject\LanguageEnum;
 
-final class LectoAILanguageCodeConverter implements LanguageCodeConverter
+final class LectoAILanguageCodeAdapter implements LanguageCodeAdapter
 {
     public static function convert(LanguageEnum $languageCode): string
     {

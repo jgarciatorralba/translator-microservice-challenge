@@ -6,7 +6,7 @@ namespace App\Translations\Domain\Contract;
 
 use App\Translations\Domain\ValueObject\LanguageEnum;
 
-interface LanguageCodeConverter
+interface LanguageCodeAdapter
 {
     public static function convert(LanguageEnum $languageCode): string;
 
