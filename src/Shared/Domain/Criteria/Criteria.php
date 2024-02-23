@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Shared\Domain\Criteria;
 
+use App\Shared\Domain\Criteria\Filter\FilterGroup;
+use App\Shared\Domain\Criteria\Order\Order;
+
 final class Criteria
 {
     private const MAX_PAGE_SIZE = 50;

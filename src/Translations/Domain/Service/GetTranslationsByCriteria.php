@@ -8,7 +8,7 @@ use App\Shared\Domain\Criteria\Criteria;
 use App\Translations\Domain\Contract\TranslationRepository;
 use App\Translations\Domain\Translation;
 
-final class GetTranslations
+final class GetTranslationsByCriteria
 {
     public function __construct(
         private readonly TranslationRepository $translationRepository

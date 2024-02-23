@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Shared\Infrastructure\Persistence\Doctrine;
 
 use App\Shared\Domain\Criteria\Criteria;
-use App\Shared\Domain\Criteria\Filter;
-use App\Shared\Domain\Criteria\FilterGroup;
-use App\Shared\Domain\Criteria\Order;
+use App\Shared\Domain\Criteria\Filter\Filter;
+use App\Shared\Domain\Criteria\Filter\FilterGroup;
+use App\Shared\Domain\Criteria\Order\Order;
 use Doctrine\Common\Collections\Criteria as DoctrineCriteria;
 use Doctrine\Common\Collections\Expr\Comparison;
 use Doctrine\Common\Collections\Expr\CompositeExpression;

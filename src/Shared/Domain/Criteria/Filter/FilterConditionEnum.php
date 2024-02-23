@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Shared\Domain\Criteria;
+namespace App\Shared\Domain\Criteria\Filter;
 
 use App\Shared\Domain\Trait\EnumValuesProviderTrait;
 

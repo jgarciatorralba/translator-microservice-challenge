@@ -7,17 +7,17 @@ namespace App\Translations\Application\Query\GetTranslations;
 use App\Shared\Domain\Aggregate\AggregateRoot;
 use App\Shared\Domain\Bus\Query\QueryHandler;
 use App\Shared\Domain\Criteria\Criteria;
-use App\Shared\Domain\Criteria\Filter;
-use App\Shared\Domain\Criteria\FilterGroup;
-use App\Shared\Domain\Criteria\FilterOperatorEnum;
-use App\Shared\Domain\Criteria\Order;
-use App\Shared\Domain\Criteria\OrderEnum;
-use App\Translations\Domain\Service\GetTranslations;
+use App\Shared\Domain\Criteria\Filter\Filter;
+use App\Shared\Domain\Criteria\Filter\FilterGroup;
+use App\Shared\Domain\Criteria\Filter\FilterOperatorEnum;
+use App\Shared\Domain\Criteria\Order\Order;
+use App\Shared\Domain\Criteria\Order\OrderEnum;
+use App\Translations\Domain\Service\GetTranslationsByCriteria;
 
 final class GetTranslationsQueryHandler implements QueryHandler
 {
     public function __construct(
-        private readonly GetTranslations $getTranslations
+        private readonly GetTranslationsByCriteria $getTranslationsByCriteria
     ) {
     }
 
@@ -34,7 +34,7 @@ final class GetTranslationsQueryHandler implements QueryHandler
         $filterGroup = new FilterGroup([$filter]);
         $order = new Order('createdAt', OrderEnum::DESCENDING);
 
-        $translations = $this->getTranslations->__invoke(
+        $translations = $this->getTranslationsByCriteria->__invoke(
             new Criteria(
                 filterGroups: [$filterGroup],
                 orderBy: [$order],
