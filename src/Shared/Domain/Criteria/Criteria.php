@@ -13,12 +13,9 @@ final class Criteria
 
     private int $limit;
 
-    /**
-     * @param FilterGroup[] $filterGroups
-     * @param Order[] $orderBy
-     */
+    /** @param Order[] $orderBy */
     public function __construct(
-        private readonly ?array $filterGroups = null,
+        private readonly ?FilterGroup $filterGroup = null,
         private readonly ?array $orderBy = null,
         ?int $limit = null,
         private readonly ?int $offset = null
@@ -30,10 +27,9 @@ final class Criteria
         }
     }
 
-    /** @return FilterGroup[] */
-    public function filterGroups(): ?array
+    public function filterGroup(): ?FilterGroup
     {
-        return $this->filterGroups;
+        return $this->filterGroup;
     }
 
     /** @return Order[] */
@@ -52,9 +48,9 @@ final class Criteria
         return $this->offset;
     }
 
-    public function hasFilterGroups(): bool
+    public function hasFilterGroup(): bool
     {
-        return !empty($this->filterGroups());
+        return !empty($this->filterGroup());
     }
 
     public function hasOrder(): bool

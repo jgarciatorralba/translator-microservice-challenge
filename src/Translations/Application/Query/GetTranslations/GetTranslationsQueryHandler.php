@@ -36,7 +36,7 @@ final class GetTranslationsQueryHandler implements QueryHandler
 
         $translations = $this->getTranslationsByCriteria->__invoke(
             new Criteria(
-                filterGroups: [$filterGroup],
+                filterGroup: $filterGroup,
                 orderBy: [$order],
                 limit: $limit
             )

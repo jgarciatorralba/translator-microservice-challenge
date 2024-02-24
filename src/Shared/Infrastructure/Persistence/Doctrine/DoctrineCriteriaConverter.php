@@ -6,7 +6,6 @@ namespace App\Shared\Infrastructure\Persistence\Doctrine;
 
 use App\Shared\Domain\Criteria\Criteria;
 use App\Shared\Domain\Criteria\Filter\Filter;
-use App\Shared\Domain\Criteria\Filter\FilterGroup;
 use App\Shared\Domain\Criteria\Order\Order;
 use Doctrine\Common\Collections\Criteria as DoctrineCriteria;
 use Doctrine\Common\Collections\Expr\Comparison;
@@ -38,39 +37,17 @@ final class DoctrineCriteriaConverter
 
     private function buildExpression(Criteria $criteria): ?CompositeExpression
     {
-        if ($criteria->hasFilterGroups()) {
-            $expression = null;
-
-            /** @var FilterGroup $filterGroup */
-            foreach ($criteria->filterGroups() as $filterGroup) {
-                $expression = $this->addGroupExpressions($filterGroup, $expression);
-            }
-
-            return $expression;
+        if ($criteria->hasFilterGroup()) {
+            return new CompositeExpression(
+                $criteria->filterGroup()->condition()->value,
+                array_map(
+                    $this->buildComparison(),
+                    $criteria->filterGroup()->filters()
+                )
+            );
         }
 
         return null;
-    }
-
-    private function addGroupExpressions(
-        FilterGroup $filterGroup,
-        ?CompositeExpression $expression
-    ): CompositeExpression {
-        $expressions = [];
-        if ($expression !== null) {
-            $expressions[] = $expression;
-        }
-
-        return new CompositeExpression(
-            $filterGroup->condition()->value,
-            array_merge(
-                $expressions,
-                array_map(
-                    $this->buildComparison(),
-                    $filterGroup->filters()
-                )
-            )
-        );
     }
 
     private function buildComparison(): callable
