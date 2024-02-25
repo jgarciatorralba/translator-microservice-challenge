@@ -33,14 +33,6 @@ class DoctrineTranslationRepository extends DoctrineRepository implements Transl
         $this->remove($translation);
     }
 
-    /**
-     * @return Translation[]
-     */
-    public function findAll(): array
-    {
-        return $this->repository()->findAll();
-    }
-
     public function findOneById(Uuid $id): Translation|null
     {
         return $this->repository()->findOneBy(['id' => $id->value()]);

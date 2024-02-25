@@ -16,9 +16,6 @@ interface TranslationRepository
 
     public function delete(Translation $translation): void;
 
-    /** @return Translation[] */
-    public function findAll(): array;
-
     public function findOneById(Uuid $id): Translation|null;
 
     /** @return Translation[] */
