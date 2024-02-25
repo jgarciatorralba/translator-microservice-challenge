@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Shared\Domain\Criteria\Filter;
 
-final class FilterGroup
+final class Filters
 {
     /** @param Filter[] $filters */
     public function __construct(

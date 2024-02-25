@@ -37,12 +37,12 @@ final class DoctrineCriteriaConverter
 
     private function buildExpression(Criteria $criteria): ?CompositeExpression
     {
-        if ($criteria->hasFilterGroup()) {
+        if ($criteria->hasFilters()) {
             return new CompositeExpression(
-                $criteria->filterGroup()->condition()->value,
+                $criteria->filters()->condition()->value,
                 array_map(
                     $this->buildComparison(),
-                    $criteria->filterGroup()->filters()
+                    $criteria->filters()->filters()
                 )
             );
         }
