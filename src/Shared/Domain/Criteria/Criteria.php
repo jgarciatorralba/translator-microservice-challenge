@@ -48,7 +48,7 @@ class Criteria
 
     public function hasFilters(): bool
     {
-        return !is_null($this->filters()) && !empty($this->filters()->filters());
+        return !is_null($this->filters()) && !empty($this->filters()->plainFilters());
     }
 
     public function hasOrder(): bool

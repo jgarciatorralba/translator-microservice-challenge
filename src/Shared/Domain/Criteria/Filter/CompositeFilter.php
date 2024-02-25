@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace App\Shared\Domain\Criteria\Filter;
 
-final class Filters
+class CompositeFilter
 {
-    /** @param array <SimpleFilter|CompositeFilter> $filters */
+    /** @param SimpleFilter[] $filters */
     public function __construct(
         private readonly array $filters = [],
         private readonly FilterConditionEnum $condition = FilterConditionEnum::AND
     ) {
     }
 
-    /** @return array <SimpleFilter|CompositeFilter> */
-    public function plainFilters(): array
+    /** @return SimpleFilter[] */
+    public function filters(): array
     {
         return $this->filters;
     }

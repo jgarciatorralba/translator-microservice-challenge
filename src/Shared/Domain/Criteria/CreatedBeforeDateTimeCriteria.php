@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Shared\Domain\Criteria;
 
-use App\Shared\Domain\Criteria\Filter\Filter;
+use App\Shared\Domain\Criteria\Filter\SimpleFilter;
 use App\Shared\Domain\Criteria\Filter\FilterOperatorEnum;
 use App\Shared\Domain\Criteria\Filter\Filters;
 use App\Shared\Domain\Criteria\Order\Order;
@@ -19,7 +19,7 @@ class CreatedBeforeDateTimeCriteria extends Criteria
     ) {
         parent::__construct(
             filters: new Filters([
-                new Filter('createdAt', $maxCreatedAt, FilterOperatorEnum::LOWER_THAN)
+                new SimpleFilter('createdAt', $maxCreatedAt, FilterOperatorEnum::LOWER_THAN)
             ]),
             orderBy: [new Order('createdAt', OrderEnum::DESCENDING)],
             limit: $limit
