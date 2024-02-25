@@ -6,7 +6,7 @@ namespace App\Translations\Application\Query\GetTranslations;
 
 use App\Shared\Domain\Aggregate\AggregateRoot;
 use App\Shared\Domain\Bus\Query\QueryHandler;
-use App\Shared\Domain\Criteria\TopCreatedAfterDateTimeCriteria;
+use App\Shared\Domain\Criteria\CreatedAfterDateTimeCriteria;
 use App\Translations\Domain\Service\GetTranslationsByCriteria;
 
 final class GetTranslationsQueryHandler implements QueryHandler
@@ -20,7 +20,7 @@ final class GetTranslationsQueryHandler implements QueryHandler
     {
         $limit = $query->pageSize() > 0 ? $query->pageSize() : null;
         $translations = $this->getTranslationsByCriteria->__invoke(
-            new TopCreatedAfterDateTimeCriteria(
+            new CreatedAfterDateTimeCriteria(
                 $query->maxCreatedAt(),
                 $limit
             )

@@ -11,7 +11,7 @@ use App\Shared\Domain\Criteria\Order\Order;
 use App\Shared\Domain\Criteria\Order\OrderEnum;
 use DateTimeImmutable;
 
-class TopCreatedAfterDateTimeCriteria extends Criteria
+class CreatedAfterDateTimeCriteria extends Criteria
 {
     public function __construct(
         DateTimeImmutable $maxCreatedAt = new DateTimeImmutable(),
