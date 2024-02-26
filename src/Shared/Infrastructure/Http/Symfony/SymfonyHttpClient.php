@@ -40,12 +40,14 @@ final class SymfonyHttpClient implements HttpClientContract
             $statusCode = $response->getStatusCode();
             $content = $response->getContent();
 
-            return new HttpResponse($statusCode, null, $content);
+            return new HttpResponse(
+                statusCode: $statusCode,
+                content: $content
+            );
         } catch (TransportExceptionInterface | DecodingExceptionInterface | HttpExceptionInterface $e) {
             return new HttpResponse(
-                $statusCode ?? null,
-                $e->getMessage(),
-                null
+                statusCode: $statusCode ?? null,
+                error: $e->getMessage()
             );
         }
     }
