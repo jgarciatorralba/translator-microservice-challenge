@@ -55,13 +55,7 @@ final class DoctrineCriteriaConverter
     private function buildComparison(): callable
     {
         return function (SimpleFilter|CompositeFilter $filter): Expression {
-            if ($filter instanceof SimpleFilter) {
-                return new Comparison(
-                    $filter->field(),
-                    $filter->operator()->value,
-                    $filter->value()
-                );
-            } else {
+            if ($filter instanceof CompositeFilter) {
                 return new CompositeExpression(
                     $filter->condition()->value,
                     array_map(
@@ -70,6 +64,12 @@ final class DoctrineCriteriaConverter
                     )
                 );
             }
+
+            return new Comparison(
+                $filter->field(),
+                $filter->operator()->value,
+                $filter->value()
+            );
         };
     }
 
