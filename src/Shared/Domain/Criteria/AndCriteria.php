@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Shared\Domain\Criteria;
 
-use App\Shared\Domain\Criteria\Filter\CompositeFilter;
 use App\Shared\Domain\Criteria\Filter\SimpleFilter;
 use App\Shared\Domain\Criteria\Filter\FilterConditionEnum;
 use App\Shared\Domain\Criteria\Filter\FilterOperatorEnum;
@@ -15,7 +14,7 @@ use DateTimeImmutable;
 
 class AndCriteria extends Criteria
 {
-    /** @param array <SimpleFilter|CompositeFilter> $filters */
+    /** @param SimpleFilter[] $filters */
     public function __construct(
         DateTimeImmutable $maxCreatedAt = new DateTimeImmutable(),
         array $filters = [],

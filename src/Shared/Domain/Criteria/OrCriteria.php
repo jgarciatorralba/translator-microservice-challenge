@@ -15,7 +15,7 @@ use DateTimeImmutable;
 
 class OrCriteria extends Criteria
 {
-    /** @param array <SimpleFilter|CompositeFilter> $filters */
+    /** @param SimpleFilter[] $filters */
     public function __construct(
         DateTimeImmutable $maxCreatedAt = new DateTimeImmutable(),
         array $filters = [],

@@ -6,8 +6,6 @@ namespace App\Shared\Domain\Bus\Query;
 
 interface Response
 {
-    /**
-     * @return array<mixed>
-     */
+    /** @return array<mixed> */
     public function data(): array;
 }

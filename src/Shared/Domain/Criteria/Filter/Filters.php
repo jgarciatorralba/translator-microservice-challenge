@@ -6,14 +6,14 @@ namespace App\Shared\Domain\Criteria\Filter;
 
 final class Filters
 {
-    /** @param array <SimpleFilter|CompositeFilter> $filters */
+    /** @param Filter[] $filters */
     public function __construct(
         private readonly array $filters = [],
         private readonly FilterConditionEnum $condition = FilterConditionEnum::AND
     ) {
     }
 
-    /** @return array <SimpleFilter|CompositeFilter> */
+    /** @return Filter[] */
     public function plainFilters(): array
     {
         return $this->filters;

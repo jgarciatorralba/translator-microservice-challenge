@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Shared\Domain\Criteria\Filter;
 
-final class SimpleFilter
+final class SimpleFilter implements Filter
 {
     public function __construct(
         private readonly string $field,
