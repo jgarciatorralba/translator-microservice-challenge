@@ -19,9 +19,7 @@ class ValidationException extends HttpException
         );
     }
 
-    /**
-     * @return array <string, string>
-     */
+    /** @return array <string, string> */
     public function getErrors(): array
     {
         return $this->errors;

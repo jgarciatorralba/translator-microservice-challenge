@@ -18,9 +18,7 @@ final class UpdateTranslationMock extends AbstractMock
         return UpdateTranslation::class;
     }
 
-    /**
-     * @param array <string, string|StatusEnum|LanguageEnum|DateTimeImmutable> $updatedData
-     */
+    /** @param array <string, string|StatusEnum|LanguageEnum|DateTimeImmutable> $updatedData */
     public function shouldUpdateTranslation(Translation $translation, array $updatedData): void
     {
         $this->mock

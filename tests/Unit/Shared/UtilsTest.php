@@ -51,9 +51,7 @@ final class UtilsTest extends TestCase
         $this->assertEquals($expectedResult, $snakeCase);
     }
 
-    /**
-     * @return array<string, array<string|DateTimeInterface|bool|null>>
-     */
+    /** @return array<string, array<string|DateTimeInterface|bool|null>> */
     public static function dataStringToDate(): array
     {
         return [
@@ -62,9 +60,7 @@ final class UtilsTest extends TestCase
         ];
     }
 
-    /**
-     * @return array<string, string[]>
-     */
+    /** @return array<string, string[]> */
     public static function dataToSnakeCase(): array
     {
         return [

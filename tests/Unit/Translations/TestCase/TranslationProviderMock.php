@@ -11,9 +11,7 @@ use PHPUnit\Framework\TestCase;
 
 final class TranslationProviderMock extends AbstractMock
 {
-    /**
-     * @param class-string $className
-     */
+    /** @param class-string $className */
     public function __construct(
         TestCase $testCase,
         private readonly string $className

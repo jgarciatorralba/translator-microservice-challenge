@@ -10,9 +10,7 @@ use Doctrine\ORM\EntityRepository;
 
 abstract class DoctrineRepository
 {
-    /**
-     * @var EntityRepository<object> $repository
-     */
+    /** @var EntityRepository<object> $repository */
     private EntityRepository $repository;
 
     public function __construct(
@@ -28,9 +26,7 @@ abstract class DoctrineRepository
         return $this->entityManager;
     }
 
-    /**
-     * @return EntityRepository<object>
-     */
+    /** @return EntityRepository<object> */
     protected function repository(): EntityRepository
     {
         return $this->repository;

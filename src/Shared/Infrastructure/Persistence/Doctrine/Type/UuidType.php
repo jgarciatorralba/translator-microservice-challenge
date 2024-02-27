@@ -26,9 +26,7 @@ final class UuidType extends Type
         return 'UUID';
     }
 
-    /**
-     * @throws ConversionException
-     */
+    /** @throws ConversionException */
     public function convertToPHPValue($value, AbstractPlatform $platform): ?Uuid
     {
         if ($value instanceof Uuid || $value === null) {

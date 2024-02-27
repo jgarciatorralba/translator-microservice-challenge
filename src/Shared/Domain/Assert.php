@@ -9,9 +9,7 @@ use InvalidArgumentException;
 
 final class Assert
 {
-    /**
-     * @param array<object> $items
-     */
+    /** @param array<object> $items */
     public static function arrayOf(string $class, array $items): void
     {
         foreach ($items as $item) {

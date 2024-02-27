@@ -22,9 +22,7 @@ final class SymfonyHttpClient implements HttpClientContract
         $this->client = new RetryableHttpClient(HttpClient::create());
     }
 
-    /**
-     * @param array<string, string|array<string, string>> $httpOptions
-     */
+    /** @param array<string, string|array<string, string>> $httpOptions */
     public function submit(string $url, array $httpOptions): HttpResponse
     {
         try {

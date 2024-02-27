@@ -17,9 +17,7 @@ final class UpdateTranslation
     ) {
     }
 
-    /**
-     * @param array <string, string|StatusEnum|LanguageEnum|DateTimeImmutable> $updatedData
-     */
+    /** @param array <string, string|StatusEnum|LanguageEnum|DateTimeImmutable> $updatedData */
     public function __invoke(Translation $translation, array $updatedData): void
     {
         $hasChanged = false;

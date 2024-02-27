@@ -105,9 +105,7 @@ class Translation extends AggregateRoot
         );
     }
 
-    /**
-     * @return array<string, string|null>
-     */
+    /** @return array<string, string|null> */
     public function toArray(): array
     {
         return [
