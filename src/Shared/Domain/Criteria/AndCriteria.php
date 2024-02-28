@@ -12,7 +12,7 @@ use App\Shared\Domain\Criteria\Order\Order;
 use App\Shared\Domain\Criteria\Order\OrderEnum;
 use DateTimeImmutable;
 
-class AndCriteria extends Criteria
+final class AndCriteria extends Criteria
 {
     /** @param SimpleFilter[] $filters */
     public function __construct(

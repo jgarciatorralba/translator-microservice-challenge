@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Shared\Domain\Criteria\Filter;
 
-class CompositeFilter implements Filter
+final class CompositeFilter implements Filter
 {
     /** @param SimpleFilter[] $filters */
     public function __construct(

@@ -13,7 +13,7 @@ use App\Shared\Domain\Criteria\Order\Order;
 use App\Shared\Domain\Criteria\Order\OrderEnum;
 use DateTimeImmutable;
 
-class OrCriteria extends Criteria
+final class OrCriteria extends Criteria
 {
     /** @param SimpleFilter[] $filters */
     public function __construct(
