@@ -18,7 +18,7 @@ final class GetTranslationById
 
     public function __invoke(Uuid $id): Translation
     {
-        $translation = $this->translationRepository->findOneById($id);
+        $translation = $this->translationRepository->findById($id);
         if ($translation === null) {
             throw new TranslationNotFoundException($id);
         }

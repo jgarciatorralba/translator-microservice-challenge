@@ -20,7 +20,7 @@ final class TranslationRepositoryMock extends AbstractMock
     {
         $this->mock
             ->expects($this->once())
-            ->method('findOneById')
+            ->method('findById')
             ->with($id)
             ->willReturn($translation);
     }
@@ -29,7 +29,7 @@ final class TranslationRepositoryMock extends AbstractMock
     {
         $this->mock
             ->expects($this->once())
-            ->method('findOneById')
+            ->method('findById')
             ->with($id)
             ->willReturn(null);
     }
