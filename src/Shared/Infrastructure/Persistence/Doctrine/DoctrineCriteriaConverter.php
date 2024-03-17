@@ -12,6 +12,7 @@ use Doctrine\Common\Collections\Criteria as DoctrineCriteria;
 use Doctrine\Common\Collections\Expr\Comparison;
 use Doctrine\Common\Collections\Expr\CompositeExpression;
 use Doctrine\Common\Collections\Expr\Expression;
+use Doctrine\Common\Collections\Order as DoctrineCriteriaOrder;
 
 final class DoctrineCriteriaConverter
 {
@@ -73,7 +74,7 @@ final class DoctrineCriteriaConverter
         };
     }
 
-    /** @return array <string, string> */
+    /** @return array<string, DoctrineCriteriaOrder>|null */
     private function formatOrder(Criteria $criteria): ?array
     {
         if ($criteria->hasOrder()) {
@@ -81,7 +82,9 @@ final class DoctrineCriteriaConverter
 
             /** @var Order $orderItem */
             foreach ($criteria->orderBy() as $orderItem) {
-                $order[$orderItem->orderBy()] = $orderItem->orderType()->value;
+                $order[$orderItem->orderBy()] = DoctrineCriteriaOrder::from(
+                    $orderItem->orderType()->value
+                );
             }
 
             return $order;
