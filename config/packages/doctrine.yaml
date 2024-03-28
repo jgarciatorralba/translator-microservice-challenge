@@ -32,6 +32,8 @@ doctrine:
         prefix: 'App\Translations\Domain'
         alias: App\Translations\Domain
         type: xml
+    controller_resolver:
+      auto_mapping: true
 
 when@test:
   doctrine:
