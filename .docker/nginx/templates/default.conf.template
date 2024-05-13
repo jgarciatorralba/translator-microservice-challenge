@@ -3,6 +3,12 @@ server {
     server_name ${NGINX_BACKEND_DOMAIN};
     root /var/www/translator/${NGINX_PUBLIC_FOLDER_PATH};
 
+    location = /favicon.ico {
+        try_files /dev/null =204;
+        access_log off;
+        log_not_found off;
+    }
+
     location / {
         try_files $uri /index.php$is_args$args;
     }

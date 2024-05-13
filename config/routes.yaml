@@ -1,9 +1,3 @@
-# FAVICON (avoid console error)
-favicon:
-  path: /favicon.ico
-  controller:
-  methods: GET
-
 translations:
   resource: routes/translations.yaml
   prefix: /api/
